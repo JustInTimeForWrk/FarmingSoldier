@@ -1,25 +1,14 @@
 package util;
 
-import scenes.*;
+import scenes.GameScene;
+import scenes.TestScene;
 import view.Window;
 
 public class GameManager {
-    public static final int FPS = 60;
-
-    private static GameManager instance;
-    private static Window window = new Window();
-
+    public static int FPS = 60;
     public static void startGame() {
-        SceneManager.addScene(new TestScene());
+        Window window = new Window();
         SceneManager.addScene(new GameScene());
-
-        SceneManager.loadCurrentSceneByIndex(0);
-
-
-        window.startGame();
+        SceneManager.addScene(new TestScene());
     }
-    public static Window getWindow() {
-        return window;
-    }
-
 }

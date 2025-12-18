@@ -1,80 +1,87 @@
 package util;
 
-import org.joml.Vector2f;
-import physics.PhysicsHandler;
 import view.Camera;
-import view.SpriteRenderer;
 
 import java.util.ArrayList;
 
 public abstract class Scene {
+    Camera camera = new Camera();
+    String name;
+    public ArrayList<Entity> entities = new ArrayList<>();
+    ArrayList<Entity> entityToAdd = new ArrayList<>();
+    ArrayList<Entity> entityToRemove = new ArrayList<>();
 
-    private boolean isRunning = false;
-    protected String name;
-    Camera camera;
-    ArrayList<Entity> entities;
+    boolean isRunning = false;
 
     public Scene(String name) {
         this.name = name;
-        camera = new Camera();
-        entities = new ArrayList<>();
-    }
-    
-    public void init()
-    {
-
     }
 
-    public void stop() {
-        for (int i = entities.size() - 1; i >= 0; i--) {
-            removeEntityFromScene(i);
+    public void update() {
+        for (Entity entity : entities) {
+            entity.update();
         }
-        isRunning = false;
+
+        if (!entityToAdd.isEmpty()) {
+            entities.addAll(entityToAdd);
+            for (Entity entity : entityToAdd) {
+                entity.start();
+            }
+            entityToAdd.clear();
+        }
+        if (!entityToRemove.isEmpty()) {
+            entities.removeAll(entityToRemove);
+            for (Entity entity : entityToRemove) {
+                entity.destroy();
+            }
+            entityToRemove.clear();
+        }
+    }
+
+    public void init() {
+        for (Entity entity : entities) {
+            entity.init();
+        }
     }
 
     public void start() {
         if (!isRunning) {
-            for (Entity e : entities)
-            {
-                e.start();
+            for (Entity entity : entities) {
+                entity.start();
             }
             isRunning = true;
         }
     }
 
-    public void update() {
-        for (Entity e : entities) {
-            e.update();
-        }
-        PhysicsHandler.update();
-    }
-
-    public void addEntityToScene(Entity e)
-    {
-        if (!isRunning)
-        {
-            entities.add(e);
-        }
-        else
-        {
-            e.start();
-            entities.add(e);
+    public void stop() {
+        if (isRunning) {
+            for (Entity entity : entities) {
+                entity.stop();
+            }
+            isRunning = false;
         }
     }
 
-    public void removeEntityFromScene(Entity entity)
-    {
-        entity.onDeletion();
-        entities.remove(entity);
-    }
-
-    public void removeEntityFromScene(int index)
-    {
-        if (-1 < index && index < entities.size()) {
-            entities.get(index).onDeletion();
-            entities.remove(index);
+    public void addEntityToScene(Entity entity) {
+        if (!isRunning) {
+            entities.add(entity);
+        } else {
+            entity.init();
+            entityToAdd.add(entity);
         }
     }
 
+    public void removeEntityToScene(Entity entity) {
+        if (!isRunning) {
+            entities.remove(entity);
+        } else {
+            entityToRemove.add(entity);
+        }
+    }
+
+
+    public Camera getCamera() {
+        return this.camera;
+    }
 
 }

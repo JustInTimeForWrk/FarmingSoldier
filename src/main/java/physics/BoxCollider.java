@@ -1,8 +1,8 @@
 package physics;
 
+import view.Window;
 import org.joml.Vector2f;
 import util.Component;
-import view.Window;
 
 import java.awt.*;
 
@@ -18,7 +18,7 @@ public class BoxCollider extends Component {
     public Rectangle hitbox = new Rectangle();
 
     public BoxCollider() {
-        this.size = new Vector2f(1,1); //default = 48x48
+        this.size = new Vector2f(Window.tileSize,Window.tileSize); //default = 48x48
         this.offset = new Vector2f();
     }
 
@@ -50,13 +50,17 @@ public class BoxCollider extends Component {
     }
 
     @Override
-    public void start() {
+    public void init() {
         position = new Vector2f(entity.transform.position).add(offset); //Position relative to the player
         size.mul(entity.transform.scale); //sets the size relative to the entity's scale
 
         hitbox.setRect(position.x,position.y,size.x,size.y);
+    }
 
-        PhysicsHandler.addCollider(this);
+    @Override
+    public void start() {
+
+        PhysicsManager.addCollider(this);
     }
 
     public Vector2f getMax() {
@@ -72,8 +76,13 @@ public class BoxCollider extends Component {
     }
 
     @Override
-    public void onDeletion() {
-        PhysicsHandler.removeCollider(this);
+    public void destroy() {
+        PhysicsManager.removeCollider(this);
+    }
+
+    @Override
+    public void stop() {
+        PhysicsManager.removeCollider(this);
     }
 
     public void updateCollider() { //Special update which only gets updated in the physics handler
@@ -86,10 +95,4 @@ public class BoxCollider extends Component {
         return hitbox.intersects(other.hitbox);
     }
 
-    public boolean checkPoint(Vector2f coords) {
-        return hitbox.contains(new Point((int)coords.x,(int)(coords.y)));
-    }
-    public boolean checkPoint(float x, float y) {
-        return hitbox.contains(new Point((int)x,(int)y));
-    }
 }

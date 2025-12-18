@@ -1,11 +1,11 @@
 package scenes;
 
 import org.joml.Vector2f;
-import util.Component;
-import util.Entity;
-import util.Scene;
-import util.Transform;
+import physics.BoxCollider;
+import util.*;
 import view.SpriteRenderer;
+
+import java.awt.event.KeyEvent;
 
 public class GameScene extends Scene {
 
@@ -15,6 +15,16 @@ public class GameScene extends Scene {
 
     @Override
     public void init() {
-        addEntityToScene(new Entity("test",new Transform(new Vector2f(200,200)),new Component[]{new SpriteRenderer()}));
+        addEntityToScene(new Entity("Player",new Transform(new Vector2f(300,100), new Vector2f(1,1)),new Component[]{new SpriteRenderer(), new BoxCollider()}));
+        addEntityToScene(new Player());
+        super.init();
+    }
+
+    @Override
+    public void update() {
+        if (KeyHandler.getKey(KeyEvent.VK_L)) {
+            SceneManager.loadSceneByIndex(1);
+        }
+        super.update();
     }
 }

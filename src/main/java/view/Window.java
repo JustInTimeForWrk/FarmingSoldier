@@ -3,7 +3,7 @@ package view;
 import javax.swing.*;
 
 public class Window extends JFrame {
-
+    //Screen Settings
     static final int originalTileSize = 16;
     static final int scale = 3;
     public static final int tileSize = originalTileSize * scale; //48x48
@@ -16,21 +16,39 @@ public class Window extends JFrame {
     public final static int halfScreenWidth = screenWidth / 2;
     public final static int halfScreenHeight = screenHeight / 2;
 
-    GamePanel gamePanel;
-    public Window() {
+
+    public GamePanel gamePanel;
+    public MenuPanel menuPanel;
+
+    public Window()
+    {
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setTitle("Island Survival");
 
+
+        menuPanel = new MenuPanel(this);
+        this.add(menuPanel);
+
+
+        this.pack();
+
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+    }
+
+    public void startGamePanel()
+    {
+        this.remove(menuPanel);
+
         gamePanel = new GamePanel();
         this.add(gamePanel);
 
         this.pack();
-    }
 
-    public void startGame() {
+        this.repaint();
+        gamePanel.requestFocus();
         gamePanel.startGameThread();
-        this.setVisible(true);
     }
 }

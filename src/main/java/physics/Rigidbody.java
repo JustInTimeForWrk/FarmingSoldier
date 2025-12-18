@@ -15,7 +15,7 @@ import util.Component;
 import java.util.ArrayList;
 
 public class Rigidbody extends Component {
-    public ArrayList<String> tagsThatCantMoveThis;
+    public ArrayList<String> tagsThatCantMoveThis = new ArrayList<>();;
 
     public Vector2f velocity;
     public float friction = 0.4f;
@@ -35,11 +35,7 @@ public class Rigidbody extends Component {
         velocity.mul(1 - friction);
         entity.transform.position.add(velocity);
     }
-    
-    @Override
-    public void start() {
-        this.tagsThatCantMoveThis = new ArrayList<>();
-    }
+
 
     public void addTagImmovable(String tag) {
         tagsThatCantMoveThis.add(tag);

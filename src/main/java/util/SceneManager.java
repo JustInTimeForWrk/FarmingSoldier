@@ -1,22 +1,20 @@
 package util;
 
+import physics.PhysicsManager;
 import view.Camera;
+import view.Renderer;
 
 import java.util.ArrayList;
 
 public class SceneManager {
-    private static ArrayList<Scene> scenes = new ArrayList<>();
-    private static int currentSceneIndex = -1;
-    private static Scene currentScene;
+    public static ArrayList<Scene> scenes = new ArrayList<>();
+    public static Scene currentScene;
+    public static int currentSceneIndex = -1;
+    private static int loadSceneIndex = -1;
 
-    public static void loadCurrentSceneByIndex(int index) {
-        if (-1 < index && index < scenes.size()) {
-            currentSceneIndex = index;
-            if (currentScene != null) {
-                currentScene.stop();
-            }
-            currentScene = scenes.get(index);
-            currentScene.start();
+    public static void loadSceneByIndex(int index) {
+        if (index > -1 && index < scenes.size()) {
+            loadSceneIndex = index;
         }
     }
 
@@ -25,12 +23,26 @@ public class SceneManager {
         scene.init();
     }
 
+    public static void updateScene() {
+        if (loadSceneIndex != -1) {
+            if (currentScene != null) {
+                currentScene.stop();
+            }
+            Renderer.clear();
+            PhysicsManager.clear();
 
-    public static Scene getCurrentScene() {
-        return currentScene;
+            currentScene = scenes.get(loadSceneIndex);
+
+            currentScene.start();
+            currentSceneIndex = loadSceneIndex;
+
+            loadSceneIndex = -1;
+        }
+
+        currentScene.update();
     }
 
-    public static Camera getSceneCamera() {
-        return currentScene.camera;
+    public static Camera getCurrentCamera() {
+        return currentScene.getCamera();
     }
 }

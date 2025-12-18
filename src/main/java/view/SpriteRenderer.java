@@ -11,6 +11,7 @@ package view;
 
 import org.joml.Vector2f;
 import physics.BoxCollider;
+import physics.PhysicsManager;
 import util.Component;
 import util.SceneManager;
 import util.Transform;
@@ -23,7 +24,7 @@ import java.io.File;
 public class SpriteRenderer extends Component implements drawable{
     public BufferedImage sprite;
     public String type;
-    public static boolean debugging = true;
+    public static boolean debugging = false;
     public static BufferedImage missingFile = loadImage("resources/assets/missing_file.png");
 
     public static BufferedImage loadImage(String filePath) {
@@ -72,7 +73,7 @@ public class SpriteRenderer extends Component implements drawable{
     }
 
     @Override
-    public void onDeletion() {
+    public void stop() {
         removeFromRenderer();
     }
 
@@ -84,7 +85,9 @@ public class SpriteRenderer extends Component implements drawable{
 
         Transform transform = entity.transform;
 
-        Vector2f screenPos = SceneManager.getSceneCamera().toScreenPos(transform.position); //coordinates of the center of the person relative to the screen
+//        Vector2f screenPos = SceneManager.getCurrentCamera().toScreenPos(transform.position); //coordinates of the center of the person relative to the screen
+
+        Vector2f screenPos = new Vector2f(transform.position);
 
         Vector2f size;
 
@@ -101,9 +104,11 @@ public class SpriteRenderer extends Component implements drawable{
                 break;
             case "rectangle":
 
+                size = new Vector2f((Window.tileSize * transform.scale.x),
+                                          (Window.tileSize * transform.scale.y));
 
                 g2.fillRect((int)screenPos.x, (int)screenPos.y,
-                        (int)transform.scale.x,(int)transform.scale.y);
+                        (int)size.x,(int)size.y);
                 break;
             default:
                 System.out.println("Cannot draw SpriteRenderer type: "+this.type);
@@ -114,13 +119,13 @@ public class SpriteRenderer extends Component implements drawable{
 
             if (collider != null) {
 
-                Vector2f topLeft = SceneManager.getSceneCamera().toScreenPos(collider.getMin());
+                Vector2f topLeft = SceneManager.getCurrentCamera().toScreenPos(collider.getMin());
                 g2.setColor(Color.red);
                 g2.drawRect((int)topLeft.x,(int)topLeft.y,(int)collider.size.x,(int)collider.size.y);
             }
 
             g2.setColor(Color.yellow);
-            Vector2f topLeft = SceneManager.getSceneCamera().toScreenPos(new Vector2f(transform.position).add(new Vector2f(transform.scale).div(2f)).sub(2,2));
+            Vector2f topLeft = SceneManager.getCurrentCamera().toScreenPos(new Vector2f(transform.position.x-2,transform.position.y-2));
             g2.fillRect((int)topLeft.x,(int)topLeft.y,4,4);
         }
     }

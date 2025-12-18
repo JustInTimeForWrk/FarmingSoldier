@@ -2,10 +2,14 @@ package util;
 
 public abstract class Component {
     public Entity entity;
-    public boolean enabled = true;
 
-    public void setEntity(Entity go) {
-        this.entity = go;
+
+    public void setParentEntity(Entity parentEntity) {
+        this.entity = parentEntity;
+    }
+
+    public void awake() {
+
     }
 
     public void start() {
@@ -16,10 +20,15 @@ public abstract class Component {
 
     }
 
-    public void onDeletion() {
+    public void destroy() {
 
     }
-    public void setEnabled(boolean bool) {
-        enabled = bool;
+
+    public void stop() {
+
+    }
+
+    public void init() {
+
     }
 }
