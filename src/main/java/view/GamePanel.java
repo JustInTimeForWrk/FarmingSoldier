@@ -1,6 +1,6 @@
 package view;
 
-import org.joml.Vector2i;
+import physics.PhysicsManager;
 import util.GameManager;
 import util.KeyHandler;
 import util.MouseHandler;
@@ -60,6 +60,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update() {
         SceneManager.updateScene();
+        PhysicsManager.update();
     }
 
     public void paintComponent(Graphics g) {

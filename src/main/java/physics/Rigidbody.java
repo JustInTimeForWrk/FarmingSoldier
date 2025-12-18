@@ -44,12 +44,7 @@ public class Rigidbody extends Component {
         tagsThatCantMoveThis.remove(tag);
     }
 
-    public void collided(BoxCollider other) {
-
-        if (tagsThatCantMoveThis.contains(other.entity.tag)) {
-            return; //Doesnt allow certain
-        }
-
+    public void solveCollision(Collider other) {
         Vector2f overlap = collider.getMax().min(other.getMax()).sub(collider.getMin().max(other.getMin()));
 
         if (overlap.x < overlap.y) {//pushes entity on the smallest distance needed
@@ -69,6 +64,20 @@ public class Rigidbody extends Component {
         }
 
         collider.updateCollider();
+    }
+    
+    public void solveCollidingTile(TileCollider other) {
+        solveCollision(other);
+    }
+    
+    public void solveCollidingEntity(BoxCollider other) {
+    
+        
+        if (tagsThatCantMoveThis.contains(other.entity.tag)) {
+            return; //Doesnt allow certain
+        }
+        
+        solveCollision(other);
     }
 
 }

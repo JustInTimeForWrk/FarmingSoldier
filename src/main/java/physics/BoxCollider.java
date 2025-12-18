@@ -6,16 +6,11 @@ import util.Component;
 
 import java.awt.*;
 
-public class BoxCollider extends Component {
+public class BoxCollider extends Collider {
 
     public Vector2f offset;
     public Vector2f size;
-    public Vector2f position = new Vector2f();
-
-    public boolean enabled = true;
     public boolean isTrigger = false;
-
-    public Rectangle hitbox = new Rectangle();
 
     public BoxCollider() {
         this.size = new Vector2f(Window.tileSize,Window.tileSize); //default = 48x48
@@ -63,18 +58,6 @@ public class BoxCollider extends Component {
         PhysicsManager.addCollider(this);
     }
 
-    public Vector2f getMax() {
-        return new Vector2f((float)hitbox.getMaxX(),(float)hitbox.getMaxY());
-    }
-
-    public Vector2f getMin() {
-        return new Vector2f((float)hitbox.getMinX(),(float)hitbox.getMinY());
-    }
-
-    public Vector2f getCenter() {
-        return new Vector2f((float)hitbox.getCenterX(),(float)hitbox.getCenterY());
-    }
-
     @Override
     public void destroy() {
         PhysicsManager.removeCollider(this);
@@ -89,10 +72,6 @@ public class BoxCollider extends Component {
         position = new Vector2f(entity.transform.position).add(offset); //Position relative to the player
 
         hitbox.setRect(position.x,position.y,size.x,size.y);
-    }
-
-    public boolean checkCollision(BoxCollider other) {
-        return hitbox.intersects(other.hitbox);
     }
 
 }
