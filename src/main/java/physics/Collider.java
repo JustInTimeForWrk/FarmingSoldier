@@ -37,4 +37,8 @@ public abstract class Collider extends Component {
     public boolean checkCollision(Collider other) {
         return hitbox.intersects(other.hitbox);
     }
+
+    public boolean checkLineCollision(float x, float y, float x2, float y2) {
+        return hitbox.intersectsLine(x,y,x2,y2);
+    }
 }

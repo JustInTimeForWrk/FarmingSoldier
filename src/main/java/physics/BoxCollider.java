@@ -69,9 +69,10 @@ public class BoxCollider extends Collider {
     }
 
     public void updateCollider() { //Special update which only gets updated in the physics handler
-        position = new Vector2f(entity.transform.position).add(offset); //Position relative to the player
+        position.set(entity.transform.position).add(offset); //Position relative to the player
 
         hitbox.setRect(position.x,position.y,size.x,size.y);
     }
+
 
 }

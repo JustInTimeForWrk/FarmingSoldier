@@ -68,7 +68,7 @@ public class TileRenderer extends Component implements drawable{
 
 //        Vector2f screenPos = SceneManager.getCurrentCamera().toScreenPos(transform.position); //coordinates of the center of the person relative to the screen
 
-        Vector2f screenPos = new Vector2f(tile.position);
+        Vector2f screenPos = SceneManager.getCurrentCamera().toScreenPos(new Vector2f(tile.position));
 
         Vector2f size;
 

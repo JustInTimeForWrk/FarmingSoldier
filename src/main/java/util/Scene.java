@@ -10,6 +10,8 @@ public abstract class Scene {
     public ArrayList<Entity> entities = new ArrayList<>();
     ArrayList<Entity> entityToAdd = new ArrayList<>();
     ArrayList<Entity> entityToRemove = new ArrayList<>();
+    public TileMap tileMap;
+
 
     boolean isRunning = false;
 
@@ -18,6 +20,11 @@ public abstract class Scene {
     }
 
     public void update() {
+        if (tileMap != null) {
+            tileMap.update();
+        }
+
+
         for (Entity entity : entities) {
             entity.update();
         }
@@ -39,6 +46,9 @@ public abstract class Scene {
     }
 
     public void init() {
+        if (tileMap != null) {
+            tileMap.init();
+        }
         for (Entity entity : entities) {
             entity.init();
         }
@@ -46,6 +56,10 @@ public abstract class Scene {
 
     public void start() {
         if (!isRunning) {
+            if (tileMap != null) {
+                tileMap.start();
+            }
+
             for (Entity entity : entities) {
                 entity.start();
             }
@@ -55,6 +69,10 @@ public abstract class Scene {
 
     public void stop() {
         if (isRunning) {
+            if (tileMap != null) {
+                tileMap.stop();
+            }
+
             for (Entity entity : entities) {
                 entity.stop();
             }
@@ -63,6 +81,7 @@ public abstract class Scene {
     }
 
     public void addEntityToScene(Entity entity) {
+        entity.parentScene = this;
         if (!isRunning) {
             entities.add(entity);
         } else {
@@ -82,6 +101,28 @@ public abstract class Scene {
 
     public Camera getCamera() {
         return this.camera;
+    }
+
+    public Entity findEntityByTag(String tag) {
+        for (Entity entity : entities) {
+            if (entity.tag.equals(tag)) {
+                return entity;
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<Entity> findEntityArrayListByTag(String tag) {
+        ArrayList<Entity> returnList = new ArrayList<>();
+        for (Entity entity : entities) {
+            if (entity.tag.equals(tag)) {
+                returnList.add(entity);
+            }
+        }
+        if (returnList.isEmpty()) {
+            return null;
+        }
+        return returnList;
     }
 
 }

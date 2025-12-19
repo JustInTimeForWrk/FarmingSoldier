@@ -8,9 +8,10 @@ package util;
  *
  * @author riegj8298
  */
+import physics.PhysicsManager;
 import physics.TileCollider;
-import view.SpriteRenderer;
 import org.joml.Vector2i;
+import view.TileRenderer;
 
 import java.awt.image.BufferedImage;
 public class Tile {
@@ -18,27 +19,35 @@ public class Tile {
     public TileCollider collider;
     boolean isSolid = false;
     String tag = "tile";
-    SpriteRenderer spriteRenderer;
+    TileRenderer tileRenderer;
     
-    Tile(int x, int y, boolean isSolid, BufferedImage image) {
+    Tile(int x, int y, BufferedImage image, boolean isSolid) {
         this.position.set(x,y);
         this.isSolid = isSolid;
         if (isSolid) {
             this.collider = new TileCollider();
         }
-        spriteRenderer = new SpriteRenderer(image);
+        tileRenderer = new TileRenderer(image);
+
     }
     
     public void start() {
-        spriteRenderer.addToRenderer();
+        tileRenderer.addToRenderer();
     }
     
     public void stop() {
-        spriteRenderer.removeFromRenderer();
+        tileRenderer.removeFromRenderer();
     }
     
     public void init() {
-        this.collider.setParentTile(this);
+        if (this.collider != null) {
+            this.collider.setParentTile(this);
+            this.collider.init();
+            System.out.println(this.collider.getMin()+"   |   "+this.collider.getMax());
+        }
+
+        this.tileRenderer.setParentTile(this);
+        this.tileRenderer.init();
     }
     
 }

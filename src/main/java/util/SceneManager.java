@@ -45,4 +45,8 @@ public class SceneManager {
     public static Camera getCurrentCamera() {
         return currentScene.getCamera();
     }
+
+    public static Scene getCurrentScene() {
+        return currentScene;
+    }
 }

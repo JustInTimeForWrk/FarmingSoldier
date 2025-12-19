@@ -85,9 +85,9 @@ public class SpriteRenderer extends Component implements drawable{
 
         Transform transform = entity.transform;
 
-//        Vector2f screenPos = SceneManager.getCurrentCamera().toScreenPos(transform.position); //coordinates of the center of the person relative to the screen
+        Vector2f screenPos = SceneManager.getCurrentCamera().toScreenPos(transform.position); //coordinates of the center of the person relative to the screen
 
-        Vector2f screenPos = new Vector2f(transform.position);
+//        Vector2f screenPos = new Vector2f(transform.position);
 
         Vector2f size;
 

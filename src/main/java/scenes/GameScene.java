@@ -15,8 +15,11 @@ public class GameScene extends Scene {
 
     @Override
     public void init() {
-        addEntityToScene(new Entity("Player",new Transform(new Vector2f(300,100), new Vector2f(1,1)),new Component[]{new SpriteRenderer(), new BoxCollider()}));
+        tileMap = new TileMap("resources/map01.txt");
+        addEntityToScene(new Entity("Test",new Transform(new Vector2f(300,100), new Vector2f(1,1)),new Component[]{new SpriteRenderer(), new BoxCollider()}));
         addEntityToScene(new Player());
+        addEntityToScene(new HostileTest(new Transform(new Vector2f(1000,1000))));
+
         super.init();
     }
 

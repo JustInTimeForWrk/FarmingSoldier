@@ -8,6 +8,7 @@ public class Entity {
     public ArrayList<Component> components;
     public Transform transform;
     public String tag;
+    public Scene parentScene;
 
     public Entity() {
         this.tag = "Entity";

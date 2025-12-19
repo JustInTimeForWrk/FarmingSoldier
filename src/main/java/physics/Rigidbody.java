@@ -21,15 +21,19 @@ public class Rigidbody extends Component {
     public float friction = 0.4f;
     public BoxCollider collider;
 
-    public Rigidbody(BoxCollider collider) {
+    public Rigidbody() {
         velocity = new Vector2f();
-        this.collider = collider;
     }
     
     public void addToVelocity(Vector2f vector) {
         velocity.add(vector);
     }
-    
+
+    @Override
+    public void init() {
+        this.collider = entity.getComponent(BoxCollider.class);
+    }
+
     @Override
     public void update() {
         velocity.mul(1 - friction);
