@@ -7,13 +7,17 @@ import physics.Rigidbody;
 import physics.TileCollider;
 import util.Component;
 import util.Entity;
+import util.SceneManager;
 import view.Window;
+
+import java.awt.*;
 import java.util.HashMap;
 
 import java.awt.image.BufferedImage;
 import view.SpriteRenderer;
+import view.drawable;
 
-public class HostileMovement extends Component {
+public class HostileMovement extends Component implements drawable {
 
     public int aggroDistance = Window.tileSize * 8;
     public boolean aggroed;
@@ -29,7 +33,9 @@ public class HostileMovement extends Component {
     private int hostileFrame = 1;
     private SpriteRenderer sr;
     String imagePath = "resources/assets/hostile/hostile_down01.png";
-    
+
+    private Vector2f lastPlayerPos;
+
     Vector2f dir = new Vector2f();
     String dirStringX = "";
     String dirStringY = "_down";
@@ -37,26 +43,22 @@ public class HostileMovement extends Component {
     @Override
     public void update() {
         if (playerCollider != null) {
+            Vector2f hostileCenter = hostileCollider.getCenter();
+
             float distance = hostileCollider.getCenter().distance(playerCollider.getCenter());
-//            System.out.println(distance+","+playerCollider.getCenter());
             if (distance < aggroDistance) {
                 aggroed = true;
-            } else {
+                if (!PhysicsManager.lineIntersectsTile(playerCollider.getCenter(),hostileCenter)) {
+                    lastPlayerPos.set(playerCollider.getCenter().sub(24,-24).div(Window.tileSize).round().mul(Window.tileSize).add(Window.tileSize/2f,-Window.tileSize/2f));
+                } //                                             ^
+            }
+            if (lastPlayerPos.distance(hostileCenter) < 4) {
+                lastPlayerPos.set(hostileCenter);
                 aggroed = false;
             }
             if (aggroed) {
-                for (TileCollider[] tiles : PhysicsManager.getTileColliders()) {
-                    for (TileCollider tile : tiles) {
-                        if (tile != null) {
-                            if (tile.checkLineCollision(hostileCollider.getCenter().x,hostileCollider.getCenter().y,playerCollider.getCenter().x,playerCollider.getCenter().y)) {
-                                aggroed = false;
-                                return;
-                            }
-                        }
-                    }
-                }
-
-                dir = (playerCollider.getCenter()).sub(hostileCollider.getCenter());
+                System.out.println(lastPlayerPos+"    |    "+hostileCenter);
+                dir.set(lastPlayerPos).sub(hostileCenter);
                 rb.addToVelocity(dir.mul(speed));
                 if (rb.velocity.length() > (speedCap)) {
                     rb.velocity.normalize().mul(speedCap);
@@ -112,7 +114,29 @@ public class HostileMovement extends Component {
             }
         }
         this.sr = entity.getComponent(SpriteRenderer.class);
-        
+
+        lastPlayerPos = new Vector2f().set(this.entity.transform.position);
+
         super.init();
+    }
+
+    @Override
+    public void start() {
+        addToRenderer();
+    }
+
+    @Override
+    public void stop() {
+        removeFromRenderer();
+    }
+
+    @Override
+    public void draw(Graphics2D g2) {
+        if (SpriteRenderer.debugging) {
+            g2.setColor(Color.PINK);
+            Vector2f newPos = new Vector2f(SceneManager.getCurrentCamera().toScreenPos(lastPlayerPos));
+            g2.fillRect((int)newPos.x-2,(int)newPos.y-2,4,4);
+        }
+
     }
 }

@@ -1,5 +1,6 @@
 package physics;
 
+import org.joml.Vector2f;
 import util.TileMap;
 import view.Window;
 
@@ -117,5 +118,18 @@ public class PhysicsManager {
 
     public static TileCollider[][] getTileColliders() {
         return tileColliders;
+    }
+
+    public static boolean lineIntersectsTile(Vector2f pos1, Vector2f pos2) {
+        for (TileCollider[] tiles : tileColliders) {
+            for (TileCollider tile : tiles) {
+                if (tile != null) {
+                    if (tile.checkLineCollision(pos1.x,pos1.y,pos2.x,pos2.y)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 }

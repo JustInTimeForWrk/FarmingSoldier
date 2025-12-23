@@ -3,7 +3,9 @@ package util;
 import physics.PhysicsManager;
 import view.Camera;
 import view.Renderer;
+import view.SpriteRenderer;
 
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 public class SceneManager {
@@ -40,6 +42,12 @@ public class SceneManager {
         }
 
         currentScene.update();
+        if (KeyHandler.getKey(KeyEvent.VK_O)) {
+            SpriteRenderer.debugging = true;
+        }
+        if (KeyHandler.getKey(KeyEvent.VK_P)) {
+            SpriteRenderer.debugging = false;
+        }
     }
 
     public static Camera getCurrentCamera() {
