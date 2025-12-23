@@ -55,6 +55,7 @@ public class HostileMovement extends Component implements drawable {
             if (lastPlayerPos.distance(hostileCenter) < 4) {
                 lastPlayerPos.set(hostileCenter);
                 aggroed = false;
+                rb.velocity.set(0,0);
             }
             if (aggroed) {
                 System.out.println(lastPlayerPos+"    |    "+hostileCenter);
@@ -117,6 +118,8 @@ public class HostileMovement extends Component implements drawable {
 
         lastPlayerPos = new Vector2f().set(this.entity.transform.position);
 
+        rb.friction = 0;
+
         super.init();
     }
 
@@ -137,6 +140,5 @@ public class HostileMovement extends Component implements drawable {
             Vector2f newPos = new Vector2f(SceneManager.getCurrentCamera().toScreenPos(lastPlayerPos));
             g2.fillRect((int)newPos.x-2,(int)newPos.y-2,4,4);
         }
-
     }
 }

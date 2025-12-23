@@ -40,11 +40,9 @@ public class PhysicsManager {
                     for (int y = -1; y < 2; y++) {
                         int xGrid = (int)collider.getCenter().div(Window.tileSize).x+x;
                         int yGrid = (int)collider.getCenter().div(Window.tileSize).y+y;
-//                        System.out.println(xGrid+", "+yGrid);
                         TileCollider tileCollider = tileColliders[xGrid][yGrid];
                         if (tileCollider != null) {
                             if (collider.checkCollision(tileCollider)) {
-//                                System.out.println("Colliding");
                                 tileCollisionResolution(collider, tileCollider);
                             }
                         }
@@ -73,6 +71,7 @@ public class PhysicsManager {
         if (entityRB != null) {
             entityRB.solveCollidingTile(tileCollider);
         }
+        entityCollider.entity.onTileCollisionEnter(tileCollider);
     }
 
     public static void entityCollisionResolution(BoxCollider firstCollider, BoxCollider secondCollider) {
@@ -80,8 +79,8 @@ public class PhysicsManager {
             firstCollider.entity.onTriggerEnter(secondCollider);
             secondCollider.entity.onTriggerEnter(firstCollider);
         } else {
-            firstCollider.entity.onCollisionEnter(secondCollider);
-            secondCollider.entity.onCollisionEnter(firstCollider);
+            firstCollider.entity.onEntityCollisionEnter(secondCollider);
+            secondCollider.entity.onEntityCollisionEnter(firstCollider);
 
             Rigidbody firstRB = firstCollider.entity.getComponent(Rigidbody.class);
             Rigidbody secondRB = secondCollider.entity.getComponent(Rigidbody.class);

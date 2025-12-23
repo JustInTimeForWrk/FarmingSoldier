@@ -53,15 +53,15 @@ public class TileMap {
                     switch(col) {
                         case "1":
                             tile = new Tile(pos.x * Window.tileSize, pos.y * Window.tileSize, grass, false);
-
+                            tile.tag = "grass";
                             break;
                         case "2":
                             tile = new Tile(pos.x * Window.tileSize, pos.y * Window.tileSize, wall, true);
-
+                            tile.tag = "wall";
                             break;
                         case "3":
                             tile = new Tile(pos.x * Window.tileSize, pos.y * Window.tileSize, water, true);
-
+                            tile.tag = "water";
                             break;
                         default:
                             break;

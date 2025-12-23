@@ -3,7 +3,6 @@ package util;
 import physics.BoxCollider;
 import physics.Rigidbody;
 import scripts.HostileMovement;
-import scripts.MovementScript;
 import view.SpriteRenderer;
 
 public class HostileTest extends Entity{
@@ -44,7 +43,7 @@ public class HostileTest extends Entity{
     }
 
     @Override
-    public void onCollisionEnter(BoxCollider other) {
-        super.onCollisionEnter(other);
+    public void onEntityCollisionEnter(BoxCollider other) {
+        super.onEntityCollisionEnter(other);
     }
 }

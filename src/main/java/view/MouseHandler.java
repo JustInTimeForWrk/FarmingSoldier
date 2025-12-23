@@ -1,9 +1,11 @@
-package util;
+package view;
 
 import org.joml.Vector2i;
+import util.ClickAction;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 public class MouseHandler implements MouseListener {
 
@@ -11,11 +13,13 @@ public class MouseHandler implements MouseListener {
     private Vector2i mousePos;
     private boolean[] keys;
     private MouseMotionHandler mouseMotionHandler;
+    private ArrayList<ClickAction> clickActions;
 
     private MouseHandler() {
         keys = new boolean[4];
         mousePos = new Vector2i();
         mouseMotionHandler = new MouseMotionHandler();
+        clickActions = new ArrayList<>();
     }
 
     public static MouseHandler get() {
@@ -23,6 +27,14 @@ public class MouseHandler implements MouseListener {
             instance = new MouseHandler();
         }
         return instance;
+    }
+
+    public void addClickAction(ClickAction clickAction) {
+        clickActions.add(clickAction);
+    }
+
+    public void removeClickAction(ClickAction clickAction) {
+        clickActions.remove(clickAction);
     }
 
     public static MouseMotionHandler getMotionHandler() {
@@ -35,7 +47,9 @@ public class MouseHandler implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
+        for (ClickAction clickAction : clickActions) {
+            clickAction.clickable(e);
+        }
     }
 
     @Override

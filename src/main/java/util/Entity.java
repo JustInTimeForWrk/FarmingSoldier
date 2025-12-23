@@ -1,6 +1,7 @@
 package util;
 
 import physics.BoxCollider;
+import physics.TileCollider;
 
 import java.util.ArrayList;
 
@@ -61,7 +62,6 @@ public class Entity {
 
     public void addComponent(Component c) {
         c.setParentEntity(this);
-        c.awake();
         components.add(c);
     }
 
@@ -75,10 +75,20 @@ public class Entity {
     }
 
     public void onTriggerEnter(BoxCollider other) {
-
+        for (Component c : components) {
+            c.onTriggerEnter(other);
+        }
     }
 
-    public void onCollisionEnter(BoxCollider other) {
+    public void onEntityCollisionEnter(BoxCollider other) {
+        for (Component c : components) {
+            c.onEntityCollisionEnter(other);
+        }
+    }
 
+    public void onTileCollisionEnter(TileCollider tile) {
+        for (Component c : components) {
+            c.onTileCollisionEnter(tile);
+        }
     }
 }

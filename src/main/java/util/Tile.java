@@ -17,18 +17,17 @@ import java.awt.image.BufferedImage;
 public class Tile {
     public Vector2i position = new Vector2i();
     public TileCollider collider;
-    boolean isSolid = false;
-    String tag = "tile";
-    TileRenderer tileRenderer;
+    public boolean isSolid = false;
+    public String tag = "tile";
+    public TileRenderer tileRenderer;
     
-    Tile(int x, int y, BufferedImage image, boolean isSolid) {
+    public Tile(int x, int y, BufferedImage image, boolean isSolid) {
         this.position.set(x,y);
         this.isSolid = isSolid;
         if (isSolid) {
             this.collider = new TileCollider();
         }
         tileRenderer = new TileRenderer(image);
-
     }
     
     public void start() {
@@ -38,7 +37,7 @@ public class Tile {
     public void stop() {
         tileRenderer.removeFromRenderer();
     }
-    
+
     public void init() {
         if (this.collider != null) {
             this.collider.setParentTile(this);

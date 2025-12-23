@@ -3,7 +3,6 @@ package view;
 import physics.PhysicsManager;
 import util.GameManager;
 import util.KeyHandler;
-import util.MouseHandler;
 import util.SceneManager;
 
 import javax.swing.*;

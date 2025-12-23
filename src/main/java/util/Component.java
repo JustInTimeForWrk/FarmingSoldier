@@ -1,15 +1,26 @@
 package util;
 
+import physics.BoxCollider;
+import physics.TileCollider;
+
 public abstract class Component {
     public Entity entity;
 
 
-    public void setParentEntity(Entity parentEntity) {
-        this.entity = parentEntity;
+    public void onEntityCollisionEnter(BoxCollider other) {
+
     }
 
-    public void awake() {
+    public void onTileCollisionEnter(TileCollider tile) {
 
+    }
+
+    public void onTriggerEnter(BoxCollider other) {
+
+    }
+
+    public void setParentEntity(Entity parentEntity) {
+        this.entity = parentEntity;
     }
 
     public void start() {
