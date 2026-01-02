@@ -15,7 +15,6 @@ public class TestScene extends Scene {
 
     @Override
     public void init() {
-        addEntityToScene(new Entity("messy test", new Transform(new Vector2f(100,100), new Vector2f(1,1)), new Component[]{new SpriteRenderer("uh oh"), new BoxCollider()}));
         super.init();
     }
 

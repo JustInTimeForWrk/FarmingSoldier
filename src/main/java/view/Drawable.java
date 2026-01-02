@@ -2,7 +2,7 @@ package view;
 
 import java.awt.*;
 
-public interface drawable {
+public interface Drawable {
     default void addToRenderer() {
         Renderer.addRenderObject(this);
     }

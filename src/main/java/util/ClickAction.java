@@ -14,5 +14,5 @@ public interface ClickAction {
         MouseHandler.get().removeClickAction(this);
     }
 
-    void clickable(MouseEvent e);
+    void clickAction(MouseEvent e);
 }

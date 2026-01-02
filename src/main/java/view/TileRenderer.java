@@ -17,7 +17,7 @@ import java.awt.image.BufferedImage;
 import physics.TileCollider;
 import util.Tile;
 
-public class TileRenderer extends Component implements drawable{
+public class TileRenderer extends Component implements Drawable {
     public BufferedImage sprite;
     public String type;
     public Tile tile;

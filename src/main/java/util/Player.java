@@ -4,7 +4,9 @@ import org.joml.Vector2f;
 import physics.BoxCollider;
 import physics.Rigidbody;
 import scripts.FarmingScript;
+import scripts.HotbarScript;
 import scripts.MovementScript;
+import scripts.playerTakeDamage;
 import view.SpriteRenderer;
 import view.Window;
 
@@ -26,9 +28,13 @@ public class Player extends Entity {
 
         addComponent(boxCollider);
 
+        addComponent(new SpriteRenderer("resources/assets/player/monkey_down01.png"));
+
         addComponent(new FarmingScript());
 
-        addComponent(new SpriteRenderer("resources/assets/player/monkey_down01.png"));
+        addComponent(new playerTakeDamage());
+
+        addComponent(new HotbarScript());
         super.init();
     }
 

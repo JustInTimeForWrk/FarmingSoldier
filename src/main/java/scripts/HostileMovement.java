@@ -4,7 +4,6 @@ import org.joml.Vector2f;
 import physics.BoxCollider;
 import physics.PhysicsManager;
 import physics.Rigidbody;
-import physics.TileCollider;
 import util.Component;
 import util.Entity;
 import util.SceneManager;
@@ -15,9 +14,11 @@ import java.util.HashMap;
 
 import java.awt.image.BufferedImage;
 import view.SpriteRenderer;
-import view.drawable;
+import view.Drawable;
 
-public class HostileMovement extends Component implements drawable {
+public class HostileMovement extends Component implements Drawable {
+
+    public double damage = 10f;
 
     public int aggroDistance = Window.tileSize * 8;
     public boolean aggroed;
@@ -58,7 +59,6 @@ public class HostileMovement extends Component implements drawable {
                 rb.velocity.set(0,0);
             }
             if (aggroed) {
-                System.out.println(lastPlayerPos+"    |    "+hostileCenter);
                 dir.set(lastPlayerPos).sub(hostileCenter);
                 rb.addToVelocity(dir.mul(speed));
                 if (rb.velocity.length() > (speedCap)) {

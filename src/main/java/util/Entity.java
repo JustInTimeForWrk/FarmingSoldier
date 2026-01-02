@@ -11,6 +11,7 @@ public class Entity {
     public String tag;
     public Scene parentScene;
 
+
     public Entity() {
         this.tag = "Entity";
         this.transform = new Transform();

@@ -48,7 +48,7 @@ public class MouseHandler implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         for (ClickAction clickAction : clickActions) {
-            clickAction.clickable(e);
+            clickAction.clickAction(e);
         }
     }
 

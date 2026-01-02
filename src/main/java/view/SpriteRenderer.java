@@ -11,7 +11,6 @@ package view;
 
 import org.joml.Vector2f;
 import physics.BoxCollider;
-import physics.PhysicsManager;
 import util.Component;
 import util.SceneManager;
 import util.Transform;
@@ -21,7 +20,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
-public class SpriteRenderer extends Component implements drawable{
+public class SpriteRenderer extends Component implements Drawable {
     public BufferedImage sprite;
     public String type;
     public static boolean debugging = false;

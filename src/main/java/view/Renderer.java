@@ -4,20 +4,20 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Renderer {
-    public static ArrayList<drawable> renderingList = new ArrayList<>();
-    private static ArrayList<drawable> rendererToAdd = new ArrayList<>();
-    private static ArrayList<drawable> rendererToRemove = new ArrayList<>();
+    public static ArrayList<Drawable> renderingList = new ArrayList<>();
+    private static ArrayList<Drawable> rendererToAdd = new ArrayList<>();
+    private static ArrayList<Drawable> rendererToRemove = new ArrayList<>();
 
-    public static void addRenderObject(drawable object) {
+    public static void addRenderObject(Drawable object) {
         rendererToAdd.add(object);
     }
 
-    public static void removeRenderObject(drawable object) {
+    public static void removeRenderObject(Drawable object) {
         rendererToRemove.add(object);
     }
 
     public static void update(Graphics2D g2) {
-        for (drawable object : renderingList) {
+        for (Drawable object : renderingList) {
             object.draw(g2);
         }
 
