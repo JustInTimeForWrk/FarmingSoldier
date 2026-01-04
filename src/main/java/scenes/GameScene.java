@@ -8,7 +8,7 @@ import view.SpriteRenderer;
 import java.awt.event.KeyEvent;
 
 public class GameScene extends Scene {
-
+    Entity player;
     public GameScene() {
         super("Game");
     }
@@ -16,11 +16,20 @@ public class GameScene extends Scene {
     @Override
     public void init() {
         tileMap = new TileMap("resources/map01.txt");
-        addEntityToScene(new Entity("Test",new Transform(new Vector2f(300,100), new Vector2f(1,1)),new Component[]{new SpriteRenderer(), new BoxCollider()}));
+        addEntityToScene(new Entity("Warp",new Transform(new Vector2f(900,300), new Vector2f(1,1)),new Component[]{new SpriteRenderer(), new BoxCollider(true)}));
         addEntityToScene(new Player());
-        addEntityToScene(new HostileTest(new Transform(new Vector2f(1000,1000))));
+//        addEntityToScene(new HostileTest(new Transform(new Vector2f(1000,1000))));
 
         super.init();
+    }
+
+    @Override
+    public void start() {
+
+        if ((player = findEntityByTag("Player")) != null) {
+            player.transform.position.set(500,800);
+        }
+        super.start();
     }
 
     @Override

@@ -7,6 +7,7 @@ import physics.Rigidbody;
 import util.Component;
 import util.Entity;
 import util.SceneManager;
+import view.Renderer;
 import view.Window;
 
 import java.awt.*;
@@ -111,7 +112,7 @@ public class HostileMovement extends Component implements Drawable {
         for (String str : imageNames) {
             for (int i = 1; i < 5; i++) {
                 String imagePath = "resources/assets/hostile/"+str+"0"+i+".png";
-                hostileImages.put(imagePath, SpriteRenderer.loadImage(imagePath));
+                hostileImages.put(imagePath, Renderer.loadImage(imagePath));
             }
         }
         this.sr = entity.getComponent(SpriteRenderer.class);
@@ -135,7 +136,7 @@ public class HostileMovement extends Component implements Drawable {
 
     @Override
     public void draw(Graphics2D g2) {
-        if (SpriteRenderer.debugging) {
+        if (Renderer.debugging) {
             g2.setColor(Color.PINK);
             Vector2f newPos = new Vector2f(SceneManager.getCurrentCamera().toScreenPos(lastPlayerPos));
             g2.fillRect((int)newPos.x-2,(int)newPos.y-2,4,4);

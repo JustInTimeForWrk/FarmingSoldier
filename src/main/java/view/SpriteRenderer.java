@@ -15,32 +15,12 @@ import util.Component;
 import util.SceneManager;
 import util.Transform;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 
 public class SpriteRenderer extends Component implements Drawable {
     public BufferedImage sprite;
     public String type;
-    public static boolean debugging = false;
-    public static BufferedImage missingFile = loadImage("resources/assets/missing_file.png");
-
-    public static BufferedImage loadImage(String filePath) {
-        try {
-            File f = new File(filePath);
-            return ImageIO.read(f);
-        } catch(Exception e) {
-            try {
-
-                File f = new File("resources/assets/missing_file.png");
-                return ImageIO.read(f);
-            } catch (Exception ex) {
-                ex.printStackTrace();
-                return null;
-            }
-        }
-    }
 
     public SpriteRenderer(BufferedImage image) {
         this.sprite = image;
@@ -52,7 +32,7 @@ public class SpriteRenderer extends Component implements Drawable {
 
     public SpriteRenderer(String filePath) {
         this.type = "image";
-        if ((this.sprite = SpriteRenderer.loadImage(filePath)) == null) {
+        if ((this.sprite = Renderer.loadImage(filePath)) == null) {
             this.type = "rectangle";
         }
     }
@@ -113,7 +93,7 @@ public class SpriteRenderer extends Component implements Drawable {
                 System.out.println("Cannot draw SpriteRenderer type: "+this.type);
                 break;
         }
-        if (debugging == true) {
+        if (Renderer.debugging) {
             BoxCollider collider = entity.getComponent(BoxCollider.class);
 
             if (collider != null) {

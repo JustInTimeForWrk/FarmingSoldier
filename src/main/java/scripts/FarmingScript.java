@@ -3,11 +3,10 @@ package scripts;
 import org.joml.Vector2f;
 import util.*;
 import util.Component;
-import view.SpriteRenderer;
+import view.Renderer;
 import view.Window;
 
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 
 public class FarmingScript extends Component implements ClickAction {
     Vector2f mouseClickPos;
@@ -36,19 +35,25 @@ public class FarmingScript extends Component implements ClickAction {
 
     @Override
     public void clickAction(MouseEvent e) {
-        if (hotbarScript.currentItemSlot == 2) {
-            playerPos.set(entity.transform.position);
-            Tile tile;
-            mouseClickPos.set(e.getX(),e.getY());
-            mouseClickPos = SceneManager.getCurrentCamera().toWorldPos(mouseClickPos).add(-24,-24).div(Window.tileSize).round();
-            if (tileMap != null) {
-                if (0 < mouseClickPos.x && mouseClickPos.x < tileMap.width && 0 < mouseClickPos.y && mouseClickPos.y < tileMap.height) {
-                    tile = tileMap.tiles2d[(int)mouseClickPos.x][(int)mouseClickPos.y];
-                    if (tile.tag.equals("grass") && playerPos.div(Window.tileSize).round().distance(mouseClickPos) < maxRadius) {
-                        tile.tag = "dug grass";
-                        tile.tileRenderer.changeImage(SpriteRenderer.loadImage("resources/assets/tiles/grass_dug.png"));
-                    }
-                }
+
+        playerPos.set(entity.transform.position);
+        mouseClickPos.set(e.getX(),e.getY());
+        mouseClickPos = SceneManager.getCurrentCamera().toWorldPos(mouseClickPos).add(-24,-24).div(Window.tileSize).round();
+        if (tileMap == null) {
+            return;
+        }
+        if (0 <= mouseClickPos.x && mouseClickPos.x < tileMap.width && 0 <= mouseClickPos.y && mouseClickPos.y < tileMap.height) {
+            Tile tile = tileMap.tiles2d[(int)mouseClickPos.x][(int)mouseClickPos.y];
+            if (playerPos.div(Window.tileSize).round().distance(mouseClickPos) > maxRadius) {
+                return;
+            }
+
+            if (tile.tag.equals("grass") && hotbarScript.currentItemSlot == 1) {
+                tile.changeTileData(3);
+            } else if (tile.tag.equals("grass_dug") && hotbarScript.currentItemSlot == 2) {
+                tile.changeTileData(4);
+            } else if (tile.tag.equals("grass_planted_stage3") && hotbarScript.currentItemSlot == 3) {
+                tile.changeTileData(3);
             }
         }
 

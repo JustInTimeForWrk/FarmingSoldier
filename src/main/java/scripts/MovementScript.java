@@ -4,6 +4,7 @@ import org.joml.Vector2f;
 import physics.Rigidbody;
 import util.Component;
 import util.KeyHandler;
+import view.Renderer;
 import view.SpriteRenderer;
 
 import java.awt.event.KeyEvent;
@@ -41,7 +42,7 @@ public class MovementScript extends Component {
         for (String str: imageNames) {
             for (int i = 1; i < 5; i++) { // i = 1-4
                 String imagePath = "resources/assets/player/" + str + "0" + i + ".png"; //Creates filepath string
-                playerImages.put(imagePath,SpriteRenderer.loadImage(imagePath));
+                playerImages.put(imagePath, Renderer.loadImage(imagePath));
             }
         }
         super.init();

@@ -3,10 +3,7 @@ package util;
 import org.joml.Vector2f;
 import physics.BoxCollider;
 import physics.Rigidbody;
-import scripts.FarmingScript;
-import scripts.HotbarScript;
-import scripts.MovementScript;
-import scripts.playerTakeDamage;
+import scripts.*;
 import view.SpriteRenderer;
 import view.Window;
 
@@ -32,9 +29,15 @@ public class Player extends Entity {
 
         addComponent(new FarmingScript());
 
-        addComponent(new playerTakeDamage());
+        addComponent(new SleepScript());
+
+        addComponent(new SwapSceneScript());
+
+//        addComponent(new playerTakeDamage());
 
         addComponent(new HotbarScript());
+
+//        addComponent(new AttackingScript());
         super.init();
     }
 

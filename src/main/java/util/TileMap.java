@@ -2,7 +2,7 @@ package util;
 
 import org.joml.Vector2i;
 import physics.PhysicsManager;
-import view.SpriteRenderer;
+import view.Renderer;
 import view.Window;
 
 import java.awt.image.BufferedImage;
@@ -12,9 +12,9 @@ import java.util.ArrayList;
 
 public class TileMap {
 
-    public static BufferedImage grass = SpriteRenderer.loadImage("resources/assets/tiles/grass.png");
-    public static BufferedImage wall = SpriteRenderer.loadImage("resources/assets/tiles/wall.png");
-    public static BufferedImage water = SpriteRenderer.loadImage("resources/assets/tiles/water.png");
+    public static BufferedImage grass = Renderer.loadImage("resources/assets/tiles/grass.png");
+    public static BufferedImage wall = Renderer.loadImage("resources/assets/tiles/wall.png");
+    public static BufferedImage water = Renderer.loadImage("resources/assets/tiles/water.png");
 
     public String filepath;
 
@@ -52,16 +52,13 @@ public class TileMap {
                     pos.add(1,0);
                     switch(col) {
                         case "1":
-                            tile = new Tile(pos.x * Window.tileSize, pos.y * Window.tileSize, grass, false);
-                            tile.tag = "grass";
+                            tile = new Tile(pos.x * Window.tileSize, pos.y * Window.tileSize, 2);
                             break;
                         case "2":
-                            tile = new Tile(pos.x * Window.tileSize, pos.y * Window.tileSize, wall, true);
-                            tile.tag = "wall";
+                            tile = new Tile(pos.x * Window.tileSize, pos.y * Window.tileSize, 1);
                             break;
                         case "3":
-                            tile = new Tile(pos.x * Window.tileSize, pos.y * Window.tileSize, water, true);
-                            tile.tag = "water";
+                            tile = new Tile(pos.x * Window.tileSize, pos.y * Window.tileSize, 0);
                             break;
                         default:
                             break;

@@ -3,21 +3,29 @@ package util;
 import physics.PhysicsManager;
 import view.Camera;
 import view.Renderer;
-import view.SpriteRenderer;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 public class SceneManager {
+    public static long timer = 0;
+    public static double sceneSwapCD = 500;
+
     public static ArrayList<Scene> scenes = new ArrayList<>();
     public static Scene currentScene;
     public static int currentSceneIndex = -1;
     private static int loadSceneIndex = -1;
 
     public static void loadSceneByIndex(int index) {
-        if (index > -1 && index < scenes.size()) {
-            loadSceneIndex = index;
+        if (System.currentTimeMillis() - timer > sceneSwapCD) {
+            timer = System.currentTimeMillis();
+            if (index > -1 && index < scenes.size()) {
+                loadSceneIndex = index;
+            }
+        } else {
+            System.out.println("too quick!");
         }
+
     }
 
     public static void addScene(Scene scene) {
@@ -27,6 +35,7 @@ public class SceneManager {
 
     public static void updateScene() {
         if (loadSceneIndex != -1) {
+            System.out.println("Switching from scene " + SceneManager.currentSceneIndex + " to " + loadSceneIndex);
             if (currentScene != null) {
                 currentScene.stop();
             }
@@ -42,11 +51,12 @@ public class SceneManager {
         }
 
         currentScene.update();
+
         if (KeyHandler.getKey(KeyEvent.VK_O)) {
-            SpriteRenderer.debugging = true;
+            Renderer.debugging = true;
         }
         if (KeyHandler.getKey(KeyEvent.VK_P)) {
-            SpriteRenderer.debugging = false;
+            Renderer.debugging = false;
         }
     }
 
@@ -56,5 +66,12 @@ public class SceneManager {
 
     public static Scene getCurrentScene() {
         return currentScene;
+    }
+
+    public static Scene getScene(int index) {
+        if (0 <= index && index <= scenes.size()) {
+            return  scenes.get(index);
+        }
+        return null;
     }
 }

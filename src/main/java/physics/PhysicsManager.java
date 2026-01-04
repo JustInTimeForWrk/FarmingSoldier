@@ -40,10 +40,14 @@ public class PhysicsManager {
                     for (int y = -1; y < 2; y++) {
                         int xGrid = (int)collider.getCenter().div(Window.tileSize).x+x;
                         int yGrid = (int)collider.getCenter().div(Window.tileSize).y+y;
-                        TileCollider tileCollider = tileColliders[xGrid][yGrid];
-                        if (tileCollider != null) {
-                            if (collider.checkCollision(tileCollider)) {
-                                tileCollisionResolution(collider, tileCollider);
+                        if (0 <= xGrid && xGrid < tileColliders.length) {
+                            if (0 <= yGrid && yGrid < tileColliders[xGrid].length) {
+                                TileCollider tileCollider = tileColliders[xGrid][yGrid];
+                                if (tileCollider != null) {
+                                    if (collider.checkCollision(tileCollider)) {
+                                        tileCollisionResolution(collider, tileCollider);
+                                    }
+                                }
                             }
                         }
                     }
@@ -129,6 +133,10 @@ public class PhysicsManager {
                 }
             }
         }
+        return false;
+    }
+
+    public static boolean RectangleIntersectsEntity(Vector2f pos1, Vector2f pos2) {
         return false;
     }
 }

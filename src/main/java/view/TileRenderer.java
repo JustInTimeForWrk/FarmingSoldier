@@ -32,7 +32,7 @@ public class TileRenderer extends Component implements Drawable {
 
     public TileRenderer(String filePath) {
         this.type = "image";
-        if ((this.sprite = SpriteRenderer.loadImage(filePath)) == null) {
+        if ((this.sprite = Renderer.loadImage(filePath)) == null) {
             this.type = "rectangle";
         }
     }
@@ -94,7 +94,7 @@ public class TileRenderer extends Component implements Drawable {
                 System.out.println("Cannot draw SpriteRenderer type: "+this.type);
                 break;
         }
-        if (SpriteRenderer.debugging == true) {
+        if (Renderer.debugging == true) {
             TileCollider collider = tile.collider;
 
             if (collider != null) {

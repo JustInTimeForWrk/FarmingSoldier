@@ -1,7 +1,7 @@
 package util;
 
 import scenes.GameScene;
-import scenes.TestScene;
+import scenes.HouseScene;
 import view.Window;
 
 public class GameManager {
@@ -9,6 +9,6 @@ public class GameManager {
     public static void startGame() {
         Window window = new Window();
         SceneManager.addScene(new GameScene());
-        SceneManager.addScene(new TestScene());
+        SceneManager.addScene(new HouseScene());
     }
 }
