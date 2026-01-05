@@ -40,8 +40,7 @@ public class Renderer {
     }
 
     public static void clear() {
-        renderingList.clear();
-        rendererToRemove.clear();
+        rendererToRemove.addAll(renderingList);
         rendererToAdd.clear();
     }
 

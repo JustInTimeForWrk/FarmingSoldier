@@ -59,7 +59,7 @@ public class SceneManager {
             Renderer.debugging = false;
         }
         if (KeyHandler.getKey(KeyEvent.VK_ESCAPE)) {
-            GameManager.stopGame();
+            GameManager.requestStopGame();
         }
 
     }
@@ -87,6 +87,7 @@ public class SceneManager {
     public static void reset() {
         for (Scene scene : scenes) {
             scene.stop();
+            scene.tileMap.clear();
         }
         scenes.clear();
     }

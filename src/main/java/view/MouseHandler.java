@@ -84,8 +84,9 @@ public class MouseHandler implements MouseListener {
         }
         return false;
     }
-
+    
     public static void reset() {
+        instance.clickActions.clear();
         instance.mouseMotionHandler.reset();
         instance.keys = new boolean[5];
     }

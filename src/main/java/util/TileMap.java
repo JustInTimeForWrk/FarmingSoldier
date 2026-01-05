@@ -69,6 +69,11 @@ public class TileMap {
             tiles2d = null;
             e.printStackTrace();
         }
+        for (Tile tile : tilesList) {
+            if (tile.id == 7) {
+                System.out.println("Tile loaded: "+tile.toString());
+            }
+        }
     }
 
 
@@ -95,7 +100,10 @@ public class TileMap {
             tile.init();
         }
     }
-
+    
+    public void clear() {
+        tilesList.clear();
+    }
 
     public boolean saveTileMap() {
         try {
@@ -121,4 +129,5 @@ public class TileMap {
             return false;
         }
     }
+    
 }

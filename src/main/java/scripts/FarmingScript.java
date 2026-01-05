@@ -3,11 +3,8 @@ package scripts;
 import org.joml.Vector2f;
 import org.joml.Vector2i;
 import util.*;
-import util.Component;
-import view.Drawable;
 import view.Window;
 
-import java.awt.*;
 import java.awt.event.MouseEvent;
 
 public class FarmingScript extends TextScript implements ClickAction{
@@ -64,6 +61,8 @@ public class FarmingScript extends TextScript implements ClickAction{
             } else if ( 4 <= tile.id && tile.id <= 6 && hotbarScript.currentItemSlot == 3) { //Waters the plants
                 tile.changeTileData(tile.id + 15);
             } else if (tile.tag.equals("grass_planted_stage3") && hotbarScript.currentItemSlot == 4) { //Harvests the plants
+                System.out.println("Tile Harvested: "+tile.toString());
+                
                 tile.changeTileData(3);
                 harvestedPlants++;
                 this.setText(harvestedPlants + "");

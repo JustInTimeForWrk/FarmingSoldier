@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class SleepScript extends TextScript {
 
     FarmingScript farmingScript;
-    public long timer;
+    public long timer = System.currentTimeMillis();
     public  double sleepCD = 30000; //30 seconds
     TileMap gameTileMap;
     ArrayList<Tile> tileMapArray = new ArrayList<>();

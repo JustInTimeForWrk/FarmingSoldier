@@ -20,7 +20,6 @@ public class GameScene extends Scene {
     @Override
     public void init() {
         tileMap = new TileMap("resources/map_world.txt");
-
         addEntityToScene(new Player());
 //        addEntityToScene(new HostileTest(new Transform(new Vector2f(1000,1000))));
 

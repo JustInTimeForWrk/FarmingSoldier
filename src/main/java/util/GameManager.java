@@ -3,6 +3,7 @@ package util;
 import physics.PhysicsManager;
 import scenes.GameScene;
 import scenes.HouseScene;
+import scripts.FarmingScript;
 import view.KeyHandler;
 import view.MouseHandler;
 import view.Renderer;
@@ -36,6 +37,10 @@ public class GameManager {
         }
     }
 
+    public static void requestStopGame() {
+        window.gamePanel.requestingQuit = true;
+    }
+    
     public static void stopGame() {
         window.stopGamePanel();
         SceneManager.reset();

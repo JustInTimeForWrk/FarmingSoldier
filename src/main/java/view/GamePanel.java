@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GamePanel extends JPanel implements Runnable {
+    public boolean requestingQuit;
     Thread gameThread;
 
     public GamePanel() {
@@ -24,6 +25,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void startGameThread()
     {
+        requestingQuit = false;
         gameThread = new Thread(this);
         gameThread.start();
         System.out.println("Game Thread Started");
@@ -58,6 +60,9 @@ public class GamePanel extends JPanel implements Runnable {
     public void update() {
         SceneManager.updateScene();
         PhysicsManager.update();
+        if (requestingQuit) {
+            GameManager.stopGame();
+        }
     }
 
     public void paintComponent(Graphics g) {
