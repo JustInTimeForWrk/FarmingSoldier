@@ -16,7 +16,7 @@ public class MouseHandler implements MouseListener {
     private ArrayList<ClickAction> clickActions;
 
     private MouseHandler() {
-        keys = new boolean[4];
+        keys = new boolean[5];
         mousePos = new Vector2i();
         mouseMotionHandler = new MouseMotionHandler();
         clickActions = new ArrayList<>();
@@ -84,6 +84,13 @@ public class MouseHandler implements MouseListener {
         }
         return false;
     }
+
+    public static void reset() {
+        instance.mouseMotionHandler.reset();
+        instance.keys = new boolean[5];
+    }
+
+
 }
 
 class MouseMotionHandler implements java.awt.event.MouseMotionListener {
@@ -102,5 +109,10 @@ class MouseMotionHandler implements java.awt.event.MouseMotionListener {
 
     public Vector2i getMousePos() {
         return mousePos;
+    }
+
+
+    public void reset() {
+        mousePos.set(0,0);
     }
 }

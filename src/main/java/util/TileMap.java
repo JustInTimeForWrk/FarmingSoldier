@@ -7,7 +7,9 @@ import view.Window;
 
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 public class TileMap {
@@ -44,24 +46,17 @@ public class TileMap {
             tiles2d = new Tile[width][height];
 
             Vector2i pos = new Vector2i(0,-1);
-            Tile tile = null;
+            Tile tile;
             for (String[] row : data) {
                 pos.set(-1,pos.y);
                 pos.add(0,1);
                 for (String col : row) {
                     pos.add(1,0);
-                    switch(col) {
-                        case "1":
-                            tile = new Tile(pos.x * Window.tileSize, pos.y * Window.tileSize, 2);
-                            break;
-                        case "2":
-                            tile = new Tile(pos.x * Window.tileSize, pos.y * Window.tileSize, 1);
-                            break;
-                        case "3":
-                            tile = new Tile(pos.x * Window.tileSize, pos.y * Window.tileSize, 0);
-                            break;
-                        default:
-                            break;
+                    int tileID = Integer.parseInt(col);
+                    if (0 <= tileID && tileID < Tile.defaultTiles.length) {
+                        tile = new Tile(pos.x * Window.tileSize, pos.y * Window.tileSize, tileID);
+                    } else {
+                        tile = null;
                     }
                     if (tile != null) {
                         tilesList.add(tile);
@@ -69,6 +64,7 @@ public class TileMap {
                     tiles2d[pos.x][pos.y] = tile;
                 }
             }
+            br.close();
         } catch (Exception e) {
             tiles2d = null;
             e.printStackTrace();
@@ -97,6 +93,32 @@ public class TileMap {
     public void init() {
         for (Tile tile : tilesList) {
             tile.init();
+        }
+    }
+
+
+    public boolean saveTileMap() {
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(filepath));
+            for (int y = 0; y < height; y++) {
+                for (int x = 0; x < width; x++) {
+                    Tile tile = tiles2d[x][y];
+                    if (tile != null) {
+                        bw.write(tile.id + ""); //the + "" turns it into a string instead of a character
+                    } else {
+                        bw.write("-1");
+                    }
+                    if (x != width -1 ) { //makes sure there isn't an extra space at the end of a line
+                        bw.write(" "); //Space for the split(" ") function in the loadTileMap() function
+                    }
+                }
+                bw.write("\n");
+            }
+            bw.close();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
     }
 }

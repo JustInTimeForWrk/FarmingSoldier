@@ -2,7 +2,6 @@ package view;
 
 import physics.PhysicsManager;
 import util.GameManager;
-import util.KeyHandler;
 import util.SceneManager;
 
 import javax.swing.*;
@@ -21,7 +20,6 @@ public class GamePanel extends JPanel implements Runnable {
         this.addMouseMotionListener(MouseHandler.getMotionHandler());
 
         this.setFocusable(true);
-
     }
 
     public void startGameThread()

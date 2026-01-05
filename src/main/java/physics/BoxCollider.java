@@ -2,9 +2,6 @@ package physics;
 
 import view.Window;
 import org.joml.Vector2f;
-import util.Component;
-
-import java.awt.*;
 
 public class BoxCollider extends Collider {
 

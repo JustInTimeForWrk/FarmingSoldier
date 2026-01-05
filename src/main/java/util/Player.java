@@ -9,7 +9,6 @@ import view.Window;
 
 public class Player extends Entity {
 
-
     public Player() {
         super("Player", new Transform(new Vector2f(480,384)));
 
@@ -29,29 +28,15 @@ public class Player extends Entity {
 
         addComponent(new FarmingScript());
 
-        addComponent(new SleepScript());
-
         addComponent(new SwapSceneScript());
 
 //        addComponent(new playerTakeDamage());
 
         addComponent(new HotbarScript());
 
+        addComponent(new MoveCameraScript());
 //        addComponent(new AttackingScript());
         super.init();
-    }
-
-    @Override
-    public void start() {
-        super.start();
-    }
-
-
-    @Override
-    public void update() {
-        super.update();
-
-        SceneManager.getCurrentCamera().setPosition(new Vector2f(transform.position).sub(Window.halfScreenWidth,Window.halfScreenHeight));
     }
 
 }

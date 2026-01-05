@@ -1,5 +1,6 @@
 package view;
 
+import util.GameManager;
 import util.SceneManager;
 
 import javax.swing.*;
@@ -14,6 +15,7 @@ public class MenuPanel extends JPanel {
     MenuPanel(Window window) {
 
         this.setPreferredSize(new Dimension(Window.screenWidth, Window.screenHeight));
+        this.setLayout(null);
 
         title = new JLabel("Farming Soldier");
         title.setFont(new Font("Ariel",Font.PLAIN,24));
@@ -24,7 +26,7 @@ public class MenuPanel extends JPanel {
         button = new JButton("play");
         button.addActionListener(new PlayGame(window));
         button.setHorizontalAlignment(SwingConstants.CENTER);
-        button.setBounds(Window.halfScreenWidth-100,Window.halfScreenHeight+100,200,200);
+        button.setBounds(Window.halfScreenWidth-100,Window.halfScreenHeight-100,200,200);
         this.add(button);
     }
 }
@@ -39,7 +41,6 @@ class PlayGame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        SceneManager.loadSceneByIndex(0);
-        this.window.startGamePanel();
+        GameManager.startGame();
     }
 }

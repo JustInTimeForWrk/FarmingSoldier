@@ -27,6 +27,7 @@ public class Window extends JFrame {
         this.setResizable(false);
         this.setTitle("Island Survival");
 
+        gamePanel = new GamePanel();
 
         menuPanel = new MenuPanel(this);
         this.add(menuPanel);
@@ -42,7 +43,6 @@ public class Window extends JFrame {
     {
         this.remove(menuPanel);
 
-        gamePanel = new GamePanel();
         this.add(gamePanel);
 
         this.pack();
@@ -50,5 +50,16 @@ public class Window extends JFrame {
         this.repaint();
         gamePanel.requestFocus();
         gamePanel.startGameThread();
+    }
+
+    public void stopGamePanel() {
+        gamePanel.gameThread = null;
+        this.remove(gamePanel);
+
+        this.add(menuPanel);
+
+        this.pack();
+
+        this.repaint();
     }
 }

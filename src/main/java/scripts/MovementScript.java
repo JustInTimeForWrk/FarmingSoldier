@@ -3,7 +3,7 @@ package scripts;
 import org.joml.Vector2f;
 import physics.Rigidbody;
 import util.Component;
-import util.KeyHandler;
+import view.KeyHandler;
 import view.Renderer;
 import view.SpriteRenderer;
 

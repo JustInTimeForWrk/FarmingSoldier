@@ -3,6 +3,7 @@ package view;
 import java.awt.*;
 
 public interface Drawable {
+
     default void addToRenderer() {
         Renderer.addRenderObject(this);
     }

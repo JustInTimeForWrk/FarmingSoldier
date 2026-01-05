@@ -6,7 +6,7 @@ import physics.Rigidbody;
 import util.Component;
 import util.SceneManager;
 
-public class playerTakeDamage extends Component {
+public class PlayerTakeDamage extends Component {
 
     public double health = 100f;
     public long invulnerabilityTimer = 0;
@@ -22,6 +22,7 @@ public class playerTakeDamage extends Component {
 
     @Override
     public void init() {
+        //grabs the rigidbody class from the player
         playerRB = entity.getComponent(Rigidbody.class);
     }
 

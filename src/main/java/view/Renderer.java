@@ -4,10 +4,12 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Renderer {
     public static ArrayList<Drawable> renderingList = new ArrayList<>();
+
     public static boolean debugging = false;
     private static ArrayList<Drawable> rendererToAdd = new ArrayList<>();
     private static ArrayList<Drawable> rendererToRemove = new ArrayList<>();

@@ -29,10 +29,10 @@ public abstract class Collider extends Component {
     public Vector2f getCenter() {
         return new Vector2f((float)hitbox.getCenterX(),(float)hitbox.getCenterY());
     }
-    
-    public boolean checkPointCollision(float x, float y) {
-        return hitbox.contains(x,y);
-    }
+
+//    public boolean checkPointCollision(float x, float y) {
+//        return hitbox.contains(x,y);
+//    }
     
     public boolean checkCollision(Collider other) {
         return hitbox.intersects(other.hitbox);

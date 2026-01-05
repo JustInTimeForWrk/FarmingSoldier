@@ -16,15 +16,29 @@ import view.TileRenderer;
 import java.awt.image.BufferedImage;
 
 public class Tile {
-    public static final Tile[] defaultTiles = { new Tile(0,0,Renderer.loadImage("resources/assets/tiles/water.png"),true,"water", 0),
-                                                new Tile(0,0,Renderer.loadImage("resources/assets/tiles/wall.png"),true,"wall", 1),
-                                                new Tile(0,0,Renderer.loadImage("resources/assets/tiles/grass.png"),false,"grass", 2),
-                                                new Tile(0,0,Renderer.loadImage("resources/assets/tiles/grass_dug.png"),false,"grass_dug", 3),
-                                                new Tile(0,0,Renderer.loadImage("resources/assets/tiles/grass_planted_stage0.png"),false,"grass_planted_stage0", 4),
-                                                new Tile(0,0,Renderer.loadImage("resources/assets/tiles/grass_planted_stage1.png"),false,"grass_planted_stage1", 5),
-                                                new Tile(0,0,Renderer.loadImage("resources/assets/tiles/grass_planted_stage2.png"),false,"grass_planted_stage2", 6),
-                                                new Tile(0,0,Renderer.loadImage("resources/assets/tiles/grass_planted_stage3.png"),false,"grass_planted_stage3", 7)
-                                                };
+    public static final Tile[] defaultTiles = new Tile[]{new Tile(0, 0, Renderer.loadImage("resources/assets/tiles/water.png"), true, "water", 0),
+            new Tile(0, 0, Renderer.loadImage("resources/assets/tiles/wall.png"), true, "wall", 1),
+            new Tile(0, 0, Renderer.loadImage("resources/assets/tiles/grass.png"), false, "grass", 2),
+            new Tile(0, 0, Renderer.loadImage("resources/assets/tiles/grass_dug.png"), false, "grass_dug", 3),
+            new Tile(0, 0, Renderer.loadImage("resources/assets/tiles/grass_planted_stage0_unwatered.png"), false, "grass_planted_stage0_unwatered", 4),
+            new Tile(0, 0, Renderer.loadImage("resources/assets/tiles/grass_planted_stage1_unwatered.png"), false, "grass_planted_stage1_unwatered", 5),
+            new Tile(0, 0, Renderer.loadImage("resources/assets/tiles/grass_planted_stage2_unwatered.png"), false, "grass_planted_stage2_unwatered", 6),
+            new Tile(0, 0, Renderer.loadImage("resources/assets/tiles/grass_planted_stage3.png"), false, "grass_planted_stage3", 7),
+            new Tile(0, 0, Renderer.loadImage("resources/assets/tiles/house_floor.png"), false, "house_floor", 8),
+            new Tile(0, 0, Renderer.loadImage("resources/assets/tiles/house_top_and_bottom.png"), true, "house_wall_top_and_bottom", 9),
+            new Tile(0, 0, Renderer.loadImage("resources/assets/tiles/house_left_top.png"), true, "house_wall_left_top", 10),
+            new Tile(0, 0, Renderer.loadImage("resources/assets/tiles/house_right_top.png"), true, "house_wall_right_top", 11),
+            new Tile(0, 0, Renderer.loadImage("resources/assets/tiles/house_left_middle.png"), true, "house_wall_left_middle", 12),
+            new Tile(0, 0, Renderer.loadImage("resources/assets/tiles/house_right_middle.png"), true, "house_wall_right_middle", 13),
+            new Tile(0, 0, Renderer.loadImage("resources/assets/tiles/house_left_bottom.png"), true, "house_wall_left_bottom", 14),
+            new Tile(0, 0, Renderer.loadImage("resources/assets/tiles/house_right_bottom.png"), true, "house_wall_right_bottom", 15),
+            new Tile(0, 0, Renderer.loadImage("resources/assets/tiles/house_window.png"), true, "house_window", 16),
+            new Tile(0, 0, Renderer.loadImage("resources/assets/tiles/house_door.png"), true, "house_door", 17),
+            new Tile(0, 0, Renderer.loadImage("resources/assets/tiles/house_outside.png"), true, "house_outside", 18),
+            new Tile(0, 0, Renderer.loadImage("resources/assets/tiles/grass_planted_stage0_watered.png"), false, "grass_planted_stage0_watered", 19),
+            new Tile(0, 0, Renderer.loadImage("resources/assets/tiles/grass_planted_stage1_watered.png"), false, "grass_planted_stage1_watered", 20),
+            new Tile(0, 0, Renderer.loadImage("resources/assets/tiles/grass_planted_stage2_watered.png"), false, "grass_planted_stage2_watered", 21)
+    };
     public int id;
     public Vector2i position = new Vector2i();
     public TileCollider collider;
@@ -75,7 +89,6 @@ public class Tile {
         if (this.collider != null) {
             this.collider.setParentTile(this);
             this.collider.init();
-            System.out.println(this.collider.getMin()+"   |   "+this.collider.getMax());
         }
 
         this.tileRenderer.setParentTile(this);

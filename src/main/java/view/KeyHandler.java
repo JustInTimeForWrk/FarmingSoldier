@@ -1,4 +1,4 @@
-package util;
+package view;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -44,6 +44,10 @@ public class KeyHandler implements KeyListener {
             return instance.keys[code];
         }
         return false;
+    }
+
+    public static void reset() {
+        instance.keys = new boolean[256];
     }
 
 }

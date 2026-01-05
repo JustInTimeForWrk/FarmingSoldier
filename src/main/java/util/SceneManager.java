@@ -2,6 +2,7 @@ package util;
 
 import physics.PhysicsManager;
 import view.Camera;
+import view.KeyHandler;
 import view.Renderer;
 
 import java.awt.event.KeyEvent;
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 
 public class SceneManager {
     public static long timer = 0;
-    public static double sceneSwapCD = 500;
+    public static double sceneSwapCD = 100;
 
     public static ArrayList<Scene> scenes = new ArrayList<>();
     public static Scene currentScene;
@@ -30,7 +31,6 @@ public class SceneManager {
 
     public static void addScene(Scene scene) {
         scenes.add(scene);
-        scene.init();
     }
 
     public static void updateScene() {
@@ -58,6 +58,10 @@ public class SceneManager {
         if (KeyHandler.getKey(KeyEvent.VK_P)) {
             Renderer.debugging = false;
         }
+        if (KeyHandler.getKey(KeyEvent.VK_ESCAPE)) {
+            GameManager.stopGame();
+        }
+
     }
 
     public static Camera getCurrentCamera() {
@@ -73,5 +77,17 @@ public class SceneManager {
             return  scenes.get(index);
         }
         return null;
+    }
+    public static void init() {
+        for (Scene scene : scenes) {
+            scene.init();
+        }
+    }
+
+    public static void reset() {
+        for (Scene scene : scenes) {
+            scene.stop();
+        }
+        scenes.clear();
     }
 }

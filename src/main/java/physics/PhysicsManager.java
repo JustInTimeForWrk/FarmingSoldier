@@ -139,4 +139,5 @@ public class PhysicsManager {
     public static boolean RectangleIntersectsEntity(Vector2f pos1, Vector2f pos2) {
         return false;
     }
+
 }
