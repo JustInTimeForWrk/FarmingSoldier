@@ -21,6 +21,8 @@ public class PhysicsManager {
         collidersRemoveQueue.add(collider);
     }
 
+    //Input: none, Output: none
+    //Purpose: updates collider positions as well as looks for collisions between entity to entity as well as entity to tile
     public static void update() {
             for (int i = 0; i < entityColliders.size(); i++) {
             BoxCollider collider = entityColliders.get(i);
@@ -65,11 +67,16 @@ public class PhysicsManager {
         }
     }
 
+    //Input: nothing/void, Output: nothing/void
+    //Purpose: completely wipes out any BoxColliders within entityColliders, collidersRemoveQueue, and collidersAddQueue
     public static void clear() {
         entityColliders.clear();
         collidersRemoveQueue.clear();
         collidersAddQueue.clear();
     }
+    
+    //Input: BoxCollider of the entity colliding & tileCollider of the tile colliding, Ouput: nothing/void
+    //Purpose: calls solveCollisidingTile in the entityRB if they have one and calls onTileCollisionEnter for the entity
     public static void tileCollisionResolution(BoxCollider entityCollider, TileCollider tileCollider) {
         Rigidbody entityRB = entityCollider.entity.getComponent(Rigidbody.class);
         if (entityRB != null) {
@@ -77,11 +84,16 @@ public class PhysicsManager {
         }
         entityCollider.entity.onTileCollisionEnter(tileCollider);
     }
-
+    
+    //Input: BoxCollider of the first object & BoxCollider of the second object (order doesnt matter just as long as they are both colliders), Ouput: nothing/void
+    //Purpose: resolves 
     public static void entityCollisionResolution(BoxCollider firstCollider, BoxCollider secondCollider) {
-        if (firstCollider.isTrigger || secondCollider.isTrigger) { //If either collider is a trigger, then call the onTriggerEnter function
-            firstCollider.entity.onTriggerEnter(secondCollider);
+        if (firstCollider.isTrigger) { //If either collider is a trigger, then call the onTriggerEnter function
+            firstCollider.entity.onEntityCollisionEnter(secondCollider);
             secondCollider.entity.onTriggerEnter(firstCollider);
+        } else if (secondCollider.isTrigger) {
+            firstCollider.entity.onTriggerEnter(secondCollider);
+            secondCollider.entity.onEntityCollisionEnter(firstCollider);
         } else {
             firstCollider.entity.onEntityCollisionEnter(secondCollider);
             secondCollider.entity.onEntityCollisionEnter(firstCollider);
@@ -91,10 +103,8 @@ public class PhysicsManager {
 
             if (firstRB != null && secondRB == null) {
                 firstRB.solveCollidingEntity(secondCollider);
-
             } else if (secondRB != null && firstRB == null) {
                 secondRB.solveCollidingEntity(firstCollider);
-
             } else if (secondRB != null && firstRB != null) {
                 firstRB.solveCollidingEntity(secondCollider);
                 secondRB.solveCollidingEntity(firstCollider);

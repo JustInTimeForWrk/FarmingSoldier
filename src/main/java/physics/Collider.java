@@ -18,14 +18,20 @@ public abstract class Collider extends Component {
     Rectangle hitbox = new Rectangle();
     public boolean enabled = true;
     
+    //Input: none, Output: Vector2f containing the biggest x and y values which is the bottom right corner of the rectangular object
+    //Purpose: to be used in calculations like collision resolution where you need to know the shape of the object
     public Vector2f getMax() {
         return new Vector2f((float)hitbox.getMaxX(),(float)hitbox.getMaxY());
     }
 
+    //Input: none, Output: Vector2f containing the smallest x and y values which is the top left corner of the rectangular object
+    //Purpose: to be used in calculations like collision resolution where you need to know the shape of the object
     public Vector2f getMin() {
         return new Vector2f((float)hitbox.getMinX(),(float)hitbox.getMinY());
     }
 
+    //Input: none, Output: Vector2f containing the x and y values of the center of the rectangle
+    //Purpose: to be used in calculations like collision resolution where you need to know the shape of the object as well as distance calculations
     public Vector2f getCenter() {
         return new Vector2f((float)hitbox.getCenterX(),(float)hitbox.getCenterY());
     }

@@ -21,10 +21,15 @@ public class Rigidbody extends Component {
     public float friction = 0.4f;
     public BoxCollider collider;
 
+    
+    //Input: none, Output: none
+    //Purpose: constructs velocity
     public Rigidbody() {
         velocity = new Vector2f();
     }
     
+    //Input: Vector2f, Output: none
+    //Purpose: adds 
     public void addToVelocity(Vector2f vector) {
         velocity.add(vector);
     }

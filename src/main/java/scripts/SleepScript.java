@@ -36,7 +36,7 @@ public class SleepScript extends TextScript {
     }
 
     @Override
-    public void onTriggerEnter(BoxCollider other) {
+    public void onEntityCollisionEnter(BoxCollider other) {
         if (other.entity.tag.equals("Player") && System.currentTimeMillis() - timer >= sleepCD) {
             if (KeyHandler.getKey(KeyEvent.VK_E)) {
                 skipTheNight(other.entity);
