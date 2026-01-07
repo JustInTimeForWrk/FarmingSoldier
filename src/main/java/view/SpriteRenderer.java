@@ -30,6 +30,8 @@ public class SpriteRenderer extends Component implements Drawable {
         }
     }
 
+    //Input: none, Output: none
+    //Purpose: constructor for the SpriteRenderer given the filePath
     public SpriteRenderer(String filePath) {
         this.type = "image";
         if ((this.sprite = Renderer.loadImage(filePath)) == null) {
@@ -37,6 +39,8 @@ public class SpriteRenderer extends Component implements Drawable {
         }
     }
 
+    //Input: BufferedImage, Output: none
+    //Purpose: changes the rendered image to the input image
     public void changeImage(BufferedImage image) {
         this.type = "image";
         if (image != null) {
@@ -56,6 +60,8 @@ public class SpriteRenderer extends Component implements Drawable {
         removeFromRenderer();
     }
 
+    //Input: none, Output: none
+    //Purpose: default constructor for SpriteRenderer
     public SpriteRenderer() {
         this.type = "rectangle";
     }

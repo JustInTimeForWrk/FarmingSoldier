@@ -20,6 +20,8 @@ public class Window extends JFrame {
     public GamePanel gamePanel;
     public MenuPanel menuPanel;
 
+    //Input: none, Output: none
+    //Purpose: constructor for the window
     public Window()
     {
 
@@ -39,6 +41,8 @@ public class Window extends JFrame {
         this.setVisible(true);
     }
 
+    //Input: none, Output: none
+    //Purpose: swaps from the menu panel to the game panel
     public void startGamePanel()
     {
         this.remove(menuPanel);
@@ -52,6 +56,8 @@ public class Window extends JFrame {
         gamePanel.startGameThread();
     }
 
+    //Input: none, Output: none
+    //Purpose: swaps from game panel to the menu panel
     public void stopGamePanel() {
         gamePanel.gameThread = null;
         this.remove(gamePanel);

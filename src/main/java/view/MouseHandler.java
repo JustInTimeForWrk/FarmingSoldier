@@ -41,6 +41,8 @@ public class MouseHandler implements MouseListener {
         return instance.mouseMotionHandler;
     }
 
+    //Input: none, Output: Vector2i representing MousePosition
+    //Purpose: returns a boolean of whether the key is being pressed or not
     public static Vector2i getMousePos() {
         return instance.mousePos.set(instance.mouseMotionHandler.getMousePos()); //prevents overwriting mouse pos values
     }
@@ -78,13 +80,17 @@ public class MouseHandler implements MouseListener {
 
     }
 
+    //Input: int representing a key code from java.awt.KeyEvent, Output: boolean representing if it is pressed or not
+    //Purpose: returns a boolean of whether the key is being pressed or not
     public static boolean getKey(int code) {
         if (0 <= code && code < instance.keys.length ) {
             return instance.keys[code];
         }
         return false;
     }
-    
+
+    //Input: none, Output: none
+    //Purpose: reset function for when quitting out of the game
     public static void reset() {
         instance.clickActions.clear();
         instance.mouseMotionHandler.reset();
@@ -100,7 +106,7 @@ class MouseMotionHandler implements java.awt.event.MouseMotionListener {
 
     @Override
     public void mouseDragged(MouseEvent e) {
-
+        mousePos.set(e.getX(),e.getY());
     }
 
     @Override
@@ -108,11 +114,14 @@ class MouseMotionHandler implements java.awt.event.MouseMotionListener {
         mousePos.set(e.getX(),e.getY());
     }
 
+    //Input: none, Output: Vector2i representing the mouse position
+    //Purpose: reset function for when quitting out of the game
     public Vector2i getMousePos() {
         return mousePos;
     }
 
-
+    //Input: none, Output: none
+    //Purpose: reset function for when quitting out of the game
     public void reset() {
         mousePos.set(0,0);
     }

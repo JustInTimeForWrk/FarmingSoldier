@@ -22,6 +22,8 @@ public class TileRenderer extends Component implements Drawable {
     public String type;
     public Tile tile;
 
+    //Input: BufferedImage, Output: none
+    //Purpose: constructor for the TileRenderer given the buffered image
     public TileRenderer(BufferedImage image) {
         this.sprite = image;
         this.type = "image";
@@ -30,17 +32,14 @@ public class TileRenderer extends Component implements Drawable {
         }
     }
 
-    public TileRenderer(String filePath) {
-        this.type = "image";
-        if ((this.sprite = Renderer.loadImage(filePath)) == null) {
-            this.type = "rectangle";
-        }
-    }
-
+    //Input: Tile, Output: none
+    //Purpose: sets the parent tile to the input
     public void setParentTile(Tile tile) {
         this.tile = tile;
     }
-    
+
+    //Input: BufferedImage, Output: none
+    //Purpose: changes the rendered image to the input image
     public void changeImage(BufferedImage image) {
         this.type = "image";
         if (image != null) {
@@ -60,6 +59,8 @@ public class TileRenderer extends Component implements Drawable {
         removeFromRenderer();
     }
 
+    //Input: none, Output: none
+    //Purpose: constructor for the TileRenderer
     public TileRenderer() {
         this.type = "rectangle";
     }
@@ -68,7 +69,7 @@ public class TileRenderer extends Component implements Drawable {
 
 //        Vector2f screenPos = SceneManager.getCurrentCamera().toScreenPos(transform.position); //coordinates of the center of the person relative to the screen
 
-        Vector2f screenPos = SceneManager.getCurrentCamera().toScreenPos(new Vector2f(tile.position));
+        Vector2f screenPos = SceneManager.getCurrentCamera().toScreenPos(new Vector2f(tile.position)); //Gets the position relative to the camera
 
         Vector2f size;
 

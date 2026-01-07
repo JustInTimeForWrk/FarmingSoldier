@@ -15,15 +15,20 @@ public class Renderer {
     private static ArrayList<Drawable> rendererToRemove = new ArrayList<>();
 
 
-
+    //Input: an object implementing Drawable, Output: none
+    //Purpose: adds the object to a queue to be added to the renderingList
     public static void addRenderObject(Drawable object) {
         rendererToAdd.add(object);
     }
 
+    //Input: an object implementing Drawable, Output: none
+    //Purpose: adds the object to a queue to be removed from the renderingList
     public static void removeRenderObject(Drawable object) {
         rendererToRemove.add(object);
     }
 
+    //Input: Graphics2D of the panel to draw the images and shapes, Output: none
+    //Purpose: draws everything in the renderingList as well as adds/remove items from the renderingList if any are in queue
     public static void update(Graphics2D g2) {
         for (Drawable object : renderingList) {
             object.draw(g2);
@@ -38,12 +43,16 @@ public class Renderer {
             rendererToRemove.clear();
         }
     }
-
+    //Input: none, Output: none
+    //Purpose: to completely remove all rendering objects when stopping the game
     public static void clear() {
         rendererToRemove.addAll(renderingList);
         rendererToAdd.clear();
     }
 
+
+    //Input: String representing the filepath of the image file, Output: BufferedImage loaded at the file location
+    //Purpose: to load images which will be displayed by the Renderer
     public static BufferedImage loadImage(String filePath) {
         try {
             File f = new File(filePath);
