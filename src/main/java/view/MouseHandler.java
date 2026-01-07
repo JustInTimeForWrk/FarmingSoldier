@@ -15,6 +15,8 @@ public class MouseHandler implements MouseListener {
     private MouseMotionHandler mouseMotionHandler;
     private ArrayList<ClickAction> clickActions;
 
+    //Input: none, Output: none
+    //Purpose: constructor for the MouseHandler
     private MouseHandler() {
         keys = new boolean[5];
         mousePos = new Vector2i();
@@ -22,6 +24,8 @@ public class MouseHandler implements MouseListener {
         clickActions = new ArrayList<>();
     }
 
+    //Input: none, Output: MouseHandler
+    //Purpose: returns the instance of the MouseHandler
     public static MouseHandler get() {
         if (instance == null) {
             instance = new MouseHandler();
@@ -29,20 +33,26 @@ public class MouseHandler implements MouseListener {
         return instance;
     }
 
+    //Input: clickAction, Output: none
+    //Purpose: adds a click action to the click actions list which gets called when the mouse is clicked
     public void addClickAction(ClickAction clickAction) {
         clickActions.add(clickAction);
     }
 
+    //Input: clickAction, Output: none
+    //Purpose: removes a click action from the click actions list
     public void removeClickAction(ClickAction clickAction) {
         clickActions.remove(clickAction);
     }
 
+    //Input: none, Output: MouseMotonHandler instance
+    //Purpose: returns MouseMotionHandler to be added to a panel as a listener
     public static MouseMotionHandler getMotionHandler() {
         return instance.mouseMotionHandler;
     }
 
     //Input: none, Output: Vector2i representing MousePosition
-    //Purpose: returns a boolean of whether the key is being pressed or not
+    //Purpose: returns a Vector2i representing the location of the cursor
     public static Vector2i getMousePos() {
         return instance.mousePos.set(instance.mouseMotionHandler.getMousePos()); //prevents overwriting mouse pos values
     }
@@ -80,8 +90,8 @@ public class MouseHandler implements MouseListener {
 
     }
 
-    //Input: int representing a key code from java.awt.KeyEvent, Output: boolean representing if it is pressed or not
-    //Purpose: returns a boolean of whether the key is being pressed or not
+    //Input: int representing a key code of a mouse button, Output: boolean representing if it is pressed or not
+    //Purpose: returns a boolean of whether the mouse button is being pressed or not
     public static boolean getKey(int code) {
         if (0 <= code && code < instance.keys.length ) {
             return instance.keys[code];

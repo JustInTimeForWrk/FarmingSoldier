@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public abstract class Scene {
     Camera camera = new Camera();
-    String name;
+    String name; //ONLY USED FOR DEBUGGING
     public ArrayList<Entity> entities = new ArrayList<>();
     ArrayList<Entity> entityToAdd = new ArrayList<>();
     ArrayList<Entity> entityToRemove = new ArrayList<>();
@@ -15,15 +15,15 @@ public abstract class Scene {
 
     boolean isRunning = false;
 
+    //Input: String of the name of the scene, Output: none
+    //Purpose: constructor for a Scene
     public Scene(String name) {
         this.name = name;
     }
 
+    //Input: none, Output: none
+    //Purpose: updates the scene and the entities in it, also adds/removes entities in the entities queue
     public void update() {
-        if (tileMap != null) {
-            tileMap.update();
-        }
-
 
         for (Entity entity : entities) {
             entity.update();
@@ -45,6 +45,8 @@ public abstract class Scene {
         }
     }
 
+    //Input: none, Output: none
+    //Purpose: initializes the scene on game panel start up
     public void init() {
         if (tileMap != null) {
             tileMap.init();
@@ -54,6 +56,8 @@ public abstract class Scene {
         }
     }
 
+    //Input: none, Output: none
+    //Purpose: starts the scene when it gets loaded as well as its TileMap and Entity arraylist
     public void start() {
         if (!isRunning) {
             if (tileMap != null) {
@@ -67,6 +71,8 @@ public abstract class Scene {
         }
     }
 
+    //Input: none, Output: none
+    //Purpose: stops the scene when it gets unloaded as well as its TileMap and Entity arraylist
     public void stop() {
         if (isRunning) {
             if (tileMap != null) {
@@ -80,6 +86,8 @@ public abstract class Scene {
         }
     }
 
+    //Input: Entity representing an entity to be added to the entities arraylist, Output: none
+    //Purpose: adds the entity to a queue which will get added to the entities arraylist in the update function
     public void addEntityToScene(Entity entity) {
         entity.parentScene = this;
         if (!isRunning) {
@@ -90,6 +98,8 @@ public abstract class Scene {
         }
     }
 
+    //Input: Entity representing an entity to be removed from the entities arraylist, Output: none
+    //Purpose: removes the entity from a queue which will get removed from the entities arraylist in the update function
     public void removeEntityToScene(Entity entity) {
         if (!isRunning) {
             entities.remove(entity);

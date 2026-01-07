@@ -17,10 +17,12 @@ public class SceneManager {
     public static int currentSceneIndex = -1;
     private static int loadSceneIndex = -1;
 
+    //Input: int representing the index wanting to load, Output: none
+    //Purpose: sets the load scene to an index in the scenes arraylist if the cooldown has passed, also resets the cooldown if successful
     public static void loadSceneByIndex(int index) {
-        if (System.currentTimeMillis() - timer > sceneSwapCD) {
+        if (System.currentTimeMillis() - timer > sceneSwapCD) { //cooldown for swapping scenes
             timer = System.currentTimeMillis();
-            if (index > -1 && index < scenes.size()) {
+            if (-1 < index && index < scenes.size()) {
                 loadSceneIndex = index;
             }
         } else {
@@ -28,11 +30,15 @@ public class SceneManager {
         }
 
     }
-
+    
+    //Input: Scene that you want to add to the scenes arraylist, Output: none
+    //Purpose: adds a scene to the scenes arraylist
     public static void addScene(Scene scene) {
         scenes.add(scene);
     }
 
+    //Input: none, Output: none
+    //Purpose: updates the current scene and loads a new scene if LoadSceneIndex isnt -1, also toggles on and off the debugger as well as requesting an exit to the main menu when listening for keys
     public static void updateScene() {
         if (loadSceneIndex != -1) {
             System.out.println("Switching from scene " + SceneManager.currentSceneIndex + " to " + loadSceneIndex);
@@ -64,26 +70,37 @@ public class SceneManager {
 
     }
 
+    //Input: none, Output: camera from the current active scene
+    //Purpose: grabs the camera from the current active scene
     public static Camera getCurrentCamera() {
         return currentScene.getCamera();
     }
 
+    //Input: none, Output: the current active scene
+    //Purpose: grabs the current active scene
     public static Scene getCurrentScene() {
         return currentScene;
     }
 
-    public static Scene getScene(int index) {
-        if (0 <= index && index <= scenes.size()) {
-            return  scenes.get(index);
+    //Input: int representing the scene index, Output: Scene grabbed from the scenes arraylist
+    //Purpose: grabs a scene from the scenes arraylist at the scene index
+    public static Scene getScene(int sceneIndex) {
+        if (0 <= sceneIndex && sceneIndex <= scenes.size()) {
+            return  scenes.get(sceneIndex);
         }
         return null;
     }
+    
+    //Input: none, Output: none
+    //Purpose: initializes every scene in the scenes arraylist
     public static void init() {
         for (Scene scene : scenes) {
             scene.init();
         }
     }
-
+    
+    //Input: none, Output: none
+    //Purpose: stops and clears all the scenes when exiting out of the game panel to the menu panel
     public static void reset() {
         for (Scene scene : scenes) {
             scene.stop();

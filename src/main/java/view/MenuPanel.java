@@ -12,6 +12,8 @@ public class MenuPanel extends JPanel {
     JLabel title;
     JButton button;
 
+    //Input: the application window, Output: none
+    //Purpose: constructor for the MenuPanel
     MenuPanel(Window window) {
 
         this.setPreferredSize(new Dimension(Window.screenWidth, Window.screenHeight));

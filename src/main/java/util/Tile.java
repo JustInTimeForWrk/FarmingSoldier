@@ -46,6 +46,8 @@ public class Tile {
     public String tag = "tile";
     public TileRenderer tileRenderer;
     
+    //Input: 2 ints represents x and y position, a buffered image to draw, a boolean for if it's solid, an int representing the id of the Tile, Output: none
+    //Purpose: constructor for a Tile
     public Tile(int x, int y, BufferedImage image, boolean isSolid, String tag, int id) {
         this.id = id;
         this.tag = tag;
@@ -57,6 +59,8 @@ public class Tile {
         tileRenderer = new TileRenderer(image);
     }
 
+    //Input: 2 ints representing the Tile x and y position and another int representing the tileID from the default tiles array, Output: none
+    //Purpose: constructor for a Tile
     public Tile(int x, int y, int tileID) {
         this.position.set(x,y);
         if (0 <= tileID && tileID < defaultTiles.length) {
@@ -77,14 +81,20 @@ public class Tile {
         }
     }
     
+    //Input: none, Output: none
+    //Purpose: adds the tileRenderer to the Renderer when the scenes change
     public void start() {
         tileRenderer.addToRenderer();
     }
     
+    //Input: none, Output: none
+    //Purpose: removes the tileRenderer from the Renderer when the scenes change
     public void stop() {
         tileRenderer.removeFromRenderer();
     }
 
+    //Input: none, Output: none
+    //Purpose: TileCollider and TileRenderer script are initialized when loading the game
     public void init() {
         if (this.collider != null) {
             this.collider.setParentTile(this);
@@ -95,6 +105,8 @@ public class Tile {
         this.tileRenderer.init();
     }
 
+    //Input: int representing an index from the defaultTiles array, Output: none
+    //Purpose: changes the tileData to the tileData of a default Tile grabbed by the tileID
     public void changeTileData(int tileID) {
         if (0 <= tileID && tileID < defaultTiles.length) {
             Tile tile = defaultTiles[tileID];

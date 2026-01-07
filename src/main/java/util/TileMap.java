@@ -26,11 +26,15 @@ public class TileMap {
     public int width;
     public int height;
 
+    //Input: String representing the filepath to a .txt file, Output: none
+    //Purpose: constructor for the TileMap
     public TileMap(String filepath) {
         this.filepath = filepath;
         loadMap(this.filepath);
     }
 
+    //Input: String of a filepath to a .txt file, Output: none
+    //Purpose: tries to load a TileMap from the file located at the filepath string
     public void loadMap(String filePath) {
         try {
             BufferedReader br = new BufferedReader(new FileReader(filePath));
@@ -76,7 +80,8 @@ public class TileMap {
         }
     }
 
-
+    //Input: none, Output: none
+    //Purpose: detatches the TileMap from the PhysicsManager and Renderer when switching scenes
     public void stop() {
         PhysicsManager.setTileMap(null);
         for (Tile tile : tilesList) {
@@ -84,6 +89,8 @@ public class TileMap {
         }
     }
 
+    //Input: none, Output: none
+    //Purpose: attaches the TileMap to the PhysicsManager and Renderer when switching scenes
     public void start() {
         PhysicsManager.setTileMap(this);
         for (Tile tile : tilesList) {
@@ -91,20 +98,22 @@ public class TileMap {
         }
     }
 
-    public void update() {
-
-    }
-
+    //Input: none , Output: none
+    //Purpose: initializes tiles
     public void init() {
         for (Tile tile : tilesList) {
             tile.init();
         }
     }
     
+    //Input: none, Output: none
+    //Purpose: removes every tile from the tilesList when quitting the game panel to the menu panel
     public void clear() {
         tilesList.clear();
     }
 
+    //Input: none, Output: none
+    //Purpose: updates the TileMap on it's filepath
     public boolean saveTileMap() {
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(filepath));
