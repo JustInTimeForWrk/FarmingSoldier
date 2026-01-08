@@ -9,6 +9,8 @@ import view.Window;
 
 public class Player extends Entity {
 
+    //Input: none, Output: none
+    //Purpose: Default Constructor for player entity
     public Player() {
         super("Player", new Transform(new Vector2f(480,384)));
 

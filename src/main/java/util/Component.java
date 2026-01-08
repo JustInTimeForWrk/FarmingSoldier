@@ -56,7 +56,7 @@ public abstract class Component {
     }
 
     //Input: nonthing/void, Output: nothing/void
-    //Purpose: gets called after the Scene gets initialized which is after every Entity and script has been built
+    //Purpose: gets called after the Scene gets initialized which when the gamethread starts and after every Entity and script has been built
     public void init() {
 
     }

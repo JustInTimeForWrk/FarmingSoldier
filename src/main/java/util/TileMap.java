@@ -18,8 +18,8 @@ public class TileMap {
     public static BufferedImage wall = Renderer.loadImage("resources/assets/tiles/wall.png");
     public static BufferedImage water = Renderer.loadImage("resources/assets/tiles/water.png");
 
-    public String filepath;
-
+    public String filePath;
+    
     public Tile[][] tiles2d;
     public ArrayList<Tile> tilesList = new ArrayList<>();
 
@@ -29,13 +29,13 @@ public class TileMap {
     //Input: String representing the filepath to a .txt file, Output: none
     //Purpose: constructor for the TileMap
     public TileMap(String filepath) {
-        this.filepath = filepath;
-        loadMap(this.filepath);
+        this.filePath = filepath;
+        loadMap(this.filePath);
     }
-
-    //Input: String of a filepath to a .txt file, Output: none
+    
+    //Input: String of a filepath to a .txt file, Output: boolean representing if loading the tilemap was successful or not
     //Purpose: tries to load a TileMap from the file located at the filepath string
-    public void loadMap(String filePath) {
+    public boolean loadMap(String filePath) {
         try {
             BufferedReader br = new BufferedReader(new FileReader(filePath));
             ArrayList<String[]> data = new ArrayList<>();
@@ -69,15 +69,12 @@ public class TileMap {
                 }
             }
             br.close();
-        } catch (Exception e) {
-            tiles2d = null;
+        } catch (Exception e) { //loads backup if main file cannot be read.
             e.printStackTrace();
+            tiles2d = null;
+            return false;
         }
-        for (Tile tile : tilesList) {
-            if (tile.id == 7) {
-                System.out.println("Tile loaded: "+tile.toString());
-            }
-        }
+        return true;
     }
 
     //Input: none, Output: none
@@ -116,7 +113,7 @@ public class TileMap {
     //Purpose: updates the TileMap on it's filepath
     public boolean saveTileMap() {
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(filepath));
+            BufferedWriter bw = new BufferedWriter(new FileWriter(filePath));
             for (int y = 0; y < height; y++) {
                 for (int x = 0; x < width; x++) {
                     Tile tile = tiles2d[x][y];
