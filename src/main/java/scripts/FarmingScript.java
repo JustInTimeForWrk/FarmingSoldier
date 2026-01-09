@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 
 public class FarmingScript extends TextScript implements ClickAction{
     public static int harvestedPlants = 0;
+
     Vector2f mouseClickPos;
     TileMap tileMap;
     Vector2f playerPos;

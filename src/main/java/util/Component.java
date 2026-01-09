@@ -21,7 +21,7 @@ public abstract class Component {
 
     //Input: BoxCollider, Output: nothing/void
     //Purpose: gets called when an a box collider that has it's trigger set to true is intersecting with the player
-    public void onTriggerEnter(BoxCollider other) {
+    public void onTrigger(BoxCollider other) {
 
     }
 
@@ -44,7 +44,7 @@ public abstract class Component {
 
     }
 
-    
+    //Unused Function
     public void destroy() {
 
     }

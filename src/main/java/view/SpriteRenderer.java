@@ -99,19 +99,19 @@ public class SpriteRenderer extends Component implements Drawable {
                 System.out.println("Cannot draw SpriteRenderer type: "+this.type);
                 break;
         }
-        if (Renderer.debugging) {
-            BoxCollider collider = entity.getComponent(BoxCollider.class);
-
-            if (collider != null) {
-
-                Vector2f topLeft = SceneManager.getCurrentCamera().toScreenPos(collider.getMin());
-                g2.setColor(Color.red);
-                g2.drawRect((int)topLeft.x,(int)topLeft.y,(int)collider.size.x,(int)collider.size.y);
-            }
-
-            g2.setColor(Color.yellow);
-            Vector2f topLeft = SceneManager.getCurrentCamera().toScreenPos(new Vector2f(transform.position.x-2,transform.position.y-2));
-            g2.fillRect((int)topLeft.x,(int)topLeft.y,4,4);
-        }
+//        if (Renderer.debugging) {
+//            BoxCollider collider = entity.getComponent(BoxCollider.class);
+//
+//            if (collider != null) {
+//
+//                Vector2f topLeft = SceneManager.getCurrentCamera().toScreenPos(collider.getMin());
+//                g2.setColor(Color.red);
+//                g2.drawRect((int)topLeft.x,(int)topLeft.y,(int)collider.size.x,(int)collider.size.y);
+//            }
+//
+//            g2.setColor(Color.yellow);
+//            Vector2f topLeft = SceneManager.getCurrentCamera().toScreenPos(new Vector2f(transform.position.x-2,transform.position.y-2));
+//            g2.fillRect((int)topLeft.x,(int)topLeft.y,4,4);
+//        }
     }
 }

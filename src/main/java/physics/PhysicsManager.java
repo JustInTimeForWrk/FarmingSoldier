@@ -85,32 +85,29 @@ public class PhysicsManager {
         entityCollider.entity.onTileCollisionEnter(tileCollider);
     }
     
-    //Input: BoxCollider of the first object & BoxCollider of the second object (order doesnt matter just as long as they are both colliders), Ouput: nothing/void
-    //Purpose: resolves 
-    public static void entityCollisionResolution(BoxCollider firstCollider, BoxCollider secondCollider) {
-        if (firstCollider.isTrigger) { //If either collider is a trigger, then call the onTriggerEnter function
-            firstCollider.entity.onEntityCollisionEnter(secondCollider);
-            secondCollider.entity.onTriggerEnter(firstCollider);
-        } else if (secondCollider.isTrigger) {
-            firstCollider.entity.onTriggerEnter(secondCollider);
-            secondCollider.entity.onEntityCollisionEnter(firstCollider);
-        } else {
-            firstCollider.entity.onEntityCollisionEnter(secondCollider);
-            secondCollider.entity.onEntityCollisionEnter(firstCollider);
+    //Input: BoxCollider of the first object & BoxCollider of the second object (order doesn't matter just as long as they are both colliders), Ouput: nothing/void
+    //Purpose: resolves collisions and runs collision/trigger callbacks
+        public static void entityCollisionResolution(BoxCollider firstCollider, BoxCollider secondCollider) {
+            if (firstCollider.isTrigger || secondCollider.isTrigger) { //If either collider is a trigger, then call the onTriggerEnter function
+                firstCollider.entity.onTriggerEnter(secondCollider);
+                secondCollider.entity.onTriggerEnter(firstCollider);
+            } else {
+                firstCollider.entity.onEntityCollisionEnter(secondCollider);
+                secondCollider.entity.onEntityCollisionEnter(firstCollider);
 
-            Rigidbody firstRB = firstCollider.entity.getComponent(Rigidbody.class);
-            Rigidbody secondRB = secondCollider.entity.getComponent(Rigidbody.class);
+                Rigidbody firstRB = firstCollider.entity.getComponent(Rigidbody.class);
+                Rigidbody secondRB = secondCollider.entity.getComponent(Rigidbody.class);
 
-            if (firstRB != null && secondRB == null) {
-                firstRB.solveCollidingEntity(secondCollider);
-            } else if (secondRB != null && firstRB == null) {
-                secondRB.solveCollidingEntity(firstCollider);
-            } else if (secondRB != null && firstRB != null) {
-                firstRB.solveCollidingEntity(secondCollider);
-                secondRB.solveCollidingEntity(firstCollider);
+                if (firstRB != null && secondRB == null) {
+                    firstRB.solveCollidingEntity(secondCollider);
+                } else if (secondRB != null && firstRB == null) {
+                    secondRB.solveCollidingEntity(firstCollider);
+                } else if (secondRB != null && firstRB != null) {
+                    firstRB.solveCollidingEntity(secondCollider);
+                    secondRB.solveCollidingEntity(firstCollider);
+                }
             }
         }
-    }
 
     public static void setTileMap(TileMap tileMap) {
         if (tileMap == null) {
@@ -129,10 +126,8 @@ public class PhysicsManager {
         }
     }
 
-    public static TileCollider[][] getTileColliders() {
-        return tileColliders;
-    }
-
+    //Input: Vector2f of the first point and Vector2f of the second point, Output: boolean to see if the line between the two points intersects a tile
+    //Purpose: to check if a line between two points is obstructed by the current tileColliders list
     public static boolean lineIntersectsTile(Vector2f pos1, Vector2f pos2) {
         for (TileCollider[] tiles : tileColliders) {
             for (TileCollider tile : tiles) {
@@ -143,10 +138,6 @@ public class PhysicsManager {
                 }
             }
         }
-        return false;
-    }
-
-    public static boolean RectangleIntersectsEntity(Vector2f pos1, Vector2f pos2) {
         return false;
     }
 

@@ -19,8 +19,10 @@ public class SleepScript extends TextScript {
     ArrayList<Tile> tileMapArray = new ArrayList<>();
     boolean playerOnBed = false;
 
+    //Input: none, Output: none
+    //Purpose: constructor for the sleep script
     public SleepScript(){
-        super("Press E to Rest", new Vector2i(200,400));
+        super("Press E to Rest", new Vector2i(Window.screenWidth/2,Window.screenHeight/2));
     }
 
     @Override
@@ -36,7 +38,7 @@ public class SleepScript extends TextScript {
     }
 
     @Override
-    public void onEntityCollisionEnter(BoxCollider other) {
+    public void onTrigger(BoxCollider other) {
         if (other.entity.tag.equals("Player") && System.currentTimeMillis() - timer >= sleepCD) {
             if (KeyHandler.getKey(KeyEvent.VK_E)) {
                 skipTheNight(other.entity);
@@ -55,10 +57,12 @@ public class SleepScript extends TextScript {
         playerOnBed = false;
     }
 
+    //Input: Entity representing the player, Output: none
+    //Purpose: runs the game save as well as resets the night timer when the player sends a request to sleep. This game mechanic is similar to Stardew Valley
     public void skipTheNight(Entity player) {
         if (tileMapArray != null){
             timer = System.currentTimeMillis();
-            player.transform.position.set(Window.tileSize*12.5,Window.tileSize*12);
+            player.transform.position.set(Window.tileSize*12.5,Window.tileSize*5);
             for (Tile tile : tileMapArray) {
 
                 if (19 <= tile.id && tile.id <= 21) { //grows watered seeds

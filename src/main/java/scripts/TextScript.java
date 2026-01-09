@@ -1,9 +1,7 @@
 package scripts;
 
-import org.joml.Vector2f;
 import org.joml.Vector2i;
 import util.Component;
-import util.SceneManager;
 import view.Drawable;
 
 import java.awt.*;
@@ -15,10 +13,14 @@ public class TextScript extends Component implements Drawable {
 
     Vector2i position = new Vector2i();
 
+    //Input: String of the new diplayable text, Output: none
+    //Purpose: changes the text that will be displayed
     public void setText(String text) {
         this.text = text;
     }
 
+    //Input: String of the text to display and Vector2i representing the position of the text on the screen, Output: none
+    //Purpose: Constructor for the text script
     public TextScript(String text, Vector2i position) {
         if (text != null) {
             this.text = text;

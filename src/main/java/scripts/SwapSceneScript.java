@@ -6,7 +6,7 @@ import util.SceneManager;
 
 public class SwapSceneScript extends Component {
     @Override
-    public void onTriggerEnter(BoxCollider other) {
+    public void onTrigger(BoxCollider other) {
         if (!other.entity.tag.equals("Warp")) {
             return;
         }

@@ -30,7 +30,6 @@ public class TileMap {
     //Purpose: constructor for the TileMap
     public TileMap(String filepath) {
         this.filePath = filepath;
-        loadMap(this.filePath);
     }
     
     //Input: String of a filepath to a .txt file, Output: boolean representing if loading the tilemap was successful or not

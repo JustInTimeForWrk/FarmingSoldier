@@ -45,35 +45,35 @@ public class MovementScript extends Component {
                 playerImages.put(imagePath, Renderer.loadImage(imagePath));
             }
         }
-        super.init();
-
-    }
-
-    @Override
-    public void start() {
-
     }
 
     @Override
     public void update() {
         Vector2f dir = new Vector2f();
         if (KeyHandler.getKey(KeyEvent.VK_W)) {
-            movingDirY = "_up";
             dir.y -= 1;
         }
         if (KeyHandler.getKey(KeyEvent.VK_S)) {
-            movingDirY = "_down";
             dir.y += 1;
         }
         if (KeyHandler.getKey(KeyEvent.VK_A)) {
-            movingDirX = "_left";
             dir.x -= 1;
         }
         if (KeyHandler.getKey(KeyEvent.VK_D)) {
-            movingDirX = "_right";
             dir.x += 1;
         }
 
+        if (dir.x > 0) { //Moving right
+            movingDirX = "_right";
+        } else if (dir.x < 0) { //Moving left
+            movingDirX = "_left";
+        }
+
+        if (dir.y > 0) { //Moving up
+            movingDirY = "_down";
+        } else if (dir.y < 0) { //Moving down
+            movingDirY = "_up";
+        }
 
         //Below contains the walking animation
         if (!dir.equals(0,0)) { //if a vector of (0,0) is normalized, it returns NaN, it can be used to see if player is moving

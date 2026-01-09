@@ -10,8 +10,8 @@ public class Window extends JFrame {
 
     final static int maxScreenCol = 16;
     final static int maxScreenRow = 12;
-    final static int screenWidth = maxScreenCol * tileSize;
-    final static int screenHeight = maxScreenRow * tileSize;
+    public final static int screenWidth = maxScreenCol * tileSize;
+    public final static int screenHeight = maxScreenRow * tileSize;
 
     public final static int halfScreenWidth = screenWidth / 2;
     public final static int halfScreenHeight = screenHeight / 2;

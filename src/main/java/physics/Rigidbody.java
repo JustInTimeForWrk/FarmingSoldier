@@ -28,8 +28,8 @@ public class Rigidbody extends Component {
         velocity = new Vector2f();
     }
     
-    //Input: Vector2f, Output: none
-    //Purpose: adds 
+    //Input: Vector2f representing a velocity to add to the rigidbody, Output: none
+    //Purpose: adds the input vector to the velocity of the rigidbody
     public void addToVelocity(Vector2f vector) {
         velocity.add(vector);
     }
@@ -45,14 +45,20 @@ public class Rigidbody extends Component {
         entity.transform.position.add(velocity);
     }
 
-
+    //Input: tag of any entity that shouldn't be able to push this object, Output: none
+    //Purpose: adds a tag to the arraylist of entity tags that cannot push this entity
     public void addTagImmovable(String tag) {
         tagsThatCantMoveThis.add(tag);
     }
+
+    //Input: String in the tagsThatCantMoveThis arraylist to remove, Output: none
+    //Purpose: removes a tag from the list of entity tags that cannot push this entity
     public void removeTagImmovable(String tag) {
         tagsThatCantMoveThis.remove(tag);
     }
 
+    //Input: a collider that is intersecting with the set box collider, Output: none
+    //Purpose: solves a collision with another collider by checking how much the rigidbody is overlapping with the collider intersecting it and moving the rigidbody the smallest axis of overlap
     public void solveCollision(Collider other) {
         Vector2f overlap = collider.getMax().min(other.getMax()).sub(collider.getMin().max(other.getMin()));
 
@@ -74,18 +80,19 @@ public class Rigidbody extends Component {
 
         collider.updateCollider();
     }
-    
+
+    //Input: TileCollider of a tile colliding with the entity, Output: none
+    //Purpose: calls solveCollision()
     public void solveCollidingTile(TileCollider other) {
         solveCollision(other);
     }
-    
+
+    //Input: none, Output: none
+    //Purpose: checks for if the colliding entity should be able to push this entity and calls solveCollision() if it can
     public void solveCollidingEntity(BoxCollider other) {
-    
-        
         if (tagsThatCantMoveThis.contains(other.entity.tag)) {
-            return; //Doesnt allow certain
+            return; //Doesn't allow certain entities from pushing this entity
         }
-        
         solveCollision(other);
     }
 

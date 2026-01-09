@@ -4,6 +4,7 @@ import physics.PhysicsManager;
 import scenes.GameScene;
 import scenes.HouseScene;
 import scripts.FarmingScript;
+import scripts.NPCSellScript;
 import view.KeyHandler;
 import view.MouseHandler;
 import view.Renderer;
@@ -18,13 +19,16 @@ public class GameManager {
     //Input: none, Output: none
     //Purpose: creates the Window of the application as well as tries to fetch game data
     public static void startWindow() {
-        loadedSave = GameData.loadGameData("resources/save.db");
+        loadedSave = GameData.loadGameData("resources/saves/gameSave.db");
         window = new Window();
     }
 
     //Input: none, Output: none
     //Purpose: to build all the scenes, initialize and load the scene manager, and start the game panel
     public static void startGame() {
+        FarmingScript.harvestedPlants = loadedSave.playerCropCount;
+        NPCSellScript.cropsNeeded = loadedSave.playerCropsNeeded;
+
         SceneManager.addScene(new GameScene());
         SceneManager.addScene(new HouseScene());
         SceneManager.init();
@@ -41,6 +45,9 @@ public class GameManager {
                 scene.tileMap.saveTileMap();
             }
         }
+        loadedSave.playerCropCount = FarmingScript.harvestedPlants;
+        loadedSave.playerCropsNeeded = NPCSellScript.cropsNeeded;
+        GameData.saveGameData("resources/saves/gameSave.db",loadedSave);
     }
 
     //Input: none, Output: none

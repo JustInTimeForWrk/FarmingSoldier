@@ -2,18 +2,17 @@ package util;
 
 import java.nio.file.*;
 import java.sql.*;
-import java.time.*;
-import java.io.*;
 
 public class GameData {
 
-    int playerCropCount = 0;
-    
-    GameData() {
+    public int playerCropCount = 0;
+    public int playerCropsNeeded = 10;
+
+    public GameData() {
         
     }
     
-    GameData(Player player) {
+    public GameData(Player player) {
         
     }
     
@@ -30,18 +29,22 @@ public class GameData {
             if (!databaseFound) {
                 String sqlCreateTable ="""
                                     CREATE TABLE IF NOT EXISTS game_data (
-                                        playerCropCount INTEGER
+                                        playerCropCount INTEGER,
+                                        playerCropsNeeded INTEGER
                                         );
                                     """;
                 stmt.execute(sqlCreateTable);
             } else {
-                String sqlLoadData_player = "SELECT playerCropCount FROM game_data";
+                String sqlLoadData_player = "SELECT playerCropCount, playerCropsNeeded FROM game_data";
                 stmt.execute(sqlLoadData_player);
             
                 
                 try (ResultSet rs = stmt.getResultSet())
                 {
-                    gameData.playerCropCount = rs.getInt("playerCropCount");
+                    if (rs.next()) {
+                        gameData.playerCropCount = rs.getInt("playerCropCount");
+                        gameData.playerCropsNeeded = rs.getInt("playerCropsNeeded");
+                    }
                 } 
                 catch (Exception Ex)
                 {
@@ -55,7 +58,7 @@ public class GameData {
         return gameData;
     }
     
-    //Input: String filepath representing the class path and a GameData storing the game's save info, Output: boolean if it saved properly or not
+    //Input: String representing the filepath and a GameData storing the game's save info, Output: boolean if it saved properly or not
     //Purpose: to save our game data into a secure .db file
     public static boolean saveGameData(String filePath, GameData gameData) {
         
@@ -67,17 +70,19 @@ public class GameData {
             if (!databaseFound) {
                 String sqlCreateTable ="""
                                     CREATE TABLE IF NOT EXISTS game_data (
-                                        playerCropCount INTEGER
+                                        playerCropCount INTEGER,
+                                        playerCropsNeeded INTEGER
                                         );
                                     """;
                 stmt.execute(sqlCreateTable);
             } else {
                 stmt.execute("DELETE FROM game_data;");
-                String sqlSaveData = "INSERT INTO game_data VALUES ("
-                                    +gameData.playerCropCount
-                                    +");";
-                stmt.execute(sqlSaveData);
             }
+            String sqlSaveData = "INSERT INTO game_data VALUES ("
+                                +gameData.playerCropCount+","
+                                +gameData.playerCropsNeeded
+                                +");";
+            stmt.execute(sqlSaveData);
             return true;
         } catch (Exception e) {
             e.printStackTrace();

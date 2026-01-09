@@ -36,14 +36,14 @@ public abstract class Collider extends Component {
         return new Vector2f((float)hitbox.getCenterX(),(float)hitbox.getCenterY());
     }
 
-//    public boolean checkPointCollision(float x, float y) {
-//        return hitbox.contains(x,y);
-//    }
-    
+    //Input: the other collider that is checking collision, Output: boolean of whether the colliders are intersecting
+    //Purpose: checks if two colliders are intersecting
     public boolean checkCollision(Collider other) {
         return hitbox.intersects(other.hitbox);
     }
 
+    //Input: floats representing the x and y of one point and the x and y of the other point, Output: boolean of whether the collider intersects with the line
+    //Purpose: checks if a line between two points intersects this collider
     public boolean checkLineCollision(float x, float y, float x2, float y2) {
         return hitbox.intersectsLine(x,y,x2,y2);
     }

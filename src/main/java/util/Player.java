@@ -18,13 +18,14 @@ public class Player extends Entity {
 
     @Override
     public void init() {
+
         addComponent(new MovementScript());
 
-        BoxCollider boxCollider = new BoxCollider(new Vector2f(40f,20f),new Vector2f(4f,32f));
+//        BoxCollider boxCollider = new BoxCollider(new Vector2f(40f,20f),new Vector2f(4f,32f));
 
         addComponent(new Rigidbody());
 
-        addComponent(boxCollider);
+        addComponent(new BoxCollider(new Vector2f(40f,20f),new Vector2f(4f,32f)));
 
         addComponent(new SpriteRenderer("resources/assets/player/monkey_down01.png"));
 
