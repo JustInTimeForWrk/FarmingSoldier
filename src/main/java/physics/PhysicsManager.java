@@ -10,7 +10,7 @@ public class PhysicsManager {
     public static ArrayList<BoxCollider> entityColliders = new ArrayList<>();
     private static ArrayList<BoxCollider> collidersRemoveQueue = new ArrayList<>();
     private static ArrayList<BoxCollider> collidersAddQueue = new ArrayList<>();
-
+    
     private static TileCollider[][] tileColliders;
 
     public static void addCollider(BoxCollider newCollider) {
