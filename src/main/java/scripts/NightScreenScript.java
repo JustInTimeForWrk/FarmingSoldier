@@ -21,7 +21,7 @@ public class NightScreenScript extends Component implements Drawable {
     @Override
     public void start() {
         addToRenderer();
-        sleepScript = SceneManager.getScene(1).findEntityByTag("Bed").getComponent(SleepScript.class);
+        sleepScript = SceneManager.getScene("house").findEntityByTag("Bed").getComponent(SleepScript.class);
     }
 
     @Override

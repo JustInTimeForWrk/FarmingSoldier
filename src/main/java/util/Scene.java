@@ -7,11 +7,10 @@ import java.util.ArrayList;
 public abstract class Scene {
     Camera camera = new Camera();
     String name; //ONLY USED FOR DEBUGGING
-    public ArrayList<Entity> entities = new ArrayList<>();
-    ArrayList<Entity> entityToAdd = new ArrayList<>();
-    ArrayList<Entity> entityToRemove = new ArrayList<>();
+    private ArrayList<Entity> entities = new ArrayList<>();
+    private ArrayList<Entity> entityToAdd = new ArrayList<>();
+    private ArrayList<Entity> entityToRemove = new ArrayList<>();
     public TileMap tileMap;
-
 
     boolean isRunning = false;
 
@@ -100,7 +99,7 @@ public abstract class Scene {
 
     //Input: Entity representing an entity to be removed from the entities arraylist, Output: none
     //Purpose: removes the entity from a queue which will get removed from the entities arraylist in the update function
-    public void removeEntityToScene(Entity entity) {
+    public void removeEntityFromScene(Entity entity) {
         if (!isRunning) {
             entities.remove(entity);
         } else {

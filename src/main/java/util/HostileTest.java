@@ -5,7 +5,11 @@ import physics.Rigidbody;
 import scripts.HostileMovement;
 import view.SpriteRenderer;
 
-//Unused class
+/*
+            ||============||
+            ||UNUSED CLASS||
+            ||============||
+ */
 public class HostileTest extends Entity{
     public int damage = 100;
 

@@ -4,7 +4,6 @@ import org.joml.Vector2f;
 import util.ClickAction;
 import util.Component;
 import util.SceneManager;
-import view.Window;
 
 import java.awt.event.MouseEvent;
 

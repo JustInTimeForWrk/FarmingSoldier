@@ -25,7 +25,7 @@ public class FarmingScript extends TextScript implements ClickAction{
         mouseClickPos = new Vector2f();
         playerPos = new Vector2f();
         hotbarScript = entity.getComponent(HotbarScript.class);
-        tileMap = SceneManager.getScene(0).tileMap;
+        tileMap = SceneManager.getScene("world").tileMap;
     }
 
     @Override

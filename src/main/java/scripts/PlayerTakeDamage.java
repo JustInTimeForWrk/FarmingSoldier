@@ -63,7 +63,7 @@ public class PlayerTakeDamage extends Component {
     private void checkForDeath() {
         if (health <= 0) {
             health = 100f;
-            SceneManager.loadSceneByIndex(0);
+            SceneManager.loadSceneByName("house");
         }
     }
 }

@@ -51,7 +51,7 @@ public class HouseScene extends Scene {
     @Override
     public void update() {
         if (KeyHandler.getKey(KeyEvent.VK_K)) {
-            SceneManager.loadSceneByIndex(0);
+            SceneManager.loadSceneByName("world");
         }
         super.update();
     }

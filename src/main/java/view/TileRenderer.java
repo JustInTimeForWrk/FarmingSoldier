@@ -24,6 +24,7 @@ public class TileRenderer extends Component implements Drawable {
 
     //Input: BufferedImage, Output: none
     //Purpose: constructor for the TileRenderer given the buffered image
+    //Example: TileRender(Renderer.loadImage("resources/assets/tiles/grass.png"))
     public TileRenderer(BufferedImage image) {
         this.sprite = image;
         this.type = "image";
@@ -34,12 +35,14 @@ public class TileRenderer extends Component implements Drawable {
 
     //Input: Tile, Output: none
     //Purpose: sets the parent tile to the input
+    //Example: setParentTile(new Tile(0,0,4))
     public void setParentTile(Tile tile) {
         this.tile = tile;
     }
 
     //Input: BufferedImage, Output: none
     //Purpose: changes the rendered image to the input image
+    //Example: changeImage(Renderer.loadImage("resources/assets/tiles/grass.png"))
     public void changeImage(BufferedImage image) {
         this.type = "image";
         if (image != null) {
@@ -61,13 +64,12 @@ public class TileRenderer extends Component implements Drawable {
 
     //Input: none, Output: none
     //Purpose: constructor for the TileRenderer
+    //Example: TileRenderer()
     public TileRenderer() {
         this.type = "rectangle";
     }
 
     public void draw(Graphics2D g2) {
-
-//        Vector2f screenPos = SceneManager.getCurrentCamera().toScreenPos(transform.position); //coordinates of the center of the person relative to the screen
 
         Vector2f screenPos = SceneManager.getCurrentCamera().toScreenPos(new Vector2f(tile.position)); //Gets the position relative to the camera
 

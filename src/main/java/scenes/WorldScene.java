@@ -12,10 +12,10 @@ import view.Window;
 
 import java.awt.event.KeyEvent;
 
-public class GameScene extends Scene {
+public class WorldScene extends Scene {
     Entity player;
-    public GameScene() {
-        super("Game");
+    public WorldScene() {
+        super("world");
     }
 
     @Override
@@ -49,7 +49,7 @@ public class GameScene extends Scene {
     @Override
     public void update() {
         if (KeyHandler.getKey(KeyEvent.VK_L)) {
-            SceneManager.loadSceneByIndex(1);
+            SceneManager.loadSceneByName("house");
         }
         super.update();
     }

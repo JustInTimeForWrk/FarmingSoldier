@@ -10,12 +10,12 @@ public class SwapSceneScript extends Component {
         if (!other.entity.tag.equals("Warp")) {
             return;
         }
-        if (SceneManager.currentSceneIndex == 1) {
+        if (SceneManager.currentSceneName.equals("world")) {
             //loads game scene
-            SceneManager.loadSceneByIndex(0);
-        } else if (SceneManager.currentSceneIndex == 0) {
+            SceneManager.loadSceneByName("house");
+        } else if (SceneManager.currentSceneName.equals("house")) {
             //loads house scene
-            SceneManager.loadSceneByIndex(1);
+            SceneManager.loadSceneByName("world");
 
         }
 

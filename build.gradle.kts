@@ -18,7 +18,7 @@ dependencies {
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     implementation("org.joml:joml:1.10.5")
-    implementation("org.xerial:sqlite-jdbc:3.45.1.0")
+        implementation("org.xerial:sqlite-jdbc:3.45.1.0")
 }
 
 tasks.test {

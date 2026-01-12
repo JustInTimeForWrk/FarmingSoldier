@@ -17,6 +17,7 @@ public class MouseHandler implements MouseListener {
 
     //Input: none, Output: none
     //Purpose: constructor for the MouseHandler
+    //Example: MouseHandler()
     private MouseHandler() {
         keys = new boolean[5];
         mousePos = new Vector2i();
@@ -26,6 +27,7 @@ public class MouseHandler implements MouseListener {
 
     //Input: none, Output: MouseHandler
     //Purpose: returns the instance of the MouseHandler
+    //Example: get()
     public static MouseHandler get() {
         if (instance == null) {
             instance = new MouseHandler();
@@ -35,24 +37,28 @@ public class MouseHandler implements MouseListener {
 
     //Input: clickAction, Output: none
     //Purpose: adds a click action to the click actions list which gets called when the mouse is clicked
+    //Example: addClickAction(new FarmingScript())
     public void addClickAction(ClickAction clickAction) {
         clickActions.add(clickAction);
     }
 
     //Input: clickAction, Output: none
     //Purpose: removes a click action from the click actions list
+    //Example: removeClickAction(new FarmingScript())
     public void removeClickAction(ClickAction clickAction) {
         clickActions.remove(clickAction);
     }
 
     //Input: none, Output: MouseMotonHandler instance
     //Purpose: returns MouseMotionHandler to be added to a panel as a listener
+    //Example: getMotionHandler()
     public static MouseMotionHandler getMotionHandler() {
         return instance.mouseMotionHandler;
     }
 
     //Input: none, Output: Vector2i representing MousePosition
     //Purpose: returns a Vector2i representing the location of the cursor
+    //Example: getMousePos()
     public static Vector2i getMousePos() {
         return instance.mousePos.set(instance.mouseMotionHandler.getMousePos()); //prevents overwriting mouse pos values
     }
@@ -89,9 +95,9 @@ public class MouseHandler implements MouseListener {
     public void mouseExited(MouseEvent e) {
 
     }
-
     //Input: int representing a key code of a mouse button, Output: boolean representing if it is pressed or not
     //Purpose: returns a boolean of whether the mouse button is being pressed or not
+    //Example: getKey(KeyEvent.VK_ESCAPE)
     public static boolean getKey(int code) {
         if (0 <= code && code < instance.keys.length ) {
             return instance.keys[code];
@@ -101,6 +107,7 @@ public class MouseHandler implements MouseListener {
 
     //Input: none, Output: none
     //Purpose: reset function for when quitting out of the game
+    //Example: reset()
     public static void reset() {
         instance.clickActions.clear();
         instance.mouseMotionHandler.reset();
@@ -126,12 +133,14 @@ class MouseMotionHandler implements java.awt.event.MouseMotionListener {
 
     //Input: none, Output: Vector2i representing the mouse position
     //Purpose: reset function for when quitting out of the game
+    //Example: getMousePos()
     public Vector2i getMousePos() {
         return mousePos;
     }
 
     //Input: none, Output: none
     //Purpose: reset function for when quitting out of the game
+    //Example: reset()
     public void reset() {
         mousePos.set(0,0);
     }

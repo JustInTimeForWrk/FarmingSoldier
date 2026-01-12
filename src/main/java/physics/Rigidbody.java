@@ -96,4 +96,5 @@ public class Rigidbody extends Component {
         solveCollision(other);
     }
 
+
 }

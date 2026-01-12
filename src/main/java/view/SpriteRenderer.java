@@ -10,7 +10,6 @@ package view;
  */
 
 import org.joml.Vector2f;
-import physics.BoxCollider;
 import util.Component;
 import util.SceneManager;
 import util.Transform;
@@ -22,6 +21,9 @@ public class SpriteRenderer extends Component implements Drawable {
     public BufferedImage sprite;
     public String type;
 
+    //Input: BufferedImage to display, Output: none
+    //Purpose: constructor for the SpriteRenderer given the filePath
+    //Example: SpriteRenderer(Renderer.loadImage("resources/assets/night_screen.png"))
     public SpriteRenderer(BufferedImage image) {
         this.sprite = image;
         this.type = "image";
@@ -30,8 +32,9 @@ public class SpriteRenderer extends Component implements Drawable {
         }
     }
 
-    //Input: none, Output: none
+    //Input: String filepath of the image to display, Output: none
     //Purpose: constructor for the SpriteRenderer given the filePath
+    //Example: SpriteRenderer("resources/assets/night_screen.png")
     public SpriteRenderer(String filePath) {
         this.type = "image";
         if ((this.sprite = Renderer.loadImage(filePath)) == null) {
@@ -41,6 +44,7 @@ public class SpriteRenderer extends Component implements Drawable {
 
     //Input: BufferedImage, Output: none
     //Purpose: changes the rendered image to the input image
+    //Example: changeImage(Renderer.loadImage("resources/assets/night_screen.png"))
     public void changeImage(BufferedImage image) {
         this.type = "image";
         if (image != null) {
@@ -62,6 +66,7 @@ public class SpriteRenderer extends Component implements Drawable {
 
     //Input: none, Output: none
     //Purpose: default constructor for SpriteRenderer
+    //Example: SpriteRenderer()
     public SpriteRenderer() {
         this.type = "rectangle";
     }
@@ -71,8 +76,6 @@ public class SpriteRenderer extends Component implements Drawable {
         Transform transform = entity.transform;
 
         Vector2f screenPos = SceneManager.getCurrentCamera().toScreenPos(transform.position); //coordinates of the center of the person relative to the screen
-
-//        Vector2f screenPos = new Vector2f(transform.position);
 
         Vector2f size;
 
@@ -99,19 +102,5 @@ public class SpriteRenderer extends Component implements Drawable {
                 System.out.println("Cannot draw SpriteRenderer type: "+this.type);
                 break;
         }
-//        if (Renderer.debugging) {
-//            BoxCollider collider = entity.getComponent(BoxCollider.class);
-//
-//            if (collider != null) {
-//
-//                Vector2f topLeft = SceneManager.getCurrentCamera().toScreenPos(collider.getMin());
-//                g2.setColor(Color.red);
-//                g2.drawRect((int)topLeft.x,(int)topLeft.y,(int)collider.size.x,(int)collider.size.y);
-//            }
-//
-//            g2.setColor(Color.yellow);
-//            Vector2f topLeft = SceneManager.getCurrentCamera().toScreenPos(new Vector2f(transform.position.x-2,transform.position.y-2));
-//            g2.fillRect((int)topLeft.x,(int)topLeft.y,4,4);
-//        }
     }
 }

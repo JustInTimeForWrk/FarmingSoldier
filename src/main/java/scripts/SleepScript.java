@@ -27,14 +27,12 @@ public class SleepScript extends TextScript {
 
     @Override
     public void init() {
-        Entity player = SceneManager.getScene(0).findEntityByTag("Player");
+        Entity player = SceneManager.getScene("world").findEntityByTag("Player");
         if (player != null) {
             farmingScript = player.getComponent(FarmingScript.class);
         }
-        gameTileMap = SceneManager.getScene(0).tileMap;
-        if (gameTileMap != null) {
-            tileMapArray = gameTileMap.tilesList;
-        }
+        gameTileMap = SceneManager.getScene("world").tileMap;
+        tileMapArray = gameTileMap.tilesList;
     }
 
     @Override

@@ -71,11 +71,11 @@ public class Tile {
             this.isSolid = tile.isSolid;
             tileRenderer = new TileRenderer(tile.tileRenderer.sprite);
         } else {
-
             id = -1;
+            this.tag = "";
+            this.isSolid = false;
             tileRenderer = new TileRenderer();
         }
-
         if (isSolid) {
             this.collider = new TileCollider();
         }

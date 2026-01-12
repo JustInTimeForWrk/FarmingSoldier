@@ -1,8 +1,7 @@
 package util;
 
-import java.util.HashMap;
 import physics.PhysicsManager;
-import scenes.GameScene;
+import scenes.WorldScene;
 import scenes.HouseScene;
 import scripts.FarmingScript;
 import scripts.NPCSellScript;
@@ -30,18 +29,18 @@ public class GameManager {
         FarmingScript.harvestedPlants = loadedSave.playerCropCount;
         NPCSellScript.cropsNeeded = loadedSave.playerCropsNeeded;
         
-        SceneManager.addScene(new GameScene());
+        SceneManager.addScene(new WorldScene());
         SceneManager.addScene(new HouseScene());
         SceneManager.init();
 
-        SceneManager.loadSceneByIndex(1);
+        SceneManager.loadSceneByName("house");
         window.startGamePanel();
     }
 
     //Input: none, Output: none
     //Purpose: saves all game data and map data
     public static void saveGame() {
-        for (Scene scene : SceneManager.scenes) {
+        for (Scene scene : SceneManager.scenes.values()) {
             if (scene.tileMap != null) {
                 scene.tileMap.saveTileMap();
             }
