@@ -8,6 +8,7 @@ import view.Window;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
@@ -68,7 +69,11 @@ public class TileMap {
                 }
             }
             br.close();
-        } catch (Exception e) { //loads backup if main file cannot be read.
+        } catch (FileNotFoundException e){
+            System.out.println("No File At: "+ filePath);
+            tiles2d = null;
+            return false;
+        } catch (Exception e) {
             e.printStackTrace();
             tiles2d = null;
             return false;

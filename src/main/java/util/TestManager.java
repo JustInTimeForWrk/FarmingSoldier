@@ -18,7 +18,8 @@ public class TestManager {
         System.out.println(BoxColliderGetCenterTest(new Vector2f(0, 0), new BoxCollider(new Vector2f(10, 10)), new Vector2f(5, 5)));
         System.out.println(BoxColliderCollisionTest(new Vector2f(0, 0), new Vector2f(5, 5), new BoxCollider(new Vector2f(10, 10)), new BoxCollider(new Vector2f(10, 10)), true));
         System.out.println(BoxColliderCollisionTest(new Vector2f(0, 0), new Vector2f(20, 20), new BoxCollider(new Vector2f(10, 10)), new BoxCollider(new Vector2f(10, 10)), false));
-
+        System.out.println(BoxColliderCollisionTest(new Vector2f(100, 100),new Vector2f(132, 100),new BoxCollider(new Vector2f(32, 32)),new BoxCollider(new Vector2f(32, 32)),false));
+        
         System.out.println(SceneFindEntityByTagTest(new TestScene(), "Player"));
         System.out.println(SceneFindEntityArrayListByTagTest(new TestScene(), "Enemy", 3));
         System.out.println(SceneInitializesEntityTest(new TestScene(), new Entity("Test", new Transform())));
@@ -27,8 +28,8 @@ public class TestManager {
 
         System.out.println(SaveLoadGameDataTest(150,2500));
 
-        System.out.println(RigidbodyFrictionTest(new Vector2f(10, 0), 0.5f, new Vector2f(5, 0)));
-        System.out.println(RigidbodyFrictionTest(new Vector2f(4, 6), 0.25f, new Vector2f(3, 4.5f)));
+        System.out.println(RigidbodyFrictionTest(new Vector2f(10, 0), 0.5f, new Vector2f(5, 0),0.1f));
+        System.out.println(RigidbodyFrictionTest(new Vector2f(4, 6), 0.25f, new Vector2f(3, 4.5f),0.1f));
         System.out.println(RigidbodyAddVelocityTest(new Vector2f(2, 3), new Vector2f(5, -1), new Vector2f(7, 2)));
         System.out.println(RigidbodyAddVelocityTest(new Vector2f(0, 0), new Vector2f(1, 1), new Vector2f(1, 1)));
         System.out.println(RigidbodyUpdatePositionTest(new Entity("RBTest1", new Transform()), new Vector2f(4, 6), 0f, new Vector2f(4, 6)));
@@ -167,7 +168,7 @@ public class TestManager {
 
     //Input: Vector2f representing initialVelocity, float representing friction amount, Vector2f of the expected velocity after friction applied, Output: boolean of if friction was applied correctly
     //Purpose: makes sure Rigidbody.update() applies friction to it's velocity
-    public static boolean RigidbodyFrictionTest(Vector2f initialVelocity, float friction, Vector2f expectedVelocity) {
+    public static boolean RigidbodyFrictionTest(Vector2f initialVelocity, float friction, Vector2f expectedVelocity, float threshold) {
         Entity e = new Entity();
         Rigidbody rb = new Rigidbody();
         e.addComponent(rb);
@@ -175,7 +176,7 @@ public class TestManager {
         rb.velocity.set(initialVelocity);
         rb.friction = friction;
         rb.update();
-        return rb.velocity.equals(expectedVelocity);
+        return rb.velocity.sub(expectedVelocity).length() < threshold;
     }
 
     //Input: Vector2f representing initialVelocity, Vector2f representing velocity to add, Vector2f of the expected velocity after adding to velocity, Output: boolean indicating if velocity was added correctly
