@@ -32,7 +32,7 @@ public class Renderer {
     //Input: Graphics2D of the panel to draw the images and shapes, Output: none
     //Purpose: draws everything in the renderingList as well as adds/remove items from the renderingList if any are in queue
     //Example: none needed
-    public static void update(Graphics2D g2) {
+    public static void draw(Graphics2D g2) {
         for (Drawable object : renderingList) {
             object.draw(g2);
         }

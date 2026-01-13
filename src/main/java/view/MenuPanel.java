@@ -31,6 +31,30 @@ public class MenuPanel extends JPanel {
         button.setHorizontalAlignment(SwingConstants.CENTER);
         button.setBounds(Window.halfScreenWidth-100,Window.halfScreenHeight-100,200,200);
         this.add(button);
+        
+        button = new JButton("Set FPS to 30");
+        button.addActionListener(new ChangeFPS(30));
+        button.setHorizontalAlignment(SwingConstants.CENTER);
+        button.setBounds(Window.halfScreenWidth-275,Window.halfScreenHeight+150,125,75);
+        this.add(button);
+        
+        button = new JButton("Set FPS to 60");
+        button.addActionListener(new ChangeFPS(60));
+        button.setHorizontalAlignment(SwingConstants.CENTER);
+        button.setBounds(Window.halfScreenWidth-125,Window.halfScreenHeight+150,125,75);
+        this.add(button);
+        
+        button = new JButton("Set FPS to 90");
+        button.addActionListener(new ChangeFPS(90));
+        button.setHorizontalAlignment(SwingConstants.CENTER);
+        button.setBounds(Window.halfScreenWidth+25,Window.halfScreenHeight+150,125,75);
+        this.add(button);
+        
+        button = new JButton("Set FPS to 120");
+        button.addActionListener(new ChangeFPS(120));
+        button.setHorizontalAlignment(SwingConstants.CENTER);
+        button.setBounds(Window.halfScreenWidth+175,Window.halfScreenHeight+150,125,75);
+        this.add(button);
     }
 }
 
@@ -45,5 +69,18 @@ class PlayGame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         GameManager.startGame();
+    }
+}
+
+class ChangeFPS implements ActionListener {
+    int FPS;
+    ChangeFPS(int fps) {
+        this.FPS = fps;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        GameManager.GameSpeed = 60f/FPS;
+        GameManager.FPS = FPS;
     }
 }

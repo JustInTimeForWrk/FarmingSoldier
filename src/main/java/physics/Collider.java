@@ -20,7 +20,7 @@ public abstract class Collider extends Component {
     
     //Input: none, Output: Vector2f containing the biggest x and y values which is the bottom right corner of the rectangular object
     //Purpose: to be used in calculations like collision resolution where you need to know the shape of the object\
-    //Example: getMax() returns new Vector2f(6,6) if the rectangle is a new Rectangle(2,2,6,6)
+    //Example: getMax() returns new Vector2f(6,6) if the hitbox is a new Rectangle(2,2,6,6)
     public Vector2f getMax() {
         return new Vector2f((float)hitbox.getMaxX(),(float)hitbox.getMaxY());
     }
@@ -48,7 +48,7 @@ public abstract class Collider extends Component {
 
     //Input: floats representing the x and y of a point, Output: boolean of whether the collider intersects with the line
     //Purpose: checks if a point intersects this collider
-    //Example: checkLineCollision(50,50) returns true if the collider hitbox intersects with the point, e.g. hitbox = new Rectangle(25,25,100,100)
+    //Example: checkPointCollision(50,50) returns true if the collider hitbox intersects with the point, e.g. hitbox = new Rectangle(25,25,100,100)
     public boolean checkPointCollision(Vector2f point) {
         return hitbox.contains(point.x, point.y);
     }

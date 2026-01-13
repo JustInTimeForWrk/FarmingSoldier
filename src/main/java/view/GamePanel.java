@@ -80,7 +80,7 @@ public class GamePanel extends JPanel implements Runnable {
         Graphics2D g2 = (Graphics2D)g;
 
         g2.setColor(Color.white);
-        Renderer.update(g2);
+        Renderer.draw(g2);
 
         g2.dispose(); //releases resources being used to draw, improves memory
     }

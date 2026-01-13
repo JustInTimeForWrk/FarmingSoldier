@@ -10,6 +10,7 @@ import view.SpriteRenderer;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
+import util.GameManager;
 
 public class MovementScript extends Component {
     private float speed = 2.4f;
@@ -77,7 +78,7 @@ public class MovementScript extends Component {
 
         walkingSpriteUpdate();
 
-        rb.addToVelocity(dir.mul(speed));
+        rb.addToVelocity(dir.mul(speed * GameManager.GameSpeed));
         if (rb.velocity.length() > speedCap) {
             rb.velocity.normalize(speedCap);
         }

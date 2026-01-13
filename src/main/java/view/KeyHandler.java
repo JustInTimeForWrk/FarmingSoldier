@@ -16,6 +16,7 @@ public class KeyHandler implements KeyListener {
 
     //Input: none, Output: KeyHandler representing the instance
     //Purpose: grabs the instance of the key handler
+    //Example: get() returns KeyHandler instance 
     public static KeyHandler get() {
         if (instance == null) {
             instance = new KeyHandler();

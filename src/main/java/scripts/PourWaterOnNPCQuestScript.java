@@ -7,7 +7,6 @@ import util.Component;
 import util.Entity;
 import util.SceneManager;
 import view.Window;
-
 import java.awt.event.MouseEvent;
 
 public class PourWaterOnNPCQuestScript extends Component implements ClickAction {
@@ -41,7 +40,9 @@ public class PourWaterOnNPCQuestScript extends Component implements ClickAction 
     }
 
 
-    @Override
+    //Input: MouseEvent when clicked, Output: none
+    //Purpose: 
+    //Example: 
     public void clickAction(MouseEvent e) {
         mousePos.set(e.getX(),e.getY());
         if (collider.checkPointCollision(SceneManager.getCurrentCamera().toWorldPos(mousePos)) && HotbarScript.currentItemSlot == 3 && watered == false && this.entity.transform.position.distance(player.transform.position) <= maxPlayerDistance) {

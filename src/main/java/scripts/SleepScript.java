@@ -46,7 +46,9 @@ public class SleepScript extends TextScript {
         }
     }
 
-    @Override
+    //Input: graphics object to draw to, Output: none
+    //Purpose: draws the text
+    //Example: draw(g2) draws white text at the text location, which could be 400,400 if the text location is 400,400
     public void draw(Graphics2D g2) {
         if (playerOnBed) {
             g2.setColor(Color.white);

@@ -15,7 +15,8 @@ public class GameManager {
     public static GameData loadedSave;
     private static Window window;
 
-    public static int FPS = 60;
+    public static int FPS = 30;
+    public static float GameSpeed = 2;
 
     //Input: none, Output: none
     //Purpose: creates the Window of the application as well as tries to fetch game data
