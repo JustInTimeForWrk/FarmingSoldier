@@ -12,6 +12,7 @@ public class NightScreenScript extends Component implements Drawable {
     BufferedImage image;
     boolean night = false;
     public SleepScript sleepScript;
+
     @Override
     public void init() {
         image = Renderer.loadImage("resources/assets/night_screen.png");

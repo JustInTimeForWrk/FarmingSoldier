@@ -29,12 +29,14 @@ public class TileMap {
 
     //Input: String representing the filepath to a .txt file, Output: none
     //Purpose: constructor for the TileMap
+    //Example: TileMap("resources/assets/map_world_default.txt")
     public TileMap(String filepath) {
         this.filePath = filepath;
     }
     
     //Input: String of a filepath to a .txt file, Output: boolean representing if loading the tilemap was successful or not
     //Purpose: tries to load a TileMap from the file located at the filepath string
+    //Example: loadMap("resources/assets/map_world_default.txt")
     public boolean loadMap(String filePath) {
         try {
             BufferedReader br = new BufferedReader(new FileReader(filePath));
@@ -83,6 +85,7 @@ public class TileMap {
 
     //Input: none, Output: none
     //Purpose: detatches the TileMap from the PhysicsManager and Renderer when switching scenes
+    //Example: none needed
     public void stop() {
         PhysicsManager.setTileMap(null);
         for (Tile tile : tilesList) {
@@ -92,6 +95,7 @@ public class TileMap {
 
     //Input: none, Output: none
     //Purpose: attaches the TileMap to the PhysicsManager and Renderer when switching scenes
+    //Example: none needed
     public void start() {
         PhysicsManager.setTileMap(this);
         for (Tile tile : tilesList) {
@@ -99,8 +103,9 @@ public class TileMap {
         }
     }
 
-    //Input: none , Output: none
+    //Input: none, Output: none
     //Purpose: initializes tiles
+    //Example: none needed
     public void init() {
         for (Tile tile : tilesList) {
             tile.init();
@@ -109,12 +114,14 @@ public class TileMap {
     
     //Input: none, Output: none
     //Purpose: removes every tile from the tilesList when quitting the game panel to the menu panel
+    //Example: none needed
     public void clear() {
         tilesList.clear();
     }
 
     //Input: none, Output: none
     //Purpose: updates the TileMap on it's filepath
+    //Example: none needed
     public boolean saveTileMap() {
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(filePath));

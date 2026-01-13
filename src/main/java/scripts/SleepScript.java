@@ -21,6 +21,7 @@ public class SleepScript extends TextScript {
 
     //Input: none, Output: none
     //Purpose: constructor for the sleep script
+    //Example: none needed
     public SleepScript(){
         super("Press E to Rest", new Vector2i(Window.screenWidth/2,Window.screenHeight/2));
     }
@@ -57,6 +58,7 @@ public class SleepScript extends TextScript {
 
     //Input: Entity representing the player, Output: none
     //Purpose: runs the game save as well as resets the night timer when the player sends a request to sleep. This game mechanic is similar to Stardew Valley
+    //Example: none needed
     public void skipTheNight(Entity player) {
         if (tileMapArray != null){
             timer = System.currentTimeMillis();

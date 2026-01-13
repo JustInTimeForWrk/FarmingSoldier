@@ -17,6 +17,11 @@ import java.awt.image.BufferedImage;
 import view.SpriteRenderer;
 import view.Drawable;
 
+/*
+            ||============||
+            ||UNUSED CLASS||
+            ||============||
+ */
 public class HostileMovement extends Component implements Drawable {
 
     public double damage = 10f;

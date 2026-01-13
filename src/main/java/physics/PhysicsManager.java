@@ -13,16 +13,23 @@ public class PhysicsManager {
     
     private static TileCollider[][] tileColliders;
 
+    //Input: BoxCollider to add, Output: none
+    //Purpose: adds a collider to the colliders to add queue, which is added after all existing colliders have been updated to prevent index out of bound error
+    //Example: none needed
     public static void addCollider(BoxCollider newCollider) {
         collidersAddQueue.add(newCollider);
     }
 
+    //Input: BoxCollider to remove, Output: none
+    //Purpose: removes a collider to the colliders to remove queue, which is removed after all existing colliders have been updated to prevent index out of bound error
+    //Example: none needed
     public static void removeCollider(BoxCollider collider) {
         collidersRemoveQueue.add(collider);
     }
 
     //Input: none, Output: none
     //Purpose: updates collider positions as well as looks for collisions between entity to entity as well as entity to tile
+    //Example: none needed
     public static void update() {
             for (int i = 0; i < entityColliders.size(); i++) {
             BoxCollider collider = entityColliders.get(i);
@@ -69,6 +76,7 @@ public class PhysicsManager {
 
     //Input: nothing/void, Output: nothing/void
     //Purpose: completely wipes out any BoxColliders within entityColliders, collidersRemoveQueue, and collidersAddQueue
+    //Example: none needed
     public static void clear() {
         entityColliders.clear();
         collidersRemoveQueue.clear();
@@ -76,17 +84,19 @@ public class PhysicsManager {
     }
     
     //Input: BoxCollider of the entity colliding & tileCollider of the tile colliding, Ouput: nothing/void
-    //Purpose: calls solveCollisidingTile in the entityRB if they have one and calls onTileCollisionEnter for the entity
+    //Purpose: calls solveCollision in the entityRB if they have one and calls onTileCollisionEnter for the entity
+    //Example: tileCollisionResolution(new BoxCollider(), new TileCollider())
     public static void tileCollisionResolution(BoxCollider entityCollider, TileCollider tileCollider) {
         Rigidbody entityRB = entityCollider.entity.getComponent(Rigidbody.class);
         if (entityRB != null) {
-            entityRB.solveCollidingTile(tileCollider);
+            entityRB.solveCollision(tileCollider);
         }
         entityCollider.entity.onTileCollisionEnter(tileCollider);
     }
     
     //Input: BoxCollider of the first object & BoxCollider of the second object (order doesn't matter just as long as they are both colliders), Ouput: nothing/void
     //Purpose: resolves collisions and runs collision/trigger callbacks
+    //Example: entityCollisionResolution(new BoxCollider(), new BoxCollider())
         public static void entityCollisionResolution(BoxCollider firstCollider, BoxCollider secondCollider) {
             if (firstCollider.isTrigger || secondCollider.isTrigger) { //If either collider is a trigger, then call the onTriggerEnter function
                 firstCollider.entity.onTriggerEnter(secondCollider);
@@ -99,12 +109,12 @@ public class PhysicsManager {
                 Rigidbody secondRB = secondCollider.entity.getComponent(Rigidbody.class);
 
                 if (firstRB != null && secondRB == null) {
-                    firstRB.solveCollidingEntity(secondCollider);
+                    firstRB.solveCollision(secondCollider);
                 } else if (secondRB != null && firstRB == null) {
-                    secondRB.solveCollidingEntity(firstCollider);
+                    secondRB.solveCollision(firstCollider);
                 } else if (secondRB != null && firstRB != null) {
-                    firstRB.solveCollidingEntity(secondCollider);
-                    secondRB.solveCollidingEntity(firstCollider);
+                    firstRB.solveCollision(secondCollider);
+                    secondRB.solveCollision(firstCollider);
                 }
             }
         }

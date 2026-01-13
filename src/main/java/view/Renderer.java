@@ -31,7 +31,7 @@ public class Renderer {
 
     //Input: Graphics2D of the panel to draw the images and shapes, Output: none
     //Purpose: draws everything in the renderingList as well as adds/remove items from the renderingList if any are in queue
-    //Example: update(g2)
+    //Example: none needed
     public static void update(Graphics2D g2) {
         for (Drawable object : renderingList) {
             object.draw(g2);
@@ -48,7 +48,7 @@ public class Renderer {
     }
     //Input: none, Output: none
     //Purpose: to completely remove all rendering objects when stopping the game
-    //Example: clear()
+    //Example: none needed
     public static void clear() {
         rendererToRemove.addAll(renderingList);
         rendererToAdd.clear();
@@ -57,7 +57,7 @@ public class Renderer {
 
     //Input: String representing the filepath of the image file, Output: BufferedImage loaded at the file location
     //Purpose: to load images which will be displayed by the Renderer
-    //Example: loadImage("resources/assets/tiles/wall.png")
+    //Example: loadImage("resources/assets/tiles/wall.png") returns a BufferedImage resembling wall.png
     public static BufferedImage loadImage(String filePath) {
         try {
             File f = new File(filePath);

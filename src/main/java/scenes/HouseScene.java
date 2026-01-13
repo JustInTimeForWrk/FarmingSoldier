@@ -14,6 +14,10 @@ import java.awt.event.KeyEvent;
 
 public class HouseScene extends Scene {
     Entity player;
+
+    //Input: none, Output: none
+    //Purpose: constructor for the HouseScene
+    //Example: none needed
     public HouseScene() {
         super("house");
     }

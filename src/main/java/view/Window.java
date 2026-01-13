@@ -22,10 +22,9 @@ public class Window extends JFrame {
 
     //Input: none, Output: none
     //Purpose: constructor for the window
-    //Example: Window()
+    //Example: none needed
     public Window()
     {
-
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setTitle("Island Survival");
@@ -44,7 +43,7 @@ public class Window extends JFrame {
 
     //Input: none, Output: none
     //Purpose: swaps from the menu panel to the game panel
-    //Example: startGamePanel()
+    //Example: none needed
     public void startGamePanel()
     {
         this.remove(menuPanel);
@@ -60,7 +59,7 @@ public class Window extends JFrame {
 
     //Input: none, Output: none
     //Purpose: swaps from game panel to the menu panel
-    //Example: stopGamePanel()
+    //Example: none needed
     public void stopGamePanel() {
         gamePanel.gameThread = null;
         this.remove(gamePanel);

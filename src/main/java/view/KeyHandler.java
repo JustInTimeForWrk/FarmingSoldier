@@ -9,6 +9,7 @@ public class KeyHandler implements KeyListener {
 
     //Input: none, Output: none
     //Purpose: constructor for the KeyHandler
+    //Example: none needed
     private KeyHandler() {
         keys = new boolean[256];
     }
@@ -22,9 +23,10 @@ public class KeyHandler implements KeyListener {
         return instance;
     }
 
+    //UNUSED
     @Override
     public void keyTyped(KeyEvent e) {
-        //Unnecessary
+
     }
 
     @Override
@@ -45,6 +47,7 @@ public class KeyHandler implements KeyListener {
 
     //Input: int representing a java.awt.KeyEvent key code, Output: boolean representing if the key is pressed
     //Purpose: constructor for the MenuPanel
+    //Example: getKey(KeyEvent.VK_ESC) returns true if the ESC key is held down
     public static boolean getKey(int code) {
         if (code < instance.keys.length) {
             return instance.keys[code];
@@ -54,8 +57,8 @@ public class KeyHandler implements KeyListener {
 
     //Input: none, Output: none
     //Purpose: reset function for when quitting out of the game
+    //Example: none needed
     public static void reset() {
         instance.keys = new boolean[256];
     }
-
 }

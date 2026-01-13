@@ -13,14 +13,9 @@ public class TextScript extends Component implements Drawable {
 
     Vector2i position = new Vector2i();
 
-    //Input: String of the new diplayable text, Output: none
-    //Purpose: changes the text that will be displayed
-    public void setText(String text) {
-        this.text = text;
-    }
-
     //Input: String of the text to display and Vector2i representing the position of the text on the screen, Output: none
     //Purpose: Constructor for the text script
+    //Example: TextScript("MyTextToDisplay", new Vector2i(100,100))
     public TextScript(String text, Vector2i position) {
         if (text != null) {
             this.text = text;
@@ -28,6 +23,13 @@ public class TextScript extends Component implements Drawable {
         if (position != null) {
             this.position = position;
         }
+    }
+
+    //Input: String of the new displayable text, Output: none
+    //Purpose: changes the text that will be displayed
+    //Example: none needed
+    public void setText(String text) {
+        this.text = text;
     }
 
     @Override

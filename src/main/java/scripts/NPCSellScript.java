@@ -15,6 +15,9 @@ public class NPCSellScript extends TextScript {
 
     boolean draw = false;
 
+    //Input: none, Output: none
+    //Purpose: constructor for the NPCSellScript
+    //Example: none needed
     public NPCSellScript() {
         super("Fetch "+ cropsNeeded +" crops", new Vector2i(Window.screenWidth/4 * 2,Window.screenHeight/4));
     }

@@ -16,8 +16,6 @@ public class SwapSceneScript extends Component {
         } else if (SceneManager.currentSceneName.equals("house")) {
             //loads house scene
             SceneManager.loadSceneByName("world");
-
         }
-
     }
 }

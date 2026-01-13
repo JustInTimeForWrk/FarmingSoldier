@@ -4,7 +4,7 @@
  */
 package view;
 
-/**
+/*
  *
  * @author riegj8298
  */
@@ -30,6 +30,7 @@ public class SpriteRenderer extends Component implements Drawable {
         if (image == null) {
             this.type = "rectangle";
         }
+
     }
 
     //Input: String filepath of the image to display, Output: none
@@ -66,11 +67,14 @@ public class SpriteRenderer extends Component implements Drawable {
 
     //Input: none, Output: none
     //Purpose: default constructor for SpriteRenderer
-    //Example: SpriteRenderer()
+    //Example: none needed
     public SpriteRenderer() {
         this.type = "rectangle";
     }
 
+    //Input: g2 representing the graphics of the paint component, Output: none
+    //Purpose: to draw the component to the game panel
+    //Example: none needed
     public void draw(Graphics2D g2) {
 
         Transform transform = entity.transform;

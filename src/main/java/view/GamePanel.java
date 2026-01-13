@@ -13,6 +13,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     //Input: none, Output: none
     //Purpose: constructor for the GamePanel
+    //Example: none needed
     public GamePanel() {
         this.setPreferredSize(new Dimension(Window.screenWidth, Window.screenHeight));
         this.setBackground(Color.black);
@@ -27,12 +28,12 @@ public class GamePanel extends JPanel implements Runnable {
 
     //Input: none, Output: none
     //Purpose: starts running the game thread
+    //Example: none needed
     public void startGameThread()
     {
         requestingQuit = false;
         gameThread = new Thread(this);
         gameThread.start();
-//        System.out.println("Game Thread Started");
     }
 
 
@@ -62,7 +63,8 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     //Input: none, Output: none
-    //Purpose: gets called every frame and updates all the game components 
+    //Purpose: gets called every frame and updates all the game components
+    //Example: none needed
     public void update() {
         SceneManager.updateScene();
         PhysicsManager.update();

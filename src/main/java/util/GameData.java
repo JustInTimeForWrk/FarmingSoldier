@@ -1,6 +1,5 @@
 package util;
 
-import java.nio.file.*;
 import java.sql.*;
 
 public class GameData {
@@ -14,6 +13,7 @@ public class GameData {
     
     //Input: String representing the filepath of the db file, Output: 
     //Purpose: to load the game data
+    //Example: loadGameData("resources/saves/MySave.db")
     public static GameData loadGameData(String filePath) {
         GameData gameData = new GameData();
         
@@ -31,9 +31,9 @@ public class GameData {
             String sqlLoadData_player = "SELECT playerCropCount, playerCropsNeeded FROM game_data";
             stmt.execute(sqlLoadData_player);
 
-            try (ResultSet rs = stmt.getResultSet())
+            try (ResultSet rs = stmt.getResultSet()) //result set is an object that stores every row of a database
             {
-                if (rs.next()) {
+                if (rs.next()) { //moves to the next row in the result set
                     gameData.playerCropCount = rs.getInt("playerCropCount");
                     gameData.playerCropsNeeded = rs.getInt("playerCropsNeeded");
                 }
@@ -51,6 +51,7 @@ public class GameData {
     
     //Input: String representing the filepath and a GameData storing the game's save info, Output: boolean if it saved properly or not
     //Purpose: to save our game data into a secure .db file
+    //Example: loadGameData("resources/saves/MySave.db", new GameData())
     public static boolean saveGameData(String filePath, GameData gameData) {
         
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + filePath);

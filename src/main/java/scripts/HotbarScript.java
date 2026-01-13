@@ -13,7 +13,6 @@ public class HotbarScript extends Component implements Drawable {
 
     String[] itemNames = {"","Hoe","Seeds","Water","Harvest","","","",""};
 
-
     @Override
     public void start() {
         addToRenderer();

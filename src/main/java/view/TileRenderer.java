@@ -64,11 +64,14 @@ public class TileRenderer extends Component implements Drawable {
 
     //Input: none, Output: none
     //Purpose: constructor for the TileRenderer
-    //Example: TileRenderer()
+    //Example: none needed
     public TileRenderer() {
         this.type = "rectangle";
     }
 
+    //Input: g2 representing the graphics of the paint component, Output: none
+    //Purpose: to draw the component to the game panel
+    //Example: none needed
     public void draw(Graphics2D g2) {
 
         Vector2f screenPos = SceneManager.getCurrentCamera().toScreenPos(new Vector2f(tile.position)); //Gets the position relative to the camera

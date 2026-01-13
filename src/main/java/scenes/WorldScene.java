@@ -14,6 +14,9 @@ import java.awt.event.KeyEvent;
 
 public class WorldScene extends Scene {
     Entity player;
+    //Input: none, Output: none
+    //Purpose: constructor for the WorldScene
+    //Example: none needed
     public WorldScene() {
         super("world");
     }

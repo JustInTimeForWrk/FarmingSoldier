@@ -7,6 +7,11 @@ import util.SceneManager;
 
 import java.awt.event.MouseEvent;
 
+/*
+            ||============||
+            ||UNUSED CLASS||
+            ||============||
+ */
 public class AttackingScript extends Component implements ClickAction {
     HotbarScript hotbarScript;
     Vector2f playerPos = new Vector2f();

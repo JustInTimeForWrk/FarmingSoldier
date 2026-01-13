@@ -17,6 +17,7 @@ public class BoxCollider extends Collider implements Drawable {
 
     //Input: none, Output: none
     //Purpose: Default constructor for the BoxCollider
+    //Example: none needed
     public BoxCollider() {
         this.size = new Vector2f(Window.tileSize,Window.tileSize); //default = 48x48
         this.offset = new Vector2f();
@@ -24,6 +25,7 @@ public class BoxCollider extends Collider implements Drawable {
 
     //Input: Vector2f representing the size of the hitbox, Output: none
     //Purpose: Constructor for the BoxCollider
+    //Example: BoxCollider(new Vector2f(16,16))
     public BoxCollider(Vector2f size) {
         this.size = size;
         this.offset = new Vector2f();
@@ -31,6 +33,7 @@ public class BoxCollider extends Collider implements Drawable {
 
     //Input: Vector2f representing the size of the hitbox, Vector2f representing the offset of the hitbox from the entity, Output: none
     //Purpose: Constructor for the BoxCollider
+    //Example: BoxCollider(new Vector2f(40,16),new vector2f(20,8))
     public BoxCollider(Vector2f size, Vector2f offset) {
         this.size = size;
         this.offset = offset;
@@ -38,6 +41,7 @@ public class BoxCollider extends Collider implements Drawable {
 
     //Input: Vector2f representing the size of the hitbox, Vector2f representing the offset of the hitbox from the entity, and boolean whether the box collider is a trigger, Output: none
     //Purpose: Constructor for the BoxCollider
+    //Example: BoxCollider(new Vector2f(48,48),new vector2f(24,24),false)
     public BoxCollider(Vector2f size, Vector2f offset, boolean isTrigger) {
         this.size = size;
         this.offset = offset;
@@ -46,17 +50,12 @@ public class BoxCollider extends Collider implements Drawable {
 
     //Input: boolean whether the box collider is a trigger, Output: none
     //Purpose: Constructor for the BoxCollider
+    //Example: BoxCollider(true)
     public BoxCollider(boolean isTrigger) {
         this.size = new Vector2f(Window.tileSize,Window.tileSize);
         this.offset = new Vector2f();
 
         this.isTrigger = isTrigger;
-    }
-
-    //Input: boolean representing if the hitbox should be toggled on (true) or off (false), Output: none
-    //Purpose: Enables or disables the tile Collider
-    public void setEnabled(boolean TorF) {
-        this.enabled = TorF;
     }
 
     @Override
@@ -86,6 +85,7 @@ public class BoxCollider extends Collider implements Drawable {
 
     //Input: none, Output: none
     //Purpose: Special update which only gets updated in the physics handler
+    //Example: none needed
     public void updateCollider() {
         position.set(entity.transform.position).add(offset); //Position relative to the player
         hitbox.setRect(position.x,position.y,size.x,size.y);
@@ -98,7 +98,7 @@ public class BoxCollider extends Collider implements Drawable {
             Transform transform = entity.transform;
             Vector2f topLeft = SceneManager.getCurrentCamera().toScreenPos(getMin());
             g2.setColor(Color.red);
-            g2.drawRect((int)topLeft.x,(int)topLeft.y,(int)size.x,(int)size.y);
+            g2.drawRect((int)topLeft.x,(int)topLeft.y,(int)size.x-1,(int)size.y-1);
 
             g2.setColor(Color.yellow);
             Vector2f topLeftCorner = SceneManager.getCurrentCamera().toScreenPos(new Vector2f(transform.position.x-2,transform.position.y-2));

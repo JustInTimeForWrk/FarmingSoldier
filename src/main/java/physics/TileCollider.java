@@ -8,18 +8,21 @@ public class TileCollider extends Collider {
 
     //Input: none, Output: none
     //Purpose: Constructor for TileCollider
+    //Example: none needed
     public TileCollider() {
         
     }
 
     //Input: Tile parent of this TileCollider, Output: none
     //Purpose: sets the Tile of this TileCollider to the Tile this TileCollider is attached to
+    //Example: none needed
     public void setParentTile(Tile tile) {
         this.tile = tile;
     }
 
     //Input: boolean representing if the hitbox should be toggled on (true) or off (false), Output: none
     //Purpose: Enables or disables the tile Collider
+    //Example: none needed
     public void setEnabled(boolean TorF) {
         this.enabled = TorF;
     }

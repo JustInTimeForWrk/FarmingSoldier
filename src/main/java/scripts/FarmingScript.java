@@ -16,6 +16,9 @@ public class FarmingScript extends TextScript implements ClickAction{
     float maxRadius = 3;
     HotbarScript hotbarScript;
 
+    //Input: none, Output: none
+    //Purpose: constructor for the NPCSellScript
+    //Example: none needed
     public FarmingScript() {
         super(harvestedPlants + "", new Vector2i(500,48));
     }

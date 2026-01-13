@@ -14,6 +14,7 @@ public class MenuPanel extends JPanel {
 
     //Input: the application window, Output: none
     //Purpose: constructor for the MenuPanel
+    //Example: none needed
     MenuPanel(Window window) {
 
         this.setPreferredSize(new Dimension(Window.screenWidth, Window.screenHeight));
