@@ -46,10 +46,24 @@ public abstract class Collider extends Component {
         return hitbox.intersects(other.hitbox);
     }
 
+    //Input: floats representing the x and y of a point, Output: boolean of whether the collider intersects with the line
+    //Purpose: checks if a point intersects this collider
+    //Example: checkLineCollision(50,50) returns true if the collider hitbox intersects with the point, e.g. hitbox = new Rectangle(25,25,100,100)
+    public boolean checkPointCollision(Vector2f point) {
+        return hitbox.contains(point.x, point.y);
+    }
+
+
+
+    /*
+                    ===============
+                    Unused Function
+                    ===============
     //Input: floats representing the x and y of one point and the x and y of the other point, Output: boolean of whether the collider intersects with the line
     //Purpose: checks if a line between two points intersects this collider
     //Example: checkLineCollision(10,20,100,200) returns true if the collider hitbox intersects with the line, e.g. hitbox = new Rectangle(25,25,100,100)
     public boolean checkLineCollision(float x, float y, float x2, float y2) {
         return hitbox.intersectsLine(x,y,x2,y2);
     }
+     */
 }

@@ -19,14 +19,17 @@ public class TestManager {
         System.out.println(BoxColliderCollisionTest(new Vector2f(0, 0), new Vector2f(5, 5), new BoxCollider(new Vector2f(10, 10)), new BoxCollider(new Vector2f(10, 10)), true));
         System.out.println(BoxColliderCollisionTest(new Vector2f(0, 0), new Vector2f(20, 20), new BoxCollider(new Vector2f(10, 10)), new BoxCollider(new Vector2f(10, 10)), false));
         System.out.println(BoxColliderCollisionTest(new Vector2f(100, 100),new Vector2f(132, 100),new BoxCollider(new Vector2f(32, 32)),new BoxCollider(new Vector2f(32, 32)),false));
-        
+        System.out.println(ColliderPointCollisionTest(new Vector2f(25, 25), new BoxCollider(new Vector2f(100, 100)), new Vector2f(50, 50), true));
+        System.out.println(ColliderPointCollisionTest(new Vector2f(25, 25), new BoxCollider(new Vector2f(100, 100)),new Vector2f(200, 200), false));
+
+
         System.out.println(SceneFindEntityByTagTest(new TestScene(), "Player"));
         System.out.println(SceneFindEntityArrayListByTagTest(new TestScene(), "Enemy", 3));
         System.out.println(SceneInitializesEntityTest(new TestScene(), new Entity("Test", new Transform())));
         System.out.println(SceneAddEntityWhileRunningTest(new TestScene(), new Entity("TestEntityAdded", new Transform())));
         System.out.println(SceneRemoveEntityDuringRuntimeTest(new TestScene(), new Entity("TestEntityRemove", new Transform())));
 
-        System.out.println(SaveLoadGameDataTest(150,2500));
+        System.out.println(SaveLoadGameDataTest(150,2500,false));
 
         System.out.println(RigidbodyFrictionTest(new Vector2f(10, 0), 0.5f, new Vector2f(5, 0),0.1f));
         System.out.println(RigidbodyFrictionTest(new Vector2f(4, 6), 0.25f, new Vector2f(3, 4.5f),0.1f));
@@ -99,6 +102,17 @@ public class TestManager {
         return colliderA.checkCollision(colliderB) == expectedResult;
     }
 
+    //Input: Vector2f of entity position, BoxCollider to test, Vector2f of point to check, boolean of the expectedResult, Output: boolean of if the point collision result matches the expected result boolean
+    //Purpose: makes sure checkPointCollision correctly detects point intersection with hitbox
+    public static boolean ColliderPointCollisionTest(Vector2f entityPos, BoxCollider collider, Vector2f point, boolean expectedResult) {
+        Entity testEntity = new Entity();
+        testEntity.transform.position.set(entityPos);
+        testEntity.addComponent(collider);
+        testEntity.init();
+        collider.updateCollider();
+        return collider.checkPointCollision(point) == expectedResult;
+    }
+
     //Input: test scene to add entity to, tag to search for any entity in that scene, Output: boolean if the entity with the input tag is found
     //Purpose: checks if Scene.findEntityByTag() returns the correct entity
     public static boolean SceneFindEntityByTagTest(Scene scene, String tag) {
@@ -153,17 +167,18 @@ public class TestManager {
         return scene.findEntityByTag(entity.tag) != entity;
     }
 
-    //Input: int 1 representing the playerCropCount to save, input2 representing the playerCropsNeeded to save, Output: boolean if the save function and the load function works
+    //Input: int 1 representing the playerCropCount to save, input2 representing the playerCropsNeeded to save boolean representing the wateredTheNPC flag, Output: boolean if the save function and the load function works
     //Purpose: to make sure that saving and loading functions are working properly.
-    public static boolean SaveLoadGameDataTest(int input1, int input2) {
+    public static boolean SaveLoadGameDataTest(int input1, int input2, boolean input3) {
         GameData test = new GameData();
         test.playerCropCount = input1;
         test.playerCropsNeeded = input2;
+        test.wateredTheNPC = input3;
         if (!GameData.saveGameData("resources/saves/filetest.db",test)) { //checks if fails to save
             return false;
         }
         GameData loaded = GameData.loadGameData("resources/saves/filetest.db");
-        return loaded.playerCropsNeeded == test.playerCropsNeeded && loaded.playerCropCount == test.playerCropCount;
+        return loaded.playerCropsNeeded == test.playerCropsNeeded && loaded.playerCropCount == test.playerCropCount && loaded.wateredTheNPC == test.wateredTheNPC;
     }
 
     //Input: Vector2f representing initialVelocity, float representing friction amount, Vector2f of the expected velocity after friction applied, Output: boolean of if friction was applied correctly

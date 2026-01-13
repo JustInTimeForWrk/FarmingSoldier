@@ -5,6 +5,7 @@ import scenes.WorldScene;
 import scenes.HouseScene;
 import scripts.FarmingScript;
 import scripts.NPCSellScript;
+import scripts.PourWaterOnNPCQuestScript;
 import view.KeyHandler;
 import view.MouseHandler;
 import view.Renderer;
@@ -30,7 +31,8 @@ public class GameManager {
     public static void startGame() {
         FarmingScript.harvestedPlants = loadedSave.playerCropCount;
         NPCSellScript.cropsNeeded = loadedSave.playerCropsNeeded;
-        
+        PourWaterOnNPCQuestScript.watered = loadedSave.wateredTheNPC;
+
         SceneManager.addScene(new WorldScene());
         SceneManager.addScene(new HouseScene());
         SceneManager.init();
@@ -50,6 +52,7 @@ public class GameManager {
         }
         loadedSave.playerCropCount = FarmingScript.harvestedPlants;
         loadedSave.playerCropsNeeded = NPCSellScript.cropsNeeded;
+        loadedSave.wateredTheNPC = PourWaterOnNPCQuestScript.watered;
         GameData.saveGameData("resources/saves/gameSave.db",loadedSave);
     }
 

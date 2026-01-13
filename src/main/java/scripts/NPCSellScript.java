@@ -37,11 +37,18 @@ public class NPCSellScript extends TextScript {
         }
 
         if (KeyHandler.getKey(KeyEvent.VK_E) && System.currentTimeMillis() - Timer >= PressCoolDownE) {
-            Timer = System.currentTimeMillis();
-
-            FarmingScript.harvestedPlants -= cropsNeeded;
-            cropsNeeded = cropsNeeded * 2 + 4;
+            giveCrops();
         }
+    }
+
+    //Input: none, Output: none
+    //Purpose: gives the player's crops to the npc and increases the npc price. Also resets the timer
+    //Example: none needed
+    private void giveCrops() {
+        Timer = System.currentTimeMillis();
+
+        FarmingScript.harvestedPlants -= cropsNeeded;
+        cropsNeeded = cropsNeeded * 2 + 4;
     }
 
     @Override

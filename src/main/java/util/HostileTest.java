@@ -1,15 +1,14 @@
 package util;
-
+/*
 import physics.BoxCollider;
 import physics.Rigidbody;
 import scripts.HostileMovement;
 import view.SpriteRenderer;
 
-/*
             ||============||
             ||UNUSED CLASS||
             ||============||
- */
+
 public class HostileTest extends Entity{
     public int damage = 100;
 
@@ -52,3 +51,5 @@ public class HostileTest extends Entity{
         super.onEntityCollisionEnter(other);
     }
 }
+ */
+

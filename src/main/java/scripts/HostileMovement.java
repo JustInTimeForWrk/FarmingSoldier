@@ -21,7 +21,7 @@ import view.Drawable;
             ||============||
             ||UNUSED CLASS||
             ||============||
- */
+
 public class HostileMovement extends Component implements Drawable {
 
     public double damage = 10f;
@@ -57,7 +57,7 @@ public class HostileMovement extends Component implements Drawable {
                 aggroed = true;
                 if (!PhysicsManager.lineIntersectsTile(playerCollider.getCenter(),hostileCenter)) {
                     lastPlayerPos.set(playerCollider.getCenter().sub(24,-24).div(Window.tileSize).round().mul(Window.tileSize).add(Window.tileSize/2f,-Window.tileSize/2f));
-                } //                                             ^
+                }                                          ^
             }
             if (lastPlayerPos.distance(hostileCenter) < 4) {
                 lastPlayerPos.set(hostileCenter);
@@ -148,3 +148,4 @@ public class HostileMovement extends Component implements Drawable {
         }
     }
 }
+ */

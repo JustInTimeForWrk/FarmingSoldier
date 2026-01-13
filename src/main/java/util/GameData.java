@@ -6,6 +6,7 @@ public class GameData {
 
     public int playerCropCount = 0;
     public int playerCropsNeeded = 10;
+    public boolean wateredTheNPC = false;
 
     public GameData() {
         
@@ -23,12 +24,13 @@ public class GameData {
             String sqlCreateTableIfNotExists ="""
                                 CREATE TABLE IF NOT EXISTS game_data (
                                     playerCropCount INTEGER,
-                                    playerCropsNeeded INTEGER
+                                    playerCropsNeeded INTEGER,
+                                    wateredTheNPC BOOLEAN
                                     );
                                 """;
             stmt.execute(sqlCreateTableIfNotExists);
 
-            String sqlLoadData_player = "SELECT playerCropCount, playerCropsNeeded FROM game_data";
+            String sqlLoadData_player = "SELECT playerCropCount, playerCropsNeeded, wateredTheNPC FROM game_data";
             stmt.execute(sqlLoadData_player);
 
             try (ResultSet rs = stmt.getResultSet()) //result set is an object that stores every row of a database
@@ -36,6 +38,7 @@ public class GameData {
                 if (rs.next()) { //moves to the next row in the result set
                     gameData.playerCropCount = rs.getInt("playerCropCount");
                     gameData.playerCropsNeeded = rs.getInt("playerCropsNeeded");
+                    gameData.wateredTheNPC = rs.getBoolean("wateredTheNPC");
                 }
             }
             catch (Exception Ex)
@@ -60,7 +63,8 @@ public class GameData {
             String sqlCreateTableIfNotExists ="""
                                 CREATE TABLE IF NOT EXISTS game_data (
                                     playerCropCount INTEGER,
-                                    playerCropsNeeded INTEGER
+                                    playerCropsNeeded INTEGER,
+                                    wateredTheNPC BOOLEAN
                                     );
                                 """;
             stmt.execute(sqlCreateTableIfNotExists);
@@ -70,7 +74,8 @@ public class GameData {
 
             String sqlSaveData = "INSERT INTO game_data VALUES ("
                                 +gameData.playerCropCount+","
-                                +gameData.playerCropsNeeded
+                                +gameData.playerCropsNeeded+","
+                                +gameData.wateredTheNPC
                                 +");";
             stmt.execute(sqlSaveData);
 

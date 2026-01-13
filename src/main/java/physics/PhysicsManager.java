@@ -136,6 +136,10 @@ public class PhysicsManager {
         }
     }
 
+    /*
+                    ===============
+                    Unused Function
+                    ===============
     //Input: Vector2f of the first point and Vector2f of the second point, Output: boolean to see if the line between the two points intersects a tile
     //Purpose: to check if a line between two points is obstructed by the current tileColliders list
     public static boolean lineIntersectsTile(Vector2f pos1, Vector2f pos2) {
@@ -150,5 +154,5 @@ public class PhysicsManager {
         }
         return false;
     }
-
+    */
 }

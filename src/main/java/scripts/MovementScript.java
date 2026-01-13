@@ -26,7 +26,7 @@ public class MovementScript extends Component {
     private int frameCounter = 0;
     private int playerFrame; //Which frame of the animation the player is on
     private HashMap<String,BufferedImage> playerImages;
-
+    private Vector2f dir = new Vector2f();
 
     @Override
     public void init() {
@@ -49,7 +49,7 @@ public class MovementScript extends Component {
 
     @Override
     public void update() {
-        Vector2f dir = new Vector2f();
+        dir.set(0,0);
         if (KeyHandler.getKey(KeyEvent.VK_W)) {
             dir.y -= 1;
         }
@@ -75,7 +75,18 @@ public class MovementScript extends Component {
             movingDirY = "_up";
         }
 
-        //Below contains the walking animation
+        walkingSpriteUpdate();
+
+        rb.addToVelocity(dir.mul(speed));
+        if (rb.velocity.length() > speedCap) {
+            rb.velocity.normalize(speedCap);
+        }
+    }
+
+    //Input: none, Output: none
+    //Purpose: changes the sprite depending on if and where the player is moving
+    //Example: none needed
+    private void walkingSpriteUpdate() {
         if (!dir.equals(0,0)) { //if a vector of (0,0) is normalized, it returns NaN, it can be used to see if player is moving
             dir.normalize();
 
@@ -108,11 +119,6 @@ public class MovementScript extends Component {
         }
         if (dir.y == 0) {
             movingDirY = "";
-        }
-
-        rb.addToVelocity(dir.mul(speed));
-        if (rb.velocity.length() > speedCap) {
-            rb.velocity.normalize(speedCap);
         }
     }
 }

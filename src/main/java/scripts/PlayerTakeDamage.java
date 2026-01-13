@@ -11,7 +11,6 @@ import util.SceneManager;
             ||============||
             ||UNUSED CLASS||
             ||============||
- */
 public class PlayerTakeDamage extends Component {
 
     public double health = 100f;
@@ -71,3 +70,4 @@ public class PlayerTakeDamage extends Component {
         }
     }
 }
+ */
