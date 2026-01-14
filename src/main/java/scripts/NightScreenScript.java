@@ -35,16 +35,16 @@ public class NightScreenScript extends Component implements Drawable {
         if (sleepScript == null) {
             return;
         }
+        night = false;
         if (System.currentTimeMillis() - sleepScript.timer > sleepScript.sleepCD) {
             night = true;
-        } else {
-            night = false;
         }
     }
-
-    @Override
+    //Input: graphics object to draw to, Output: none
+    //Purpose: draws a translucent blue image when night hits
+    //Example: draw(g2) draws a translucent blue screen when night is hit
     public void draw(Graphics2D g2) {
-        if (night && image != null) {
+        if (night) {
             g2.drawImage(image, 0,0, null);
         }
     }

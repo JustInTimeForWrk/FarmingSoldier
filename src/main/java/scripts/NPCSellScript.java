@@ -13,7 +13,7 @@ public class NPCSellScript extends TextScript {
     double PressCoolDownE = 200;
     public static int cropsNeeded = 10;
 
-    boolean ifNightTimeThenDraw = false;
+    boolean playerInBoxCollider = false;
 
     //Input: none, Output: none
     //Purpose: constructor for the NPCSellScript
@@ -27,7 +27,7 @@ public class NPCSellScript extends TextScript {
         if (!other.entity.tag.equals("Player")) {
             return;
         }
-        ifNightTimeThenDraw = true;
+        playerInBoxCollider = true;
 
         if (FarmingScript.harvestedPlants < cropsNeeded) {
             setText("Fetch "+ cropsNeeded +" crops");
@@ -53,14 +53,14 @@ public class NPCSellScript extends TextScript {
 
     @Override
     public void update() {
-        ifNightTimeThenDraw = false;
+        playerInBoxCollider = false;
     }
 
     //Input: graphics object to draw to, Output: none
-    //Purpose: draws a translucent blue image when night hits
-    //Example: draw(g2) draws a translucent blue screen when night is hit
+    //Purpose: draws the text
+    //Example: draw(g2) draws white text at the text location, which could be 400,400 if the text location is 400,400
     public void draw(Graphics2D g2) {
-        if (ifNightTimeThenDraw) {
+        if (playerInBoxCollider) {
             super.draw(g2);
         }
     }
