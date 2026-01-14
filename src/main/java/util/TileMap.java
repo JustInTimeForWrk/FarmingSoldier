@@ -36,7 +36,7 @@ public class TileMap {
     
     //Input: String of a filepath to a .txt file, Output: boolean representing if loading the tilemap was successful or not
     //Purpose: tries to load a TileMap from the file located at the filepath string
-    //Example: loadMap("resources/assets/map_world_default.txt")
+    //Example: loadMap("resources/assets/map_world_default.txt") returns true if loading the map is successful
     public boolean loadMap(String filePath) {
         try {
             BufferedReader br = new BufferedReader(new FileReader(filePath));

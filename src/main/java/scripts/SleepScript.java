@@ -60,13 +60,12 @@ public class SleepScript extends TextScript {
 
     //Input: Entity representing the player, Output: none
     //Purpose: runs the game save as well as resets the night timer when the player sends a request to sleep. This game mechanic is similar to Stardew Valley
-    //Example: none needed
+    //Example: skipTheNight(SceneManager.getScene("house").getEntityByTag("Player"))
     public void skipTheNight(Entity player) {
         if (tileMapArray != null){
             timer = System.currentTimeMillis();
             player.transform.position.set(Window.tileSize*12.5,Window.tileSize*5);
             for (Tile tile : tileMapArray) {
-
                 if (19 <= tile.id && tile.id <= 21) { //grows watered seeds
                     tile.changeTileData(tile.id - 14);
                 } else if (4 <= tile.id && tile.id <= 6 && Math.random() * 100 + 1 <= 10) { //10 percent chance for unwatered plants to die
@@ -75,12 +74,7 @@ public class SleepScript extends TextScript {
                     tile.changeTileData(2);
                 }
             }
-
             GameManager.saveGame();
-
-            if (farmingScript != null) {
-
-            }
         }
     }
 }

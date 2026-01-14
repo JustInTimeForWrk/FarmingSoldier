@@ -1,6 +1,4 @@
-package util;
-
-import view.MouseHandler;
+package view;
 
 import java.awt.event.MouseEvent;
 

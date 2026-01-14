@@ -58,8 +58,6 @@ public class MenuPanel extends JPanel {
     }
 }
 
-
-
 class PlayGame implements ActionListener {
     Window window;
     PlayGame(Window window) {

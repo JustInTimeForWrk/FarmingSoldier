@@ -32,7 +32,9 @@ public class HotbarScript extends Component implements Drawable {
         }
     }
 
-    @Override
+    //Input: graphics object to draw to, Output: none
+    //Purpose: draws the hotbar
+    //Example: draw(g2) draws white text and hollow box extending out from the top left corner of the screen, if a slot is selected, the corresponding box and text are both green
     public void draw(Graphics2D g2) {
         for (int i = 0; i < 9; i++) { // i = 0 - 8
             g2.setColor(Color.white);

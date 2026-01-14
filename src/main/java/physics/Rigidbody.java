@@ -30,7 +30,7 @@ public class Rigidbody extends Component {
     
     //Input: Vector2f representing a velocity to add to the rigidbody, Output: none
     //Purpose: adds the input vector to the velocity of the rigidbody
-    //Example: none needed
+    //Example: addToVelocity(new Vector2f(0,0))
     public void addToVelocity(Vector2f vector) {
         velocity.add(vector);
     }

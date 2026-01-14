@@ -13,14 +13,14 @@ public class Camera {
     
     //Input: Vector2f representing the position of the Camera, Output: none
     //Purpose: Constructor for the camera
-    //Example: none needed
+    //Example: Camera(new Vector2f())
     public Camera(Vector2f pos) {
         this.position.set(pos);
     }
 
     //Input: Vector2f representing the new position of the Camera, Output: none
     //Purpose: sets the camera position to the input position
-    //Example: none needed
+    //Example: setPosition(new Vector2f(100,100))
     public void setPosition(Vector2f pos) {
         position.set(pos);
     }

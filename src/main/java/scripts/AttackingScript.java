@@ -1,17 +1,10 @@
 package scripts;
 
-import org.joml.Vector2f;
-import util.ClickAction;
-import util.Component;
-import util.SceneManager;
-
-import java.awt.event.MouseEvent;
-
 /*
             ||============||
             ||UNUSED CLASS||
             ||============||
- */
+
 public class AttackingScript extends Component implements ClickAction {
     HotbarScript hotbarScript;
     Vector2f playerPos = new Vector2f();
@@ -36,7 +29,7 @@ public class AttackingScript extends Component implements ClickAction {
         super.stop();
     }
 
-    @Override
+
     public void clickAction(MouseEvent e) {
         if (hotbarScript.currentItemSlot == 0) {
             playerPos.set(entity.transform.getCenter());
@@ -48,3 +41,6 @@ public class AttackingScript extends Component implements ClickAction {
         }
     }
 }
+
+
+ */

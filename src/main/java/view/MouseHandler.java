@@ -1,7 +1,6 @@
 package view;
 
 import org.joml.Vector2i;
-import util.ClickAction;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;

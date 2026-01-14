@@ -27,7 +27,7 @@ public class TextScript extends Component implements Drawable {
 
     //Input: String of the new displayable text, Output: none
     //Purpose: changes the text that will be displayed
-    //Example: none needed
+    //Example: setText("MyNewText")
     public void setText(String text) {
         this.text = text;
     }

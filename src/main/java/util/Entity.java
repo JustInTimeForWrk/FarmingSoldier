@@ -12,8 +12,8 @@ public class Entity {
     public Scene parentScene;
     public boolean initialized = false;
 
-    //Input: String representing the entity's tag, Transform of the entit, Output: none
-    //Purpose: default constructor for the entity, mostly for bug testing
+    //Input: none, Output: none
+    //Purpose: default constructor for the entity
     //Example: none needed
     public Entity() {
         this.tag = "Entity";
@@ -21,7 +21,7 @@ public class Entity {
         components = new ArrayList<>();
     }
 
-    //Input: String representing the entity's tag, Transform of the entit, Output: none
+    //Input: String representing the entity's tag, Transform of the entity, Output: none
     //Purpose: Constructor for the entity
     //Example: Entity("MyEntity", new Transform())
     public Entity(String objectTag, Transform transform) {
@@ -49,14 +49,6 @@ public class Entity {
         for (Component c : components) {
             c.start();
         }
-    }
-
-    //Unused function
-    public void destroy() {
-        for (Component c : components) {
-            c.destroy();
-        }
-        components.clear();
     }
 
     //Input: none, Output: none
@@ -89,7 +81,7 @@ public class Entity {
 
     //Input: component to add, Output: none
     //Purpose: adds a component and sets its parent entity to this
-    //Example: none needed
+    //Example: addComponent(new MovementScript())
     public void addComponent(Component c) {
         c.setParentEntity(this);
         components.add(c);
@@ -109,7 +101,7 @@ public class Entity {
 
     //Input: BoxCollider with isTrigger = true of the other entity that is colliding with this one, Output: none
     //Purpose: gets called when colliding with an entity with a BoxCollider that has isTrigger = true
-    //Example: none needed
+    //Example: onTriggerEnter(new Entity("MyEntity", new Transform, new Component[]{new BoxCollider(true)} ))
     public void onTriggerEnter(BoxCollider other) {
         for (Component c : components) {
             c.onTrigger(other);
@@ -118,7 +110,7 @@ public class Entity {
 
     //Input: BoxCollider with isTrigger = false of the other entity that is colliding with this one, Output: none
     //Purpose: gets called when colliding with an entity with a BoxCollider that has isTrigger = false
-    //Example: none needed
+    //Example: onEntityCollisionEnter(new Entity("MyEntity", new Transform, new Component[]{new BoxCollider()} ))
     public void onEntityCollisionEnter(BoxCollider other) {
         for (Component c : components) {
             c.onEntityCollisionEnter(other);
@@ -127,7 +119,7 @@ public class Entity {
 
     //Input: TileCollider of the tile the entity is colliding with, Output: none
     //Purpose: gets called when colliding with a tile with a TileCollider
-    //Example: none needed
+    //Example: onTileCollisionEnter(new Tile())
     public void onTileCollisionEnter(TileCollider tile) {
         for (Component c : components) {
             c.onTileCollisionEnter(tile);

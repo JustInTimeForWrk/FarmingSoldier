@@ -33,8 +33,8 @@ public class Transform {
 
     //Input: none, Output: Vector2f representing the center of the pos
     //Purpose: constructor for the Transform
-    //Example: none needed
+    //Example: Vector2f getCenter() returns new Vector2f(48,48) if the position = Vector2f(24,24) and the scale = Vector2f(1,1)
     public Vector2f getCenter() {
-        return new Vector2f(this.position).add(new Vector2f(this.scale).mul(Window.tileSize).div(2));
+        return new Vector2f(this.position).add(new Vector2f(this.scale).mul(Window.tileSize / 2f));
     }
 }

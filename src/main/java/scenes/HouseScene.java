@@ -33,7 +33,7 @@ public class HouseScene extends Scene {
         addEntityToScene(new Entity("npc", new Transform(new Vector2f(Window.tileSize * 5, Window.tileSize * 0.5f)), new Component[]{new SpriteRenderer("resources/assets/hostile/hostile_down01.png"), new BoxCollider()}));
         addEntityToScene(new Entity("npc sell box", new Transform(new Vector2f(Window.tileSize * 4.5f, 0)), new Component[]{new BoxCollider(new Vector2f(Window.tileSize*2,Window.tileSize*2),new Vector2f(),true), new NPCSellScript()}));
         addEntityToScene(new Entity("Bed",new Transform(new Vector2f(Window.tileSize * 14, Window.tileSize * 5)),new Component[]{new SpriteRenderer("resources/assets/entity/bed.png"), new BoxCollider(new Vector2f(Window.tileSize - 12,Window.tileSize * 2 - 20),new Vector2f(6,8), true), new SleepScript()}));
-//        addEntityToScene(new Player());
+
         addEntityToScene(new Entity("text", new Transform(), new Component[]{new TextScript("'Esc' for \nmain menu",new Vector2i(Window.tileSize,Window.screenHeight-Window.tileSize))}));
         addEntityToScene(new Entity("Player",new Transform(),new Component[]{new MovementScript(),new Rigidbody(),new BoxCollider(new Vector2f(40f,20f),new Vector2f(4f,32f)),
                          new SpriteRenderer("resources/assets/player/monkey_down01.png"),new SwapSceneScript()}));

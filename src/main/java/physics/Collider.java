@@ -53,8 +53,6 @@ public abstract class Collider extends Component {
         return hitbox.contains(point.x, point.y);
     }
 
-
-
     /*
                     ===============
                     Unused Function

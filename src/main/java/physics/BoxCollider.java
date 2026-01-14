@@ -73,11 +73,6 @@ public class BoxCollider extends Collider implements Drawable {
     }
 
     @Override
-    public void destroy() {
-        PhysicsManager.removeCollider(this);
-    }
-
-    @Override
     public void stop() {
         removeFromRenderer();
         PhysicsManager.removeCollider(this);

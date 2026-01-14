@@ -12,7 +12,7 @@ public class ActivateNPCMonologueScript extends TextScript {
 
     //Input: String of the text to appear when in range Vector2f of the text's position, Output: none
     //Purpose: constructor for the ActivateNPCMonologueScript
-    //Example: none needed
+    //Example: ActivateNPCMonologueScript("myText", new Vector2f(100,100))
     public ActivateNPCMonologueScript(String textWhenInRange, Vector2f textPos) {
         super(textWhenInRange, new Vector2i());
         this.textPos = textPos;
@@ -20,8 +20,8 @@ public class ActivateNPCMonologueScript extends TextScript {
     }
 
     //Input: String of the text to appear when in range Vector2f of the text's position, Output: none
-    //Purpose: constructor for the ActivateNPCMonologueScript
-    //Example: none needed
+    //Purpose: changes the text to display when the player is in range of the parent entity's BoxCollider that has isTrigger = true
+    //Example: setTextWhenInRange("MyNewText")
     public void setTextWhenInRange(String newTextWhenInRange) {
         this.textWhenInRange = newTextWhenInRange;
     }

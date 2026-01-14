@@ -20,7 +20,7 @@ public class SceneManager {
 
     //Input: int representing the index wanting to load, Output: none
     //Purpose: sets the load scene to an index in the scenes arraylist if the cooldown has passed, also resets the cooldown if successful
-    //Example: none needed
+    //Example: loadSceneByName("house")
     public static void loadSceneByName(String name) {
         if (System.currentTimeMillis() - timer > sceneSwapCD) { //cooldown for swapping scenes
             timer = System.currentTimeMillis();
@@ -32,7 +32,7 @@ public class SceneManager {
     
     //Input: Scene that you want to add to the scenes arraylist, Output: none
     //Purpose: adds a scene to the scenes arraylist
-    //Example: none needed
+    //Example: addScene(new TestScene())
     public static void addScene(Scene scene) {
         scenes.put(scene.name,scene);
     }
@@ -73,6 +73,7 @@ public class SceneManager {
 
     //Input: none, Output: camera from the current active scene
     //Purpose: grabs the camera from the current active scene
+    //Example: getCurrentCamera() returns the GameScene's camera if the current scene is a GameScene()
     public static Camera getCurrentCamera() {
         return currentScene.getCamera();
     }

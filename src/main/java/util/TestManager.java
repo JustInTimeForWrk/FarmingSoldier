@@ -27,21 +27,21 @@ public class TestManager {
         System.out.println(SceneFindEntityArrayListByTagTest(new TestScene(), "Enemy", 3));
         System.out.println(SceneInitializesEntityTest(new TestScene(), new Entity("Test", new Transform())));
         System.out.println(SceneAddEntityWhileRunningTest(new TestScene(), new Entity("TestEntityAdded", new Transform())));
-        System.out.println(SceneRemoveEntityDuringRuntimeTest(new TestScene(), new Entity("TestEntityRemove", new Transform())));
+        System.out.println(SceneRemoveEntityWhileRunningTest(new TestScene(), new Entity("TestEntityRemove", new Transform())));
 
         System.out.println(SaveLoadGameDataTest(150,2500,false));
 
-        System.out.println(RigidbodyFrictionTest(new Vector2f(10, 0), 0.5f, new Vector2f(5, 0),0.1f));
-        System.out.println(RigidbodyFrictionTest(new Vector2f(4, 6), 0.25f, new Vector2f(3, 4.5f),0.1f));
+        System.out.println(RigidbodyFrictionTest(new Vector2f(10, 0), 0.5f, new Vector2f(5, 0),0.0001f));
+        System.out.println(RigidbodyFrictionTest(new Vector2f(4, 6), 0.25f, new Vector2f(3, 4.5f),0.0001f));
         System.out.println(RigidbodyAddVelocityTest(new Vector2f(2, 3), new Vector2f(5, -1), new Vector2f(7, 2)));
         System.out.println(RigidbodyAddVelocityTest(new Vector2f(0, 0), new Vector2f(1, 1), new Vector2f(1, 1)));
-        System.out.println(RigidbodyUpdatePositionTest(new Entity("RBTest1", new Transform()), new Vector2f(4, 6), 0f, new Vector2f(4, 6)));
-        System.out.println(RigidbodyUpdatePositionTest(new Entity("RBTest2", new Transform()), new Vector2f(10, 0), 0.5f, new Vector2f(5, 0)));
+        System.out.println(RigidbodyUpdatePositionTest(new Entity("RBTest1", new Transform()), new Vector2f(4, 6), 0f, new Vector2f(4, 6),0.0001f)); //Without friction
+        System.out.println(RigidbodyUpdatePositionTest(new Entity("RBTest2", new Transform()), new Vector2f(10, 0), 0.5f, new Vector2f(5, 0),0.0001f)); //With friction
 
         System.out.println(TileConstructorWithTileIDTest(2, 2));
         System.out.println(TileConstructorWithTileIDTest(999, -1));
-        System.out.println(TileChangeDataTest(1, 1, "wall", true));
-        System.out.println(TileChangeDataTest(2, 2, "grass", false));
+        System.out.println(TileChangeDataTest(15,1, 1, "wall", true));
+        System.out.println(TileChangeDataTest(0,-1000, 0, "water", true));
 
         System.out.println(TileMapClearTest());
 
@@ -158,7 +158,7 @@ public class TestManager {
 
     //Input: test scene to add entity, Entity to add after start, Output: boolean if the entity was added
     //Purpose: makes sure that removeEntityFromScene works when the scene is running
-    public static boolean SceneRemoveEntityDuringRuntimeTest(Scene scene, Entity entity) {
+    public static boolean SceneRemoveEntityWhileRunningTest(Scene scene, Entity entity) {
         scene.addEntityToScene(entity);
         scene.init();
         scene.start();
@@ -191,7 +191,7 @@ public class TestManager {
         rb.velocity.set(initialVelocity);
         rb.friction = friction;
         rb.update();
-        return rb.velocity.sub(expectedVelocity).length() < threshold;
+        return rb.velocity.sub(expectedVelocity).length() <= threshold;
     }
 
     //Input: Vector2f representing initialVelocity, Vector2f representing velocity to add, Vector2f of the expected velocity after adding to velocity, Output: boolean indicating if velocity was added correctly
@@ -206,16 +206,16 @@ public class TestManager {
         return rb.velocity.equals(expectedVelocity);
     }
 
-    //Input: Entity to test, Vector2f of velocity to set, float of friction to set, Vector2f of expected position, Output: boolean of if the entity position was correctly moved
+    //Input: Entity to test, Vector2f of velocity to set, float of friction to set, Vector2f of expected position, float representing how much of an approximation it should calculate for floating point imprecision, Output: boolean of if the entity position was correctly moved
     //Purpose: makes sure Rigidbody.update() moves the entity correctly
-    public static boolean RigidbodyUpdatePositionTest(Entity entity, Vector2f velocity, float friction, Vector2f exepectedPosition) {
+    public static boolean RigidbodyUpdatePositionTest(Entity entity, Vector2f velocity, float friction, Vector2f exepectedPosition, float threshold) {
         Rigidbody rb = new Rigidbody();
         entity.addComponent(rb);
         entity.init();
         rb.velocity.set(velocity);
         rb.friction = friction; //Makes it elastic
         entity.update();
-        return entity.transform.position.equals(exepectedPosition);
+        return entity.transform.position.sub(exepectedPosition).length() <= threshold;
     }
 
     //Input: int representing an index in defaultTiles array, int representing the expected tileID, Output: boolean of if the id of the new tile matches the expected tile id
@@ -225,10 +225,10 @@ public class TestManager {
         return t.id == expectedTileID;
     }
 
-    //Input: tileID to changeTileData() to, int of expected tileID, String of expected tag, boolean of expectedIsSolidBool, Output: boolean of if the changed tile has all the expected variables
+    //Input: int tileID of the tile to start with, int tileID to changeTileData() to, int of expected tileID, String of expected tag, boolean of expectedIsSolidBool, Output: boolean of if the changed tile has all the expected variables
     //Purpose: makes sure changeTileData correctly updates tile properties
-    public static boolean TileChangeDataTest(int tileID, int expectedID, String expectedTag, boolean expectedIsSolidBool) {
-        Tile t = new Tile(0, 0, -1);
+    public static boolean TileChangeDataTest(int initialTileID, int tileID, int expectedID, String expectedTag, boolean expectedIsSolidBool) {
+        Tile t = new Tile(0, 0, initialTileID);
         t.changeTileData(tileID);
         return t.id == expectedID && t.isSolid == expectedIsSolidBool && t.tag.equals(expectedTag);
     }

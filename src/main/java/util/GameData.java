@@ -54,7 +54,7 @@ public class GameData {
     
     //Input: String representing the filepath and a GameData storing the game's save info, Output: boolean if it saved properly or not
     //Purpose: to save our game data into a secure .db file
-    //Example: loadGameData("resources/saves/MySave.db", new GameData())
+    //Example: loadGameData("resources/saves/MySave.db", new GameData()) returns true if save is successful
     public static boolean saveGameData(String filePath, GameData gameData) {
         
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:" + filePath);

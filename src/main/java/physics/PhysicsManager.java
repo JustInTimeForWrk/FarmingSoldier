@@ -10,19 +10,19 @@ public class PhysicsManager {
     public static ArrayList<BoxCollider> entityColliders = new ArrayList<>();
     private static ArrayList<BoxCollider> collidersRemoveQueue = new ArrayList<>();
     private static ArrayList<BoxCollider> collidersAddQueue = new ArrayList<>();
-    
+
     private static TileCollider[][] tileColliders;
 
     //Input: BoxCollider to add, Output: none
     //Purpose: adds a collider to the colliders to add queue, which is added after all existing colliders have been updated to prevent index out of bound error
-    //Example: none needed
+    //Example: addCollider(new BoxCollider())
     public static void addCollider(BoxCollider newCollider) {
         collidersAddQueue.add(newCollider);
     }
 
     //Input: BoxCollider to remove, Output: none
     //Purpose: removes a collider to the colliders to remove queue, which is removed after all existing colliders have been updated to prevent index out of bound error
-    //Example: none needed
+    //Example: removeCollider(new BoxCollider())
     public static void removeCollider(BoxCollider collider) {
         collidersRemoveQueue.add(collider);
     }
@@ -31,7 +31,7 @@ public class PhysicsManager {
     //Purpose: updates collider positions as well as looks for collisions between entity to entity as well as entity to tile
     //Example: none needed
     public static void update() {
-            for (int i = 0; i < entityColliders.size(); i++) {
+        for (int i = 0; i < entityColliders.size(); i++) {
             BoxCollider collider = entityColliders.get(i);
             collider.updateCollider();
 
@@ -47,8 +47,8 @@ public class PhysicsManager {
             if (tileColliders != null) {
                 for (int x = -1; x < 2; x++) {
                     for (int y = -1; y < 2; y++) {
-                        int xGrid = (int)collider.getCenter().div(Window.tileSize).x+x;
-                        int yGrid = (int)collider.getCenter().div(Window.tileSize).y+y;
+                        int xGrid = (int) collider.getCenter().div(Window.tileSize).x + x;
+                        int yGrid = (int) collider.getCenter().div(Window.tileSize).y + y;
                         if (0 <= xGrid && xGrid < tileColliders.length) {
                             if (0 <= yGrid && yGrid < tileColliders[xGrid].length) {
                                 TileCollider tileCollider = tileColliders[xGrid][yGrid];
@@ -82,10 +82,10 @@ public class PhysicsManager {
         collidersRemoveQueue.clear();
         collidersAddQueue.clear();
     }
-    
-    //Input: BoxCollider of the entity colliding & tileCollider of the tile colliding, Ouput: nothing/void
+
+    //Input: BoxCollider of the entity colliding & tileCollider of the tile colliding, Output: nothing/void
     //Purpose: calls solveCollision in the entityRB if they have one and calls onTileCollisionEnter for the entity
-    //Example: tileCollisionResolution(new BoxCollider(), new TileCollider())
+    //Example: tileCollisionResolution(boxCollider, tileCollider) both boxCollider and tileCollider must have a parent entity/tile attached to them
     public static void tileCollisionResolution(BoxCollider entityCollider, TileCollider tileCollider) {
         Rigidbody entityRB = entityCollider.entity.getComponent(Rigidbody.class);
         if (entityRB != null) {
@@ -93,32 +93,35 @@ public class PhysicsManager {
         }
         entityCollider.entity.onTileCollisionEnter(tileCollider);
     }
-    
+
     //Input: BoxCollider of the first object & BoxCollider of the second object (order doesn't matter just as long as they are both colliders), Ouput: nothing/void
     //Purpose: resolves collisions and runs collision/trigger callbacks
-    //Example: entityCollisionResolution(new BoxCollider(), new BoxCollider())
-        public static void entityCollisionResolution(BoxCollider firstCollider, BoxCollider secondCollider) {
-            if (firstCollider.isTrigger || secondCollider.isTrigger) { //If either collider is a trigger, then call the onTriggerEnter function
-                firstCollider.entity.onTriggerEnter(secondCollider);
-                secondCollider.entity.onTriggerEnter(firstCollider);
-            } else {
-                firstCollider.entity.onEntityCollisionEnter(secondCollider);
-                secondCollider.entity.onEntityCollisionEnter(firstCollider);
+    //Example: entityCollisionResolution(boxCollider1, boxCollider2) boxCollider1 and 2 MUST have an entity attached
+    public static void entityCollisionResolution(BoxCollider firstCollider, BoxCollider secondCollider) {
+        if (firstCollider.isTrigger || secondCollider.isTrigger) { //If either collider is a trigger, then call the onTriggerEnter function
+            firstCollider.entity.onTriggerEnter(secondCollider);
+            secondCollider.entity.onTriggerEnter(firstCollider);
+        } else {
+            firstCollider.entity.onEntityCollisionEnter(secondCollider);
+            secondCollider.entity.onEntityCollisionEnter(firstCollider);
 
-                Rigidbody firstRB = firstCollider.entity.getComponent(Rigidbody.class);
-                Rigidbody secondRB = secondCollider.entity.getComponent(Rigidbody.class);
+            Rigidbody firstRB = firstCollider.entity.getComponent(Rigidbody.class);
+            Rigidbody secondRB = secondCollider.entity.getComponent(Rigidbody.class);
 
-                if (firstRB != null && secondRB == null) {
-                    firstRB.solveCollision(secondCollider);
-                } else if (secondRB != null && firstRB == null) {
-                    secondRB.solveCollision(firstCollider);
-                } else if (secondRB != null && firstRB != null) {
-                    firstRB.solveCollision(secondCollider);
-                    secondRB.solveCollision(firstCollider);
-                }
+            if (firstRB != null && secondRB == null) {
+                firstRB.solveCollision(secondCollider);
+            } else if (secondRB != null && firstRB == null) {
+                secondRB.solveCollision(firstCollider);
+            } else if (secondRB != null && firstRB != null) {
+                firstRB.solveCollision(secondCollider);
+                secondRB.solveCollision(firstCollider);
             }
         }
+    }
 
+    //Input: BoxCollider of the first object & BoxCollider of the second object (order doesn't matter just as long as they are both colliders), Ouput: nothing/void
+    //Purpose: resolves collisions and runs collision/trigger callbacks
+    //Example: setTileMap(new TileMap("resources/map_house.txt").loadMap("resources/map_house_default.txt"))
     public static void setTileMap(TileMap tileMap) {
         if (tileMap == null) {
             tileColliders = null;

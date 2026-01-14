@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public abstract class Scene {
     Camera camera = new Camera();
-    String name; //ONLY USED FOR DEBUGGING
+    String name;
     private ArrayList<Entity> entities = new ArrayList<>();
     private ArrayList<Entity> entityToAdd = new ArrayList<>();
     private ArrayList<Entity> entityToRemove = new ArrayList<>();
@@ -40,7 +40,7 @@ public abstract class Scene {
         if (!entityToRemove.isEmpty()) {
             entities.removeAll(entityToRemove);
             for (Entity entity : entityToRemove) {
-                entity.destroy();
+                entity.stop();
             }
             entityToRemove.clear();
         }
@@ -105,7 +105,7 @@ public abstract class Scene {
 
     //Input: Entity representing an entity to be removed from the entities arraylist, Output: none
     //Purpose: removes the entity from a queue which will get removed from the entities arraylist in the update function
-    //Example: none needed
+    //Example: removeEntityFromScene(findEntityByTag("NPC"))
     public void removeEntityFromScene(Entity entity) {
         if (!isRunning) {
             entities.remove(entity);
@@ -135,7 +135,7 @@ public abstract class Scene {
 
     //Input: String representing the tag of an entity, Output: ArrayList of all entities with the input tag
     //Purpose: to get all entities with the same tag in the scene
-    //Example: findEntityByTag("Hostile") returns the every Entity with the "Hostile" tag attached
+    //Example: findEntityByTag("Hostile") returns an ArrayList with every Entity with the "Hostile" tag attached
     public ArrayList<Entity> findEntityArrayListByTag(String tag) {
         ArrayList<Entity> returnList = new ArrayList<>();
         for (Entity entity : entities) {

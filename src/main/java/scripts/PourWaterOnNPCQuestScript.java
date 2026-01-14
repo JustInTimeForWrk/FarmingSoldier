@@ -2,7 +2,7 @@ package scripts;
 
 import org.joml.Vector2f;
 import physics.BoxCollider;
-import util.ClickAction;
+import view.ClickAction;
 import util.Component;
 import util.Entity;
 import util.SceneManager;
@@ -41,8 +41,8 @@ public class PourWaterOnNPCQuestScript extends Component implements ClickAction 
 
 
     //Input: MouseEvent when clicked, Output: none
-    //Purpose: 
-    //Example: 
+    //Purpose: checks if the player has clicked on the parent entity's BoxCollider and completes a quest if the player hasn't completed it yet
+    //Example: clickAction(e) checks the mouse event with this component's entity's BoxCollider and runs a quest complete flag if it hasn't yet been completed
     public void clickAction(MouseEvent e) {
         mousePos.set(e.getX(),e.getY());
         if (collider.checkPointCollision(SceneManager.getCurrentCamera().toWorldPos(mousePos)) && HotbarScript.currentItemSlot == 3 && watered == false && this.entity.transform.position.distance(player.transform.position) <= maxPlayerDistance) {

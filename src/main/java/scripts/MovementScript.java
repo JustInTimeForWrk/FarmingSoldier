@@ -26,11 +26,13 @@ public class MovementScript extends Component {
                                    "monkey_up","monkey_up_right","monkey_right","monkey_down_right"};
     private int frameCounter = 0;
     private int playerFrame; //Which frame of the animation the player is on
+    private float framesPerImageChange;
     private HashMap<String,BufferedImage> playerImages;
     private Vector2f dir = new Vector2f();
 
     @Override
     public void init() {
+        framesPerImageChange = 10f/GameManager.GameSpeed;
         rb = entity.getComponent(Rigidbody.class);
         sp = entity.getComponent(SpriteRenderer.class);
         playerImages = new HashMap<>();
@@ -92,8 +94,8 @@ public class MovementScript extends Component {
             dir.normalize();
 
             frameCounter++;
-            if (frameCounter >= 10) {
-                frameCounter -= 10; //changes player animation every 10 frames
+            if (frameCounter >= framesPerImageChange) {
+                frameCounter -= Math.round(framesPerImageChange);
 
                 playerFrame++;
                 if (playerFrame >= 5) {
