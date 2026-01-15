@@ -244,8 +244,8 @@ public class TestManager {
         return map.tilesList.isEmpty(); //returns true if nothing is in tilesList
     }
 
-    //Input: none, Output: boolean of if the clear works
-    //Purpose: makes sure TileMap.clear() removes all tiles
+    //Input: none, Output: boolean of if the tile map can save and load successfully
+    //Purpose: makes sure that saving and loading tileMaps construct the same thing
     public static boolean TileMapSaveLoadTest() {
         TileMap saveMapTest = new TileMap("resources/map_test.txt");
         saveMapTest.tiles2d = new Tile[][]{
