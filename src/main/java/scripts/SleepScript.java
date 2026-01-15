@@ -43,6 +43,8 @@ public class SleepScript extends TextScript {
                 skipTheNight(other.entity);
             }
             playerOnBed = true;
+        } else if (KeyHandler.getKey(KeyEvent.VK_Z)) { //Input for testing
+            skipTheNight(SceneManager.getCurrentScene().findEntityByTag("Player"));
         }
     }
 

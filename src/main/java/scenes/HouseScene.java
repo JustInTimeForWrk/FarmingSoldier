@@ -26,7 +26,7 @@ public class HouseScene extends Scene {
     public void init() {
         this.getCamera().setPosition(new Vector2f(0,-Window.tileSize));
         this.tileMap = new TileMap("resources/map_house.txt");
-        if (!this.tileMap.loadMap(this.tileMap.filePath)) { // only runs if the tileMap fails to load
+        if (!this.tileMap.loadMap(this.tileMap.filePathToSaveTo)) { // only runs if the tileMap fails to load
             this.tileMap.loadMap("resources/map_house_default.txt");
             this.tileMap.saveTileMap();
         }

@@ -55,6 +55,12 @@ public class MenuPanel extends JPanel {
         button.setHorizontalAlignment(SwingConstants.CENTER);
         button.setBounds(Window.halfScreenWidth+175,Window.halfScreenHeight+150,125,75);
         this.add(button);
+
+        button = new JButton("Clear Data");
+        button.addActionListener(new clearData());
+        button.setHorizontalAlignment(SwingConstants.CENTER);
+        button.setBounds(Window.screenWidth-100,0,100,50);
+        this.add(button);
     }
 }
 
@@ -80,5 +86,13 @@ class ChangeFPS implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         GameManager.GameSpeed = 60f/FPS;
         GameManager.FPS = FPS;
+    }
+}
+
+class clearData implements ActionListener {
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        GameManager.clearData();
     }
 }

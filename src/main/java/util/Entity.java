@@ -2,11 +2,12 @@ package util;
 
 import physics.BoxCollider;
 import physics.TileCollider;
-
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Entity {
     public ArrayList<Component> components;
+    public HashMap<Class<? extends Component>, Component> componentHashMap = new HashMap<>();
     public Transform transform;
     public String tag;
     public Scene parentScene;
@@ -39,6 +40,7 @@ public class Entity {
         components = new ArrayList<>();
         for (Component c : componentArray) {
             addComponent(c);
+
         }
     }
 
@@ -85,18 +87,14 @@ public class Entity {
     public void addComponent(Component c) {
         c.setParentEntity(this);
         components.add(c);
+        componentHashMap.put(c.getClass(),c);
     }
 
     //Input: class representing the desired component type to return, Output: an object extending the Component class
     //Purpose: to find a specific component in an entity
     //Example: getComponent(SleepScript.class) returns a SleepScript if there is one added to a player or returns null if none are found
     public <T extends Component> T getComponent(Class<T> componentType) {
-        for (Component comp : components) {
-            if (componentType.isInstance(comp)) { //Returns true or false if comp is an instance of the component type
-                return componentType.cast(comp); //converts the Component comp to componentType which is returned
-            }
-        }
-        return null;
+        return componentType.cast(componentHashMap.get(componentType)); //cast tells java to treat the component retrieved as the componentType declared
     }
 
     //Input: BoxCollider with isTrigger = true of the other entity that is colliding with this one, Output: none

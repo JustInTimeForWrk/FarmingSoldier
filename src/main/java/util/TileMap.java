@@ -19,7 +19,7 @@ public class TileMap {
     public static BufferedImage wall = Renderer.loadImage("resources/assets/tiles/wall.png");
     public static BufferedImage water = Renderer.loadImage("resources/assets/tiles/water.png");
 
-    public String filePath;
+    public String filePathToSaveTo;
     
     public Tile[][] tiles2d;
     public ArrayList<Tile> tilesList = new ArrayList<>();
@@ -31,7 +31,7 @@ public class TileMap {
     //Purpose: constructor for the TileMap
     //Example: TileMap("resources/assets/map_world_default.txt")
     public TileMap(String filepath) {
-        this.filePath = filepath;
+        this.filePathToSaveTo = filepath;
     }
     
     //Input: String of a filepath to a .txt file, Output: boolean representing if loading the tilemap was successful or not
@@ -124,7 +124,7 @@ public class TileMap {
     //Example: none needed
     public boolean saveTileMap() {
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(filePath));
+            BufferedWriter bw = new BufferedWriter(new FileWriter(filePathToSaveTo));
             for (int y = 0; y < height; y++) {
                 for (int x = 0; x < width; x++) {
                     Tile tile = tiles2d[x][y];

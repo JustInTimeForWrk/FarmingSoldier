@@ -75,6 +75,16 @@ public class GameManager {
         Renderer.clear();
         PhysicsManager.clear();
     }
+
+    public static void clearData() {
+        loadedSave = new GameData();
+        TileMap rewritingTileMap = new TileMap("resources/map_world.txt");
+        rewritingTileMap.loadMap("resources/map_world_default.txt");
+        rewritingTileMap.saveTileMap();
+        rewritingTileMap.filePathToSaveTo = "resources/map_house.txt";
+        rewritingTileMap.loadMap("resources/map_house_default.txt");
+        rewritingTileMap.saveTileMap();
+    }
 }
 
 

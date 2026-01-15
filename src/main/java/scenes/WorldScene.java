@@ -25,7 +25,7 @@ public class WorldScene extends Scene {
     @Override
     public void init() {
         tileMap = new TileMap("resources/map_world.txt");
-        if (!this.tileMap.loadMap(this.tileMap.filePath)) { // only runs if the tileMap fails to load
+        if (!this.tileMap.loadMap(this.tileMap.filePathToSaveTo)) { // only runs if the tileMap fails to load
             this.tileMap.loadMap("resources/map_world_default.txt");
             this.tileMap.saveTileMap();
         }
