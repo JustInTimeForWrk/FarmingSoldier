@@ -44,6 +44,7 @@ public class TestManager {
         System.out.println(TileChangeDataTest(0,-1000, 0, "water", true));
 
         System.out.println(TileMapClearTest());
+        System.out.println(TileMapSaveLoadTest());
 
         System.out.println(AddComponentSetParentEntityTest());
 
@@ -234,12 +235,46 @@ public class TestManager {
     }
 
     //Input: none, Output: boolean of if the clear works
-    //Purpose: makes sure TileMap.clear() removes all tiles
+    //Purpose: makes sure TileMap.clear() removes all tiles from the tilesList
     public static boolean TileMapClearTest() {
         TileMap map = new TileMap("test");
+        map.tiles2d = new Tile[10][5];
         map.tilesList.add(new Tile(0, 0, 2));
         map.clear();
         return map.tilesList.isEmpty(); //returns true if nothing is in tilesList
+    }
+
+    //Input: none, Output: boolean of if the clear works
+    //Purpose: makes sure TileMap.clear() removes all tiles
+    public static boolean TileMapSaveLoadTest() {
+        TileMap saveMapTest = new TileMap("resources/map_test.txt");
+        saveMapTest.tiles2d = new Tile[][]{
+                {new Tile(0,0,4),new Tile(0,0,8), new Tile(0,0,12)},
+                {new Tile(0,0,2),new Tile(0,0,2), new Tile(0,0,2)},
+                {new Tile(0,0,7),new Tile(0,0,6), new Tile(0,0,2)},
+                {new Tile(0,0,8),new Tile(0,0,5), new Tile(0,0,2)}
+        };
+        /*
+        Save should look like:
+                                    4 8 12
+                                    2 2 2
+                                    7 6 2
+                                    8 5 2
+         */
+        saveMapTest.width = 4;
+        saveMapTest.height = 3;
+        boolean mapSaved = saveMapTest.saveTileMap();
+        TileMap loadMapTest = new TileMap("resources/map_test.txt");
+        boolean mapLoaded = loadMapTest.loadMap("resources/map_test.txt");
+        boolean tiles2dAreTheSame = true;
+        for (int i = 0; i < loadMapTest.tiles2d.length; i++) {
+            for (int j = 0; j < loadMapTest.tiles2d[i].length; j++) {
+                if (loadMapTest.tiles2d[i][j].id != saveMapTest.tiles2d[i][j].id) {
+                    tiles2dAreTheSame = false;
+                }
+            }
+        }
+        return tiles2dAreTheSame && mapLoaded && mapSaved;
     }
 
     //Input: none, Output: boolean of if the component's parent entity is the entity created in the function

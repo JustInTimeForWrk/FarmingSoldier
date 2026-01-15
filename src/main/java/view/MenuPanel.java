@@ -1,7 +1,6 @@
 package view;
 
 import util.GameManager;
-import util.SceneManager;
 
 import javax.swing.*;
 import java.awt.*;

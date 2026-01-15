@@ -2,10 +2,8 @@ package util;
 
 import org.joml.Vector2i;
 import physics.PhysicsManager;
-import view.Renderer;
 import view.Window;
 
-import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -14,10 +12,6 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 
 public class TileMap {
-
-    public static BufferedImage grass = Renderer.loadImage("resources/assets/tiles/grass.png");
-    public static BufferedImage wall = Renderer.loadImage("resources/assets/tiles/wall.png");
-    public static BufferedImage water = Renderer.loadImage("resources/assets/tiles/water.png");
 
     public String filePathToSaveTo;
     
@@ -45,7 +39,6 @@ public class TileMap {
             while ((line = br.readLine()) != null) {
                 data.add(line.split(" "));
             }
-
             width = data.get(0).length;
             height = data.size();
 
