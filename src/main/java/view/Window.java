@@ -31,7 +31,7 @@ public class Window extends JFrame {
 
         gamePanel = new GamePanel();
 
-        menuPanel = new MenuPanel(this);
+        menuPanel = new MenuPanel();
         this.add(menuPanel);
 
 

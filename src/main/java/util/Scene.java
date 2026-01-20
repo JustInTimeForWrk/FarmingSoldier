@@ -29,7 +29,7 @@ public abstract class Scene {
         for (Entity entity : entities) {
             entity.update();
         }
-
+        
         if (!entityToAdd.isEmpty()) {
             entities.addAll(entityToAdd);
             for (Entity entity : entityToAdd) {

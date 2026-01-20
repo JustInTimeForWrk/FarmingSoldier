@@ -14,7 +14,7 @@ public class MenuPanel extends JPanel {
     //Input: the application window, Output: none
     //Purpose: constructor for the MenuPanel
     //Example: none needed
-    MenuPanel(Window window) {
+    MenuPanel() {
 
         this.setPreferredSize(new Dimension(Window.screenWidth, Window.screenHeight));
         this.setLayout(null);
@@ -26,7 +26,7 @@ public class MenuPanel extends JPanel {
         this.add(title);
 
         button = new JButton("play");
-        button.addActionListener(new PlayGame(window));
+        button.addActionListener(new PlayGame());
         button.setHorizontalAlignment(SwingConstants.CENTER);
         button.setBounds(Window.halfScreenWidth-100,Window.halfScreenHeight-100,200,200);
         this.add(button);
@@ -64,11 +64,6 @@ public class MenuPanel extends JPanel {
 }
 
 class PlayGame implements ActionListener {
-    Window window;
-    PlayGame(Window window) {
-        this.window = window;
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         GameManager.startGame();
