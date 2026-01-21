@@ -48,11 +48,13 @@ public class SceneManager {
             }
             Renderer.clear();
             PhysicsManager.clear();
-
-            currentScene = scenes.get(loadSceneName);
-
-            currentScene.start();
-            currentSceneName = loadSceneName;
+            if (scenes.get(loadSceneName) != null) {
+                currentScene = scenes.get(loadSceneName);
+                currentScene.start();
+                currentSceneName = loadSceneName;
+            } else {
+                System.out.println("scene at "+loadSceneName+" was null.");
+            }
 
             loadSceneName = null;
         }

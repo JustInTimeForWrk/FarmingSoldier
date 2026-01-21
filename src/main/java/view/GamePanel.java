@@ -40,8 +40,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     @Override
     public void run() {
-
-        double drawInterval = 1E9d / GameManager.FPS;
+        double drawInterval = 1E9d / GameManager.FPS; // How many nanoseconds per frame
         double delta = 0;
         long lastTime = System.nanoTime();
         long currentTime;
@@ -49,7 +48,7 @@ public class GamePanel extends JPanel implements Runnable {
         while (gameThread != null) {
 
             currentTime = System.nanoTime();
-            delta += (currentTime - lastTime) / drawInterval;
+            delta += (currentTime - lastTime) / drawInterval; //calculates the delta time between updates
             lastTime = currentTime;
 
             if (delta >= 1) {

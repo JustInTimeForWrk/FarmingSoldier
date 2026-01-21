@@ -34,7 +34,6 @@ public class Window extends JFrame {
         menuPanel = new MenuPanel();
         this.add(menuPanel);
 
-
         this.pack();
 
         this.setLocationRelativeTo(null);
